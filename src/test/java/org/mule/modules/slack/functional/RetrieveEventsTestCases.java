@@ -18,13 +18,6 @@ public class RetrieveEventsTestCases extends AbstractSlackTestCase {
     @Test
     public void testSource() throws InterruptedException {
         getConnector().postMessage("Test", CHANNEL_ID, null, null, true);
-        Thread.sleep(5000);
-        getConnector().postMessage("Test", CHANNEL_ID, null, null, true);
-        getConnector().postMessage("Test", CHANNEL_ID, null, null, true);
-        getConnector().postMessage("Test", CHANNEL_ID, null, null, true);
-        Thread.sleep(5000);
-        getConnector().postMessage("Test", CHANNEL_ID, null, null, true);
-        getConnector().postMessage("Test", CHANNEL_ID, null, null, true);
         List<Object> events = getDispatcher().getSourceMessages("retrieveEvents");
         System.out.println(events);
     }
