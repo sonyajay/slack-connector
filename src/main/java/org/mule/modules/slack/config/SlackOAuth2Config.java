@@ -6,6 +6,7 @@ package org.mule.modules.slack.config;
 
 
 import org.mule.api.annotations.Configurable;
+import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.display.FriendlyName;
 import org.mule.api.annotations.oauth.*;
 import org.mule.modules.slack.client.SlackClient;
@@ -41,6 +42,14 @@ public class SlackOAuth2Config implements BasicSlackConfig {
     @OAuthConsumerSecret
     @FriendlyName("Client Secret")
     private String consumerSecret;
+
+    /**
+     * Slack permissions
+     */
+    @Configurable
+    @Default(value = "search:read")
+    @OAuthScope
+    private String scope;
 
     @OAuthPostAuthorization
     public void postAuthorize() {
@@ -87,6 +96,22 @@ public class SlackOAuth2Config implements BasicSlackConfig {
      */
     public void setConsumerSecret(String consumerSecret) {
         this.consumerSecret = consumerSecret;
+    }
+
+    /**
+     * Get scope
+     */
+
+    public String getScope() {
+        return scope;
+    }
+
+    /**
+     * Set scope
+     */
+
+    public void setScope(String scope) {
+        this.scope = scope;
     }
 
     /**
