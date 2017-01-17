@@ -3,7 +3,6 @@
  * a copy of which has been included with this distribution in the LICENSE.md file.
  */
 
-
 package org.mule.modules.slack.client.model;
 
 import javax.annotation.Generated;
@@ -54,8 +53,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The firstName
+     * @return The firstName
      */
     public String getFirstName() {
         return firstName;
@@ -64,7 +62,7 @@ public class Profile {
     /**
      *
      * @param firstName
-     *     The first_name
+     *            The first_name
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -72,8 +70,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The lastName
+     * @return The lastName
      */
     public String getLastName() {
         return lastName;
@@ -82,7 +79,7 @@ public class Profile {
     /**
      *
      * @param lastName
-     *     The last_name
+     *            The last_name
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -90,8 +87,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The title
+     * @return The title
      */
     public String getTitle() {
         return title;
@@ -100,7 +96,7 @@ public class Profile {
     /**
      *
      * @param title
-     *     The title
+     *            The title
      */
     public void setTitle(String title) {
         this.title = title;
@@ -108,8 +104,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The skype
+     * @return The skype
      */
     public String getSkype() {
         return skype;
@@ -118,7 +113,7 @@ public class Profile {
     /**
      *
      * @param skype
-     *     The skype
+     *            The skype
      */
     public void setSkype(String skype) {
         this.skype = skype;
@@ -126,8 +121,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The phone
+     * @return The phone
      */
     public String getPhone() {
         return phone;
@@ -136,7 +130,7 @@ public class Profile {
     /**
      *
      * @param phone
-     *     The phone
+     *            The phone
      */
     public void setPhone(String phone) {
         this.phone = phone;
@@ -144,8 +138,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The image24
+     * @return The image24
      */
     public String getImage24() {
         return image24;
@@ -154,7 +147,7 @@ public class Profile {
     /**
      *
      * @param image24
-     *     The image_24
+     *            The image_24
      */
     public void setImage24(String image24) {
         this.image24 = image24;
@@ -162,8 +155,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The image32
+     * @return The image32
      */
     public String getImage32() {
         return image32;
@@ -172,7 +164,7 @@ public class Profile {
     /**
      *
      * @param image32
-     *     The image_32
+     *            The image_32
      */
     public void setImage32(String image32) {
         this.image32 = image32;
@@ -180,8 +172,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The image48
+     * @return The image48
      */
     public String getImage48() {
         return image48;
@@ -190,7 +181,7 @@ public class Profile {
     /**
      *
      * @param image48
-     *     The image_48
+     *            The image_48
      */
     public void setImage48(String image48) {
         this.image48 = image48;
@@ -198,8 +189,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The image72
+     * @return The image72
      */
     public String getImage72() {
         return image72;
@@ -208,7 +198,7 @@ public class Profile {
     /**
      *
      * @param image72
-     *     The image_72
+     *            The image_72
      */
     public void setImage72(String image72) {
         this.image72 = image72;
@@ -216,8 +206,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The image192
+     * @return The image192
      */
     public String getImage192() {
         return image192;
@@ -226,7 +215,7 @@ public class Profile {
     /**
      *
      * @param image192
-     *     The image_192
+     *            The image_192
      */
     public void setImage192(String image192) {
         this.image192 = image192;
@@ -234,8 +223,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The imageOriginal
+     * @return The imageOriginal
      */
     public String getImageOriginal() {
         return imageOriginal;
@@ -244,7 +232,7 @@ public class Profile {
     /**
      *
      * @param imageOriginal
-     *     The image_original
+     *            The image_original
      */
     public void setImageOriginal(String imageOriginal) {
         this.imageOriginal = imageOriginal;
@@ -252,8 +240,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The realName
+     * @return The realName
      */
     public String getRealName() {
         return realName;
@@ -262,7 +249,7 @@ public class Profile {
     /**
      *
      * @param realName
-     *     The real_name
+     *            The real_name
      */
     public void setRealName(String realName) {
         this.realName = realName;
@@ -270,8 +257,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The realNameNormalized
+     * @return The realNameNormalized
      */
     public String getRealNameNormalized() {
         return realNameNormalized;
@@ -280,7 +266,7 @@ public class Profile {
     /**
      *
      * @param realNameNormalized
-     *     The real_name_normalized
+     *            The real_name_normalized
      */
     public void setRealNameNormalized(String realNameNormalized) {
         this.realNameNormalized = realNameNormalized;
@@ -288,8 +274,7 @@ public class Profile {
 
     /**
      *
-     * @return
-     *     The email
+     * @return The email
      */
     public String getEmail() {
         return email;
@@ -298,7 +283,7 @@ public class Profile {
     /**
      *
      * @param email
-     *     The email
+     *            The email
      */
     public void setEmail(String email) {
         this.email = email;

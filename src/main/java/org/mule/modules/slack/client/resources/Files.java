@@ -22,7 +22,7 @@ public class Files {
         this.gson = gson;
     }
 
-    //TODO -- Delete duplicated code
+    // TODO -- Delete duplicated code
     public FileUploadResponse sendFile(String channelId, String fileName, String fileType, String title, String initialComment, InputStream file) {
         WebTarget webTarget = slackRequester.getWebTarget()
                 .path(Operations.FILES_UPLOAD)
@@ -55,6 +55,5 @@ public class Files {
 
         return gson.fromJson(new JSONObject(stringResponse).getJSONObject("file").toString(), FileUploadResponse.class);
     }
-
 
 }

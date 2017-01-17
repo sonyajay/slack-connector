@@ -16,15 +16,13 @@ public class Auth {
     }
 
     public String testAuth() {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.AUTH_TEST);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.AUTH_TEST);
 
         return SlackRequester.sendRequest(webTarget);
     }
 
     public String getSelfId() {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.AUTH_TEST);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.AUTH_TEST);
 
         String output = SlackRequester.sendRequest(webTarget);
         JSONObject slackResponse = new JSONObject(output);
@@ -32,8 +30,7 @@ public class Auth {
     }
 
     public Boolean isConnected() {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.AUTH_TEST);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.AUTH_TEST);
 
         String output = SlackRequester.sendRequest(webTarget);
         JSONObject slackResponse = new JSONObject(output);

@@ -22,8 +22,7 @@ public class Field {
 
     /**
      *
-     * @return
-     *     The title
+     * @return The title
      */
     public String getTitle() {
         return title;
@@ -32,7 +31,7 @@ public class Field {
     /**
      *
      * @param title
-     *     The title
+     *            The title
      */
     public void setTitle(String title) {
         this.title = title;
@@ -40,8 +39,7 @@ public class Field {
 
     /**
      *
-     * @return
-     *     The value
+     * @return The value
      */
     public String getValue() {
         return value;
@@ -50,7 +48,7 @@ public class Field {
     /**
      *
      * @param value
-     *     The value
+     *            The value
      */
     public void setValue(String value) {
         this.value = value;
@@ -58,8 +56,7 @@ public class Field {
 
     /**
      *
-     * @return
-     *     The _short
+     * @return The _short
      */
     public Boolean getShort() {
         return _short;
@@ -68,7 +65,7 @@ public class Field {
     /**
      *
      * @param _short
-     *     The short
+     *            The short
      */
     public void setShort(Boolean _short) {
         this._short = _short;

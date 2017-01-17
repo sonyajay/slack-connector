@@ -3,7 +3,6 @@
  * a copy of which has been included with this distribution in the LICENSE.md file.
  */
 
-
 package org.mule.modules.slack.client.model;
 
 import javax.annotation.Generated;
@@ -60,8 +59,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The id
+     * @return The id
      */
     public String getId() {
         return id;
@@ -70,7 +68,7 @@ public class User {
     /**
      *
      * @param id
-     *     The id
+     *            The id
      */
     public void setId(String id) {
         this.id = id;
@@ -78,8 +76,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The name
+     * @return The name
      */
     public String getName() {
         return name;
@@ -88,7 +85,7 @@ public class User {
     /**
      *
      * @param name
-     *     The name
+     *            The name
      */
     public void setName(String name) {
         this.name = name;
@@ -96,8 +93,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The deleted
+     * @return The deleted
      */
     public Boolean getDeleted() {
         return deleted;
@@ -106,7 +102,7 @@ public class User {
     /**
      *
      * @param deleted
-     *     The deleted
+     *            The deleted
      */
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
@@ -114,8 +110,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The status
+     * @return The status
      */
     public Object getStatus() {
         return status;
@@ -124,7 +119,7 @@ public class User {
     /**
      *
      * @param status
-     *     The status
+     *            The status
      */
     public void setStatus(Object status) {
         this.status = status;
@@ -132,8 +127,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The color
+     * @return The color
      */
     public String getColor() {
         return color;
@@ -142,7 +136,7 @@ public class User {
     /**
      *
      * @param color
-     *     The color
+     *            The color
      */
     public void setColor(String color) {
         this.color = color;
@@ -150,8 +144,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The realName
+     * @return The realName
      */
     public String getRealName() {
         return realName;
@@ -160,7 +153,7 @@ public class User {
     /**
      *
      * @param realName
-     *     The real_name
+     *            The real_name
      */
     public void setRealName(String realName) {
         this.realName = realName;
@@ -168,8 +161,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The tz
+     * @return The tz
      */
     public String getTz() {
         return tz;
@@ -178,7 +170,7 @@ public class User {
     /**
      *
      * @param tz
-     *     The tz
+     *            The tz
      */
     public void setTz(String tz) {
         this.tz = tz;
@@ -186,8 +178,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The tzLabel
+     * @return The tzLabel
      */
     public String getTzLabel() {
         return tzLabel;
@@ -196,7 +187,7 @@ public class User {
     /**
      *
      * @param tzLabel
-     *     The tz_label
+     *            The tz_label
      */
     public void setTzLabel(String tzLabel) {
         this.tzLabel = tzLabel;
@@ -204,8 +195,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The tzOffset
+     * @return The tzOffset
      */
     public Integer getTzOffset() {
         return tzOffset;
@@ -214,7 +204,7 @@ public class User {
     /**
      *
      * @param tzOffset
-     *     The tz_offset
+     *            The tz_offset
      */
     public void setTzOffset(Integer tzOffset) {
         this.tzOffset = tzOffset;
@@ -222,8 +212,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The profile
+     * @return The profile
      */
     public Profile getProfile() {
         return profile;
@@ -232,7 +221,7 @@ public class User {
     /**
      *
      * @param profile
-     *     The profile
+     *            The profile
      */
     public void setProfile(Profile profile) {
         this.profile = profile;
@@ -240,8 +229,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The isAdmin
+     * @return The isAdmin
      */
     public Boolean getIsAdmin() {
         return isAdmin;
@@ -250,7 +238,7 @@ public class User {
     /**
      *
      * @param isAdmin
-     *     The is_admin
+     *            The is_admin
      */
     public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
@@ -258,8 +246,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The isOwner
+     * @return The isOwner
      */
     public Boolean getIsOwner() {
         return isOwner;
@@ -268,7 +255,7 @@ public class User {
     /**
      *
      * @param isOwner
-     *     The is_owner
+     *            The is_owner
      */
     public void setIsOwner(Boolean isOwner) {
         this.isOwner = isOwner;
@@ -276,8 +263,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The isPrimaryOwner
+     * @return The isPrimaryOwner
      */
     public Boolean getIsPrimaryOwner() {
         return isPrimaryOwner;
@@ -286,7 +272,7 @@ public class User {
     /**
      *
      * @param isPrimaryOwner
-     *     The is_primary_owner
+     *            The is_primary_owner
      */
     public void setIsPrimaryOwner(Boolean isPrimaryOwner) {
         this.isPrimaryOwner = isPrimaryOwner;
@@ -294,8 +280,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The isRestricted
+     * @return The isRestricted
      */
     public Boolean getIsRestricted() {
         return isRestricted;
@@ -304,7 +289,7 @@ public class User {
     /**
      *
      * @param isRestricted
-     *     The is_restricted
+     *            The is_restricted
      */
     public void setIsRestricted(Boolean isRestricted) {
         this.isRestricted = isRestricted;
@@ -312,8 +297,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The isUltraRestricted
+     * @return The isUltraRestricted
      */
     public Boolean getIsUltraRestricted() {
         return isUltraRestricted;
@@ -322,7 +306,7 @@ public class User {
     /**
      *
      * @param isUltraRestricted
-     *     The is_ultra_restricted
+     *            The is_ultra_restricted
      */
     public void setIsUltraRestricted(Boolean isUltraRestricted) {
         this.isUltraRestricted = isUltraRestricted;
@@ -330,8 +314,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The isBot
+     * @return The isBot
      */
     public Boolean getIsBot() {
         return isBot;
@@ -340,7 +323,7 @@ public class User {
     /**
      *
      * @param isBot
-     *     The is_bot
+     *            The is_bot
      */
     public void setIsBot(Boolean isBot) {
         this.isBot = isBot;
@@ -348,8 +331,7 @@ public class User {
 
     /**
      *
-     * @return
-     *     The hasFiles
+     * @return The hasFiles
      */
     public Boolean getHasFiles() {
         return hasFiles;
@@ -358,7 +340,7 @@ public class User {
     /**
      *
      * @param hasFiles
-     *     The has_files
+     *            The has_files
      */
     public void setHasFiles(Boolean hasFiles) {
         this.hasFiles = hasFiles;

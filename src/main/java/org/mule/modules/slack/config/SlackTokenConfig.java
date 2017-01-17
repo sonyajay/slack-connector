@@ -7,69 +7,55 @@ package org.mule.modules.slack.config;
 
 import org.mule.api.ConnectionException;
 import org.mule.api.ConnectionExceptionCode;
-import org.mule.api.annotations.Configurable;
+import org.mule.api.annotations.Connect;
+import org.mule.api.annotations.ConnectionIdentifier;
+import org.mule.api.annotations.Disconnect;
 import org.mule.api.annotations.TestConnectivity;
-import org.mule.api.annotations.components.Configuration;
-import org.mule.api.annotations.lifecycle.Start;
+import org.mule.api.annotations.ValidateConnection;
+import org.mule.api.annotations.components.ConnectionManagement;
+import org.mule.api.annotations.param.ConnectionKey;
 import org.mule.modules.slack.client.SlackClient;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Connection Management Strategy
  *
  * @author Esteban Wasinger.
  */
-@Configuration(configElementName = "config-type", friendlyName = "Token Configuration")
-//@ConnectionManagement(configElementName = "config-type", friendlyName = "Token Configuration")
-public class SlackTokenConfig implements BasicSlackConfig {
+@ConnectionManagement(configElementName = "token-config", friendlyName = "Token Configuration")
+public class SlackTokenConfig implements SlackConfig {
 
-    Map<String, Map<String, Object>> userMap;
-
-    public SlackTokenConfig(){
-        userMap = new HashMap<>();
-    }
-
-    SlackClient slack;
-
-    @Configurable
-    String accessToken;
-
-    @Start
-    public void init(){
-        System.out.println("tu mama");
-    }
+    private SlackClient slackClient;
+    private String accessToken;
 
     /**
      * @throws ConnectionException
      */
     @TestConnectivity
-//    @Connect
-//    public void connect(@ConnectionKey String keyee) throws ConnectionException {
-    public void connect() throws ConnectionException {
-        SlackClient slackTestClient = new SlackClient(accessToken);
-        if (!slackTestClient.auth.isConnected()) {
+    @Connect
+    public void connect(@ConnectionKey String accessToken) throws ConnectionException {
+        slackClient = new SlackClient(accessToken);
+        if (!slackClient.auth.isConnected()) {
             throw new ConnectionException(ConnectionExceptionCode.INCORRECT_CREDENTIALS, "Invalid Token", "Invalid Token");
         }
     }
 
-//    @Disconnect
-    public void dds(){
-
+    @Disconnect
+    public void disconnect() {
+        slackClient = null;
     }
 
-//    @ValidateConnection
-    public boolean isValiod(){
-        return true;
+    @ValidateConnection
+    public boolean isValid() {
+        return slackClient != null && slackClient.auth.isConnected();
     }
 
-//    @ConnectionIdentifier
-    public String sss(){
-        return "dsad";
+    @ConnectionIdentifier
+    public String getConnectionIdentifier() {
+        return accessToken;
     }
+
     public SlackClient getSlackClient() {
-        return slack;
+        return slackClient;
     }
 
     public String getToken() {
@@ -85,16 +71,11 @@ public class SlackTokenConfig implements BasicSlackConfig {
     }
 
     public void setAccessToken(String accessToken) {
-        slack = new SlackClient(accessToken);
+        slackClient = new SlackClient(accessToken);
         this.accessToken = accessToken;
     }
 
     public Boolean isAuthorized() {
         return accessToken != null;
-    }
-
-    @Override
-    public Map<String, Map<String, Object>> getUserMap() {
-        return userMap;
     }
 }

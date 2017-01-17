@@ -9,6 +9,7 @@ package org.mule.modules.slack.client.model.chat;
  * Created by estebanwasinger on 1/30/15.
  */
 public class MessageResponse {
+
     private Message message;
 
     private String ts;

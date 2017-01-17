@@ -47,9 +47,9 @@ public class SlackClient {
         files = new Files(slackRequester, gson);
     }
 
-    //******************
+    // ******************
     // RTM
-    //******************
+    // ******************
 
     public String getWebSockerURI() {
         WebTarget webTarget = slackRequester.getWebTarget().path(Operations.RTM_START);
@@ -78,7 +78,6 @@ public class SlackClient {
     public SlackMessageHandler getSlackMessageHandler() {
         return slackMessageHandler;
     }
-
 
     private String getURL(String operation) {
         return "https://slack.com/api/" + operation + "?token=" + token;

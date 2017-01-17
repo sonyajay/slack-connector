@@ -5,7 +5,6 @@
 
 package org.mule.modules.slack.client.model.chat.attachment;
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -52,7 +51,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param fallback The fallback
+     * @param fallback
+     *            The fallback
      */
     public void setFallback(String fallback) {
         this.fallback = fallback;
@@ -66,7 +66,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param color The color
+     * @param color
+     *            The color
      */
     public void setColor(String color) {
         this.color = color;
@@ -80,7 +81,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param pretext The pretext
+     * @param pretext
+     *            The pretext
      */
     public void setPretext(String pretext) {
         this.pretext = pretext;
@@ -94,7 +96,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param authorName The author_name
+     * @param authorName
+     *            The author_name
      */
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
@@ -108,7 +111,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param authorLink The author_link
+     * @param authorLink
+     *            The author_link
      */
     public void setAuthorLink(String authorLink) {
         this.authorLink = authorLink;
@@ -122,7 +126,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param authorIcon The author_icon
+     * @param authorIcon
+     *            The author_icon
      */
     public void setAuthorIcon(String authorIcon) {
         this.authorIcon = authorIcon;
@@ -136,7 +141,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param title The title
+     * @param title
+     *            The title
      */
     public void setTitle(String title) {
         this.title = title;
@@ -150,7 +156,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param titleLink The title_link
+     * @param titleLink
+     *            The title_link
      */
     public void setTitleLink(String titleLink) {
         this.titleLink = titleLink;
@@ -164,7 +171,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param text The text
+     * @param text
+     *            The text
      */
     public void setText(String text) {
         this.text = text;
@@ -178,7 +186,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param fields The fields
+     * @param fields
+     *            The fields
      */
     public void setFields(List<Field> fields) {
         this.fields = fields;
@@ -192,7 +201,8 @@ public class ChatAttachment {
     }
 
     /**
-     * @param imageUrl The image_url
+     * @param imageUrl
+     *            The image_url
      */
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;

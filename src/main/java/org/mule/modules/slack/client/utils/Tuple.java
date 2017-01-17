@@ -6,7 +6,7 @@ package org.mule.modules.slack.client.utils;
 
 import java.io.Serializable;
 
-public class Tuple<X, Y> implements Serializable{
+public class Tuple<X, Y> implements Serializable {
 
     public X getLeft() {
         return left;

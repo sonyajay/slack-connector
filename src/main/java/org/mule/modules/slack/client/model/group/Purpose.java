@@ -3,7 +3,6 @@
  * a copy of which has been included with this distribution in the LICENSE.md file.
  */
 
-
 package org.mule.modules.slack.client.model.group;
 
 import com.google.gson.annotations.Expose;
@@ -30,7 +29,8 @@ public class Purpose {
     }
 
     /**
-     * @param value The value
+     * @param value
+     *            The value
      */
     public void setValue(String value) {
         this.value = value;
@@ -44,7 +44,8 @@ public class Purpose {
     }
 
     /**
-     * @param creator The creator
+     * @param creator
+     *            The creator
      */
     public void setCreator(String creator) {
         this.creator = creator;
@@ -58,7 +59,8 @@ public class Purpose {
     }
 
     /**
-     * @param lastSet The last_set
+     * @param lastSet
+     *            The last_set
      */
     public void setLastSet(Integer lastSet) {
         this.lastSet = lastSet;

@@ -3,7 +3,6 @@
  * a copy of which has been included with this distribution in the LICENSE.md file.
  */
 
-
 package org.mule.modules.slack.client.model.group;
 
 import com.google.gson.annotations.Expose;
@@ -57,7 +56,8 @@ public class Group {
     }
 
     /**
-     * @param id The id
+     * @param id
+     *            The id
      */
     public void setId(String id) {
         this.id = id;
@@ -71,7 +71,8 @@ public class Group {
     }
 
     /**
-     * @param name The name
+     * @param name
+     *            The name
      */
     public void setName(String name) {
         this.name = name;
@@ -85,7 +86,8 @@ public class Group {
     }
 
     /**
-     * @param isGroup The is_group
+     * @param isGroup
+     *            The is_group
      */
     public void setIsGroup(Boolean isGroup) {
         this.isGroup = isGroup;
@@ -99,7 +101,8 @@ public class Group {
     }
 
     /**
-     * @param created The created
+     * @param created
+     *            The created
      */
     public void setCreated(Integer created) {
         this.created = created;
@@ -113,7 +116,8 @@ public class Group {
     }
 
     /**
-     * @param creator The creator
+     * @param creator
+     *            The creator
      */
     public void setCreator(String creator) {
         this.creator = creator;
@@ -127,7 +131,8 @@ public class Group {
     }
 
     /**
-     * @param isArchived The is_archived
+     * @param isArchived
+     *            The is_archived
      */
     public void setIsArchived(Boolean isArchived) {
         this.isArchived = isArchived;
@@ -141,7 +146,8 @@ public class Group {
     }
 
     /**
-     * @param members The members
+     * @param members
+     *            The members
      */
     public void setMembers(List<String> members) {
         this.members = members;
@@ -155,7 +161,8 @@ public class Group {
     }
 
     /**
-     * @param topic The topic
+     * @param topic
+     *            The topic
      */
     public void setTopic(Topic topic) {
         this.topic = topic;
@@ -169,7 +176,8 @@ public class Group {
     }
 
     /**
-     * @param purpose The purpose
+     * @param purpose
+     *            The purpose
      */
     public void setPurpose(Purpose purpose) {
         this.purpose = purpose;

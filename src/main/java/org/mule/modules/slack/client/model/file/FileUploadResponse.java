@@ -90,8 +90,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The id
+     * @return The id
      */
     public String getId() {
         return id;
@@ -100,7 +99,7 @@ public class FileUploadResponse {
     /**
      *
      * @param id
-     * The id
+     *            The id
      */
     public void setId(String id) {
         this.id = id;
@@ -108,8 +107,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The created
+     * @return The created
      */
     public Integer getCreated() {
         return created;
@@ -118,7 +116,7 @@ public class FileUploadResponse {
     /**
      *
      * @param created
-     * The created
+     *            The created
      */
     public void setCreated(Integer created) {
         this.created = created;
@@ -126,8 +124,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The timestamp
+     * @return The timestamp
      */
     public Integer getTimestamp() {
         return timestamp;
@@ -136,7 +133,7 @@ public class FileUploadResponse {
     /**
      *
      * @param timestamp
-     * The timestamp
+     *            The timestamp
      */
     public void setTimestamp(Integer timestamp) {
         this.timestamp = timestamp;
@@ -144,8 +141,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The name
+     * @return The name
      */
     public String getName() {
         return name;
@@ -154,7 +150,7 @@ public class FileUploadResponse {
     /**
      *
      * @param name
-     * The name
+     *            The name
      */
     public void setName(String name) {
         this.name = name;
@@ -162,8 +158,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The title
+     * @return The title
      */
     public String getTitle() {
         return title;
@@ -172,7 +167,7 @@ public class FileUploadResponse {
     /**
      *
      * @param title
-     * The title
+     *            The title
      */
     public void setTitle(String title) {
         this.title = title;
@@ -180,8 +175,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The mimetype
+     * @return The mimetype
      */
     public String getMimetype() {
         return mimetype;
@@ -190,7 +184,7 @@ public class FileUploadResponse {
     /**
      *
      * @param mimetype
-     * The mimetype
+     *            The mimetype
      */
     public void setMimetype(String mimetype) {
         this.mimetype = mimetype;
@@ -198,8 +192,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The filetype
+     * @return The filetype
      */
     public String getFiletype() {
         return filetype;
@@ -208,7 +201,7 @@ public class FileUploadResponse {
     /**
      *
      * @param filetype
-     * The filetype
+     *            The filetype
      */
     public void setFiletype(String filetype) {
         this.filetype = filetype;
@@ -216,8 +209,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The prettyType
+     * @return The prettyType
      */
     public String getPrettyType() {
         return prettyType;
@@ -226,7 +218,7 @@ public class FileUploadResponse {
     /**
      *
      * @param prettyType
-     * The pretty_type
+     *            The pretty_type
      */
     public void setPrettyType(String prettyType) {
         this.prettyType = prettyType;
@@ -234,8 +226,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The user
+     * @return The user
      */
     public String getUser() {
         return user;
@@ -244,7 +235,7 @@ public class FileUploadResponse {
     /**
      *
      * @param user
-     * The user
+     *            The user
      */
     public void setUser(String user) {
         this.user = user;
@@ -252,8 +243,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The editable
+     * @return The editable
      */
     public Boolean getEditable() {
         return editable;
@@ -262,7 +252,7 @@ public class FileUploadResponse {
     /**
      *
      * @param editable
-     * The editable
+     *            The editable
      */
     public void setEditable(Boolean editable) {
         this.editable = editable;
@@ -270,8 +260,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The size
+     * @return The size
      */
     public Integer getSize() {
         return size;
@@ -280,7 +269,7 @@ public class FileUploadResponse {
     /**
      *
      * @param size
-     * The size
+     *            The size
      */
     public void setSize(Integer size) {
         this.size = size;
@@ -288,8 +277,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The mode
+     * @return The mode
      */
     public String getMode() {
         return mode;
@@ -298,7 +286,7 @@ public class FileUploadResponse {
     /**
      *
      * @param mode
-     * The mode
+     *            The mode
      */
     public void setMode(String mode) {
         this.mode = mode;
@@ -306,8 +294,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The isExternal
+     * @return The isExternal
      */
     public Boolean getIsExternal() {
         return isExternal;
@@ -316,7 +303,7 @@ public class FileUploadResponse {
     /**
      *
      * @param isExternal
-     * The is_external
+     *            The is_external
      */
     public void setIsExternal(Boolean isExternal) {
         this.isExternal = isExternal;
@@ -324,8 +311,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The externalType
+     * @return The externalType
      */
     public String getExternalType() {
         return externalType;
@@ -334,7 +320,7 @@ public class FileUploadResponse {
     /**
      *
      * @param externalType
-     * The external_type
+     *            The external_type
      */
     public void setExternalType(String externalType) {
         this.externalType = externalType;
@@ -342,8 +328,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The isPublic
+     * @return The isPublic
      */
     public Boolean getIsPublic() {
         return isPublic;
@@ -352,7 +337,7 @@ public class FileUploadResponse {
     /**
      *
      * @param isPublic
-     * The is_public
+     *            The is_public
      */
     public void setIsPublic(Boolean isPublic) {
         this.isPublic = isPublic;
@@ -360,8 +345,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The publicUrlShared
+     * @return The publicUrlShared
      */
     public Boolean getPublicUrlShared() {
         return publicUrlShared;
@@ -370,7 +354,7 @@ public class FileUploadResponse {
     /**
      *
      * @param publicUrlShared
-     * The public_url_shared
+     *            The public_url_shared
      */
     public void setPublicUrlShared(Boolean publicUrlShared) {
         this.publicUrlShared = publicUrlShared;
@@ -378,8 +362,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The url
+     * @return The url
      */
     public String getUrl() {
         return url;
@@ -388,7 +371,7 @@ public class FileUploadResponse {
     /**
      *
      * @param url
-     * The url
+     *            The url
      */
     public void setUrl(String url) {
         this.url = url;
@@ -396,8 +379,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The urlDownload
+     * @return The urlDownload
      */
     public String getUrlDownload() {
         return urlDownload;
@@ -406,7 +388,7 @@ public class FileUploadResponse {
     /**
      *
      * @param urlDownload
-     * The url_download
+     *            The url_download
      */
     public void setUrlDownload(String urlDownload) {
         this.urlDownload = urlDownload;
@@ -414,8 +396,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The urlPrivate
+     * @return The urlPrivate
      */
     public String getUrlPrivate() {
         return urlPrivate;
@@ -424,7 +405,7 @@ public class FileUploadResponse {
     /**
      *
      * @param urlPrivate
-     * The url_private
+     *            The url_private
      */
     public void setUrlPrivate(String urlPrivate) {
         this.urlPrivate = urlPrivate;
@@ -432,8 +413,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The urlPrivateDownload
+     * @return The urlPrivateDownload
      */
     public String getUrlPrivateDownload() {
         return urlPrivateDownload;
@@ -442,7 +422,7 @@ public class FileUploadResponse {
     /**
      *
      * @param urlPrivateDownload
-     * The url_private_download
+     *            The url_private_download
      */
     public void setUrlPrivateDownload(String urlPrivateDownload) {
         this.urlPrivateDownload = urlPrivateDownload;
@@ -450,8 +430,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The permalink
+     * @return The permalink
      */
     public String getPermalink() {
         return permalink;
@@ -460,7 +439,7 @@ public class FileUploadResponse {
     /**
      *
      * @param permalink
-     * The permalink
+     *            The permalink
      */
     public void setPermalink(String permalink) {
         this.permalink = permalink;
@@ -468,8 +447,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The permalinkPublic
+     * @return The permalinkPublic
      */
     public String getPermalinkPublic() {
         return permalinkPublic;
@@ -478,7 +456,7 @@ public class FileUploadResponse {
     /**
      *
      * @param permalinkPublic
-     * The permalink_public
+     *            The permalink_public
      */
     public void setPermalinkPublic(String permalinkPublic) {
         this.permalinkPublic = permalinkPublic;
@@ -486,8 +464,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The editLink
+     * @return The editLink
      */
     public String getEditLink() {
         return editLink;
@@ -496,7 +473,7 @@ public class FileUploadResponse {
     /**
      *
      * @param editLink
-     * The edit_link
+     *            The edit_link
      */
     public void setEditLink(String editLink) {
         this.editLink = editLink;
@@ -504,8 +481,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The preview
+     * @return The preview
      */
     public String getPreview() {
         return preview;
@@ -514,7 +490,7 @@ public class FileUploadResponse {
     /**
      *
      * @param preview
-     * The preview
+     *            The preview
      */
     public void setPreview(String preview) {
         this.preview = preview;
@@ -522,8 +498,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The previewHighlight
+     * @return The previewHighlight
      */
     public String getPreviewHighlight() {
         return previewHighlight;
@@ -532,7 +507,7 @@ public class FileUploadResponse {
     /**
      *
      * @param previewHighlight
-     * The preview_highlight
+     *            The preview_highlight
      */
     public void setPreviewHighlight(String previewHighlight) {
         this.previewHighlight = previewHighlight;
@@ -540,8 +515,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The lines
+     * @return The lines
      */
     public Integer getLines() {
         return lines;
@@ -550,7 +524,7 @@ public class FileUploadResponse {
     /**
      *
      * @param lines
-     * The lines
+     *            The lines
      */
     public void setLines(Integer lines) {
         this.lines = lines;
@@ -558,8 +532,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The linesMore
+     * @return The linesMore
      */
     public Integer getLinesMore() {
         return linesMore;
@@ -568,7 +541,7 @@ public class FileUploadResponse {
     /**
      *
      * @param linesMore
-     * The lines_more
+     *            The lines_more
      */
     public void setLinesMore(Integer linesMore) {
         this.linesMore = linesMore;
@@ -576,8 +549,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The channels
+     * @return The channels
      */
     public List<Object> getChannels() {
         return channels;
@@ -586,7 +558,7 @@ public class FileUploadResponse {
     /**
      *
      * @param channels
-     * The channels
+     *            The channels
      */
     public void setChannels(List<Object> channels) {
         this.channels = channels;
@@ -594,8 +566,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The groups
+     * @return The groups
      */
     public List<String> getGroups() {
         return groups;
@@ -604,7 +575,7 @@ public class FileUploadResponse {
     /**
      *
      * @param groups
-     * The groups
+     *            The groups
      */
     public void setGroups(List<String> groups) {
         this.groups = groups;
@@ -612,8 +583,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The ims
+     * @return The ims
      */
     public List<Object> getIms() {
         return ims;
@@ -622,7 +592,7 @@ public class FileUploadResponse {
     /**
      *
      * @param ims
-     * The ims
+     *            The ims
      */
     public void setIms(List<Object> ims) {
         this.ims = ims;
@@ -630,8 +600,7 @@ public class FileUploadResponse {
 
     /**
      *
-     * @return
-     * The commentsCount
+     * @return The commentsCount
      */
     public Integer getCommentsCount() {
         return commentsCount;
@@ -640,7 +609,7 @@ public class FileUploadResponse {
     /**
      *
      * @param commentsCount
-     * The comments_count
+     *            The comments_count
      */
     public void setCommentsCount(Integer commentsCount) {
         this.commentsCount = commentsCount;

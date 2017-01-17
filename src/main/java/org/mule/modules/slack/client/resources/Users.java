@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.mule.modules.slack.client.Operations;
 import org.mule.modules.slack.client.SlackRequester;
-import org.mule.modules.slack.client.exceptions.UserNotFoundException;
+import org.mule.modules.slack.client.exceptions.SlackException;
 
 import javax.ws.rs.client.WebTarget;
 import java.lang.reflect.Type;
@@ -14,7 +14,8 @@ import java.util.List;
 
 public class Users {
 
-    private final Type usersListType = new TypeToken<List<org.mule.modules.slack.client.model.User>>(){}.getType();
+    private final Type usersListType = new TypeToken<List<org.mule.modules.slack.client.model.User>>() {
+    }.getType();
     private final SlackRequester slackRequester;
     private final Gson gson;
 
@@ -25,9 +26,7 @@ public class Users {
     }
 
     public org.mule.modules.slack.client.model.User getUserInfo(String id) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.USER_INFO)
-                .queryParam("user", id);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.USER_INFO).queryParam("user", id);
 
         String output = SlackRequester.sendRequest(webTarget);
 
@@ -36,8 +35,7 @@ public class Users {
     }
 
     public List<org.mule.modules.slack.client.model.User> getUserList() {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.USER_LIST);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.USER_LIST);
 
         String output = SlackRequester.sendRequest(webTarget);
 
@@ -45,14 +43,14 @@ public class Users {
         return gson.fromJson(slackResponse.toString(), usersListType);
     }
 
-    public org.mule.modules.slack.client.model.User getUserInfoByName(String username) throws UserNotFoundException {
+    public org.mule.modules.slack.client.model.User getUserInfoByName(String username) {
         List<org.mule.modules.slack.client.model.User> list = getUserList();
         for (org.mule.modules.slack.client.model.User user : list) {
             if (user.getName().equals(username)) {
                 return user;
             }
         }
-        throw new UserNotFoundException("The user: " + username + " does not exist, please check the name!");
+        throw new SlackException("The user: " + username + " does not exist, please check the name!");
     }
 
 }

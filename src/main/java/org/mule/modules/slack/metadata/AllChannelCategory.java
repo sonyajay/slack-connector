@@ -5,7 +5,6 @@
 
 package org.mule.modules.slack.metadata;
 
-
 import org.mule.api.annotations.MetaDataKeyRetriever;
 import org.mule.api.annotations.MetaDataRetriever;
 import org.mule.api.annotations.components.MetaDataCategory;
@@ -30,14 +29,14 @@ public class AllChannelCategory {
     public List<MetaDataKey> getEntities() throws Exception {
         List<MetaDataKey> entities = new ArrayList<MetaDataKey>();
         List<Channel> channelList = connector.slack().channels.getChannelList();
-        for(Channel channel: channelList){
-            entities.add(new DefaultMetaDataKey(channel.getId(),channel.getName() + " - " + channel.getId()));
+        for (Channel channel : channelList) {
+            entities.add(new DefaultMetaDataKey(channel.getId(), channel.getName() + " - " + channel.getId()));
         }
 
         List<DirectMessageChannel> dmList = connector.slack().im.getDirectMessageChannelsList();
         List<User> userList = connector.slack().users.getUserList();
         for (DirectMessageChannel group : dmList) {
-            entities.add(new DefaultMetaDataKey(group.getId(), userName(userList,group.getUser()) + " - " + group.getId()));
+            entities.add(new DefaultMetaDataKey(group.getId(), userName(userList, group.getUser()) + " - " + group.getId()));
         }
 
         List<Group> groupList = connector.slack().groups.getGroupList();
@@ -49,8 +48,8 @@ public class AllChannelCategory {
     }
 
     private String userName(List<User> userList, String userId) {
-        for(User user: userList){
-            if(user.getId().equals(userId)){
+        for (User user : userList) {
+            if (user.getId().equals(userId)) {
                 return user.getName();
             }
         }

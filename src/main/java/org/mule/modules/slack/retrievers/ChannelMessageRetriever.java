@@ -5,7 +5,6 @@
 
 package org.mule.modules.slack.retrievers;
 
-
 import org.mule.modules.slack.client.SlackClient;
 import org.mule.modules.slack.client.model.chat.Message;
 
@@ -14,6 +13,6 @@ import java.util.List;
 public class ChannelMessageRetriever implements MessageRetriever {
 
     public List<Message> retrieve(SlackClient slackClient, String channelId, String latestTimestamp, String oldestTimestamp, String mountOfMessages) {
-        return slackClient.channels.getChannelHistory(channelId,latestTimestamp,oldestTimestamp,mountOfMessages);
+        return slackClient.channels.getChannelHistory(channelId, latestTimestamp, oldestTimestamp, mountOfMessages);
     }
 }

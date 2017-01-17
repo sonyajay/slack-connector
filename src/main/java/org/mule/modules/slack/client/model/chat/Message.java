@@ -3,7 +3,6 @@
  * a copy of which has been included with this distribution in the LICENSE.md file.
  */
 
-
 package org.mule.modules.slack.client.model.chat;
 
 import java.util.ArrayList;
@@ -28,8 +27,7 @@ public class Message {
 
     /**
      *
-     * @return
-     *     The type
+     * @return The type
      */
     public String getType() {
         return type;
@@ -38,7 +36,7 @@ public class Message {
     /**
      *
      * @param type
-     *     The type
+     *            The type
      */
     public void setType(String type) {
         this.type = type;
@@ -46,8 +44,7 @@ public class Message {
 
     /**
      *
-     * @return
-     *     The user
+     * @return The user
      */
     public String getUser() {
         return user;
@@ -56,7 +53,7 @@ public class Message {
     /**
      *
      * @param user
-     *     The user
+     *            The user
      */
     public void setUser(String user) {
         this.user = user;
@@ -64,8 +61,7 @@ public class Message {
 
     /**
      *
-     * @return
-     *     The text
+     * @return The text
      */
     public String getText() {
         return text;
@@ -74,7 +70,7 @@ public class Message {
     /**
      *
      * @param text
-     *     The text
+     *            The text
      */
     public void setText(String text) {
         this.text = text;
@@ -82,8 +78,7 @@ public class Message {
 
     /**
      *
-     * @return
-     *     The attachments
+     * @return The attachments
      */
     public List<Attachment> getAttachments() {
         return attachments;
@@ -92,7 +87,7 @@ public class Message {
     /**
      *
      * @param attachments
-     *     The attachments
+     *            The attachments
      */
     public void setAttachments(List<Attachment> attachments) {
         this.attachments = attachments;
@@ -100,8 +95,7 @@ public class Message {
 
     /**
      *
-     * @return
-     *     The ts
+     * @return The ts
      */
     public String getTs() {
         return ts;
@@ -110,7 +104,7 @@ public class Message {
     /**
      *
      * @param ts
-     *     The ts
+     *            The ts
      */
     public void setTs(String ts) {
         this.ts = ts;

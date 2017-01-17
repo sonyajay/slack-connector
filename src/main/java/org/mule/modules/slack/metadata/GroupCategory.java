@@ -28,8 +28,8 @@ public class GroupCategory {
     public List<MetaDataKey> getEntities() throws Exception {
         List<MetaDataKey> entities = new ArrayList<MetaDataKey>();
         List<Group> groupList = connector.slack().groups.getGroupList();
-        for(Group group: groupList){
-            entities.add(new DefaultMetaDataKey(group.getId(),group.getName() + " - " + group.getId()));
+        for (Group group : groupList) {
+            entities.add(new DefaultMetaDataKey(group.getId(), group.getName() + " - " + group.getId()));
         }
 
         return entities;

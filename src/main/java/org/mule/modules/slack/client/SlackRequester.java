@@ -34,14 +34,12 @@ public class SlackRequester {
     }
 
     public static String sendRequest(WebTarget webTarget) {
-        Invocation.Builder invocationBuilder =
-                webTarget.request(MediaType.APPLICATION_JSON);
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 
         Response response = invocationBuilder.get();
 
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + response.getStatus());
+            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
         String output = response.readEntity(String.class);
         ErrorHandler.verifyResponse(output);
@@ -55,8 +53,7 @@ public class SlackRequester {
         Response response = webTarget.request(MediaType.MULTIPART_FORM_DATA).post(Entity.entity(multiPart, multiPart.getMediaType()));
 
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + response.getStatus());
+            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
 
         String output = response.readEntity(String.class);
@@ -70,11 +67,10 @@ public class SlackRequester {
         FormDataMultiPart multiPart = new FormDataMultiPart();
         multiPart.bodyPart(new FileDataBodyPart("file", file, MediaType.APPLICATION_OCTET_STREAM_TYPE));
 
-        Response response = webTarget.request(MediaType.MULTIPART_FORM_DATA).post(Entity.entity(multiPart,multiPart.getMediaType()));
+        Response response = webTarget.request(MediaType.MULTIPART_FORM_DATA).post(Entity.entity(multiPart, multiPart.getMediaType()));
 
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + response.getStatus());
+            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
 
         String output = response.readEntity(String.class);

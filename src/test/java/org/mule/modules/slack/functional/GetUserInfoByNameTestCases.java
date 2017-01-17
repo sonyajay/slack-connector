@@ -5,7 +5,6 @@
 package org.mule.modules.slack.functional;
 
 import org.junit.Test;
-import org.mule.modules.slack.client.exceptions.UserNotFoundException;
 import org.mule.modules.slack.client.model.User;
 import org.mule.modules.slack.runner.AbstractSlackTestCase;
 
@@ -17,8 +16,8 @@ import static org.junit.Assert.assertEquals;
 public class GetUserInfoByNameTestCases extends AbstractSlackTestCase {
 
     @Test
-    public void testGetUserInfoByName() throws UserNotFoundException {
-        User user = getConnector().getUserInfoByName(ESTEBANWASINGER);
+    public void testGetUserInfoByName() {
+        User user = getConnector().getUserInfoByName(ESTEBANWASINGER,"");
         assertEquals(ESTEBANWASINGER, user.getName());
     }
 

@@ -23,8 +23,7 @@ public class Prefs {
 
     /**
      *
-     * @return
-     *     The channels
+     * @return The channels
      */
     public List<Object> getChannels() {
         return channels;
@@ -33,7 +32,7 @@ public class Prefs {
     /**
      *
      * @param channels
-     *     The channels
+     *            The channels
      */
     public void setChannels(List<Object> channels) {
         this.channels = channels;
@@ -41,8 +40,7 @@ public class Prefs {
 
     /**
      *
-     * @return
-     *     The groups
+     * @return The groups
      */
     public List<Object> getGroups() {
         return groups;
@@ -51,7 +49,7 @@ public class Prefs {
     /**
      *
      * @param groups
-     *     The groups
+     *            The groups
      */
     public void setGroups(List<Object> groups) {
         this.groups = groups;

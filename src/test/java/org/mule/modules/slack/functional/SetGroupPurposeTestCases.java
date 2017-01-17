@@ -5,7 +5,6 @@
 package org.mule.modules.slack.functional;
 
 import org.junit.Test;
-import org.mule.modules.slack.client.exceptions.UserNotFoundException;
 import org.mule.modules.slack.runner.AbstractSlackTestCase;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class SetGroupPurposeTestCases extends AbstractSlackTestCase {
 
     @Test
-    public void testSetGroupPurpose() throws UserNotFoundException {
+    public void testSetGroupPurpose() {
         String date = getDateString();
         getConnector().setGroupPurpose(GROUP_ID, date);
         String purpose = getConnector().getGroupInfo(GROUP_ID).getPurpose().getValue();

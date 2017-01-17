@@ -26,8 +26,10 @@ public class UserGroups {
     private static final String USERS = "users";
     private final SlackRequester slackRequester;
     private final Gson gson;
-    private final Type userGroupsListType = new TypeToken<ArrayList<Usergroup>>() {}.getType();
-    private final Type stringListType = new TypeToken<List<String>>(){}.getType();
+    private final Type userGroupsListType = new TypeToken<ArrayList<Usergroup>>() {
+    }.getType();
+    private final Type stringListType = new TypeToken<List<String>>() {
+    }.getType();
 
     public UserGroups(SlackRequester slackRequester, Gson gson) {
 
@@ -35,7 +37,7 @@ public class UserGroups {
         this.gson = gson;
     }
 
-    public List<Usergroup> listUserGroups(boolean includeDisabled, boolean includeCount, boolean includeUsers){
+    public List<Usergroup> listUserGroups(boolean includeDisabled, boolean includeCount, boolean includeUsers) {
         WebTarget webTarget = slackRequester.getWebTarget()
                 .path(Operations.USERGROUPS_LIST)
                 .queryParam(INCLUDE_DISABLED, (includeDisabled) ? 1 : 0)
@@ -47,18 +49,15 @@ public class UserGroups {
         return gson.fromJson(slackResponse.toString(), userGroupsListType);
     }
 
-    public Usergroup enableUserGroup(String usergroupId, boolean includeCount){
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.USERGROUPS_ENABLE)
-                .queryParam(USERGROUP, usergroupId)
-                .queryParam(INCLUDE_COUNT, (includeCount) ? 1 : 0);
+    public Usergroup enableUserGroup(String usergroupId, boolean includeCount) {
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.USERGROUPS_ENABLE).queryParam(USERGROUP, usergroupId).queryParam(INCLUDE_COUNT, (includeCount) ? 1 : 0);
 
         String output = SlackRequester.sendRequest(webTarget);
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get(USERGROUP);
         return gson.fromJson(slackResponse.toString(), Usergroup.class);
     }
 
-    public Usergroup disableUserGroup(String usergroupId, boolean includeCount){
+    public Usergroup disableUserGroup(String usergroupId, boolean includeCount) {
         WebTarget webTarget = slackRequester.getWebTarget()
                 .path(Operations.USERGROUPS_DISABLE)
                 .queryParam(USERGROUP, usergroupId)
@@ -69,7 +68,7 @@ public class UserGroups {
         return gson.fromJson(slackResponse.toString(), Usergroup.class);
     }
 
-    public Usergroup createUserGroup(String name, String handle, String description, List<String> channels, boolean include_count){
+    public Usergroup createUserGroup(String name, String handle, String description, List<String> channels, boolean include_count) {
         WebTarget webTarget = slackRequester.getWebTarget()
                 .path(Operations.USERGROUPS_CREATE)
                 .queryParam(NAME, name)
@@ -83,7 +82,7 @@ public class UserGroups {
         return gson.fromJson(slackResponse.toString(), Usergroup.class);
     }
 
-    public Usergroup updateUserGroup(String usergroupId, String name, String handle, String description, List<String> channels, boolean include_count){
+    public Usergroup updateUserGroup(String usergroupId, String name, String handle, String description, List<String> channels, boolean include_count) {
         WebTarget webTarget = slackRequester.getWebTarget()
                 .path(Operations.USERGROUPS_UPDATE)
                 .queryParam(USERGROUP, usergroupId)
@@ -98,7 +97,7 @@ public class UserGroups {
         return gson.fromJson(slackResponse.toString(), Usergroup.class);
     }
 
-    public List<String> listUsersFromUserGroup(String usergroupId, boolean includeDisabled){
+    public List<String> listUsersFromUserGroup(String usergroupId, boolean includeDisabled) {
         WebTarget webTarget = slackRequester.getWebTarget()
                 .path(Operations.USERGROUPS_USERS_LIST)
                 .queryParam(USERGROUP, usergroupId)
@@ -108,7 +107,8 @@ public class UserGroups {
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get(USERS);
         return gson.fromJson(slackResponse.toString(), stringListType);
     }
-    public Usergroup updateUsersFromUserGroup(String usergroupId, List<String> users, boolean includeCount){
+
+    public Usergroup updateUsersFromUserGroup(String usergroupId, List<String> users, boolean includeCount) {
         WebTarget webTarget = slackRequester.getWebTarget()
                 .path(Operations.USERGROUPS_USERS_UPDATE)
                 .queryParam(USERGROUP, usergroupId)

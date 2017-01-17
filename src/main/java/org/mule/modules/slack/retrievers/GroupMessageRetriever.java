@@ -13,6 +13,6 @@ import java.util.List;
 public class GroupMessageRetriever implements MessageRetriever {
 
     public List<Message> retrieve(SlackClient slackClient, String channelId, String latestTimestamp, String oldestTimestamp, String mountOfMessages) {
-        return slackClient.groups.getGroupHistory(channelId,latestTimestamp,oldestTimestamp,mountOfMessages);
+        return slackClient.groups.getGroupHistory(channelId, latestTimestamp, oldestTimestamp, mountOfMessages);
     }
 }

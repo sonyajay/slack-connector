@@ -63,8 +63,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The id
+     * @return The id
      */
     public String getId() {
         return id;
@@ -73,7 +72,7 @@ public class Usergroup {
     /**
      *
      * @param id
-     *     The id
+     *            The id
      */
     public void setId(String id) {
         this.id = id;
@@ -81,8 +80,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The teamId
+     * @return The teamId
      */
     public String getTeamId() {
         return teamId;
@@ -91,7 +89,7 @@ public class Usergroup {
     /**
      *
      * @param teamId
-     *     The team_id
+     *            The team_id
      */
     public void setTeamId(String teamId) {
         this.teamId = teamId;
@@ -99,8 +97,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The isUsergroup
+     * @return The isUsergroup
      */
     public Boolean getIsUsergroup() {
         return isUsergroup;
@@ -109,7 +106,7 @@ public class Usergroup {
     /**
      *
      * @param isUsergroup
-     *     The is_usergroup
+     *            The is_usergroup
      */
     public void setIsUsergroup(Boolean isUsergroup) {
         this.isUsergroup = isUsergroup;
@@ -117,8 +114,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The name
+     * @return The name
      */
     public String getName() {
         return name;
@@ -127,7 +123,7 @@ public class Usergroup {
     /**
      *
      * @param name
-     *     The name
+     *            The name
      */
     public void setName(String name) {
         this.name = name;
@@ -135,8 +131,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The description
+     * @return The description
      */
     public String getDescription() {
         return description;
@@ -145,7 +140,7 @@ public class Usergroup {
     /**
      *
      * @param description
-     *     The description
+     *            The description
      */
     public void setDescription(String description) {
         this.description = description;
@@ -153,8 +148,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The handle
+     * @return The handle
      */
     public String getHandle() {
         return handle;
@@ -163,7 +157,7 @@ public class Usergroup {
     /**
      *
      * @param handle
-     *     The handle
+     *            The handle
      */
     public void setHandle(String handle) {
         this.handle = handle;
@@ -171,8 +165,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The isExternal
+     * @return The isExternal
      */
     public Boolean getIsExternal() {
         return isExternal;
@@ -181,7 +174,7 @@ public class Usergroup {
     /**
      *
      * @param isExternal
-     *     The is_external
+     *            The is_external
      */
     public void setIsExternal(Boolean isExternal) {
         this.isExternal = isExternal;
@@ -189,8 +182,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The dateCreate
+     * @return The dateCreate
      */
     public Integer getDateCreate() {
         return dateCreate;
@@ -199,7 +191,7 @@ public class Usergroup {
     /**
      *
      * @param dateCreate
-     *     The date_create
+     *            The date_create
      */
     public void setDateCreate(Integer dateCreate) {
         this.dateCreate = dateCreate;
@@ -207,8 +199,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The dateUpdate
+     * @return The dateUpdate
      */
     public Integer getDateUpdate() {
         return dateUpdate;
@@ -217,7 +208,7 @@ public class Usergroup {
     /**
      *
      * @param dateUpdate
-     *     The date_update
+     *            The date_update
      */
     public void setDateUpdate(Integer dateUpdate) {
         this.dateUpdate = dateUpdate;
@@ -225,8 +216,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The dateDelete
+     * @return The dateDelete
      */
     public Integer getDateDelete() {
         return dateDelete;
@@ -235,7 +225,7 @@ public class Usergroup {
     /**
      *
      * @param dateDelete
-     *     The date_delete
+     *            The date_delete
      */
     public void setDateDelete(Integer dateDelete) {
         this.dateDelete = dateDelete;
@@ -243,8 +233,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The autoType
+     * @return The autoType
      */
     public Object getAutoType() {
         return autoType;
@@ -253,7 +242,7 @@ public class Usergroup {
     /**
      *
      * @param autoType
-     *     The auto_type
+     *            The auto_type
      */
     public void setAutoType(Object autoType) {
         this.autoType = autoType;
@@ -261,8 +250,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The createdBy
+     * @return The createdBy
      */
     public String getCreatedBy() {
         return createdBy;
@@ -271,7 +259,7 @@ public class Usergroup {
     /**
      *
      * @param createdBy
-     *     The created_by
+     *            The created_by
      */
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
@@ -279,8 +267,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The updatedBy
+     * @return The updatedBy
      */
     public String getUpdatedBy() {
         return updatedBy;
@@ -289,7 +276,7 @@ public class Usergroup {
     /**
      *
      * @param updatedBy
-     *     The updated_by
+     *            The updated_by
      */
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
@@ -297,8 +284,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The deletedBy
+     * @return The deletedBy
      */
     public Object getDeletedBy() {
         return deletedBy;
@@ -307,7 +293,7 @@ public class Usergroup {
     /**
      *
      * @param deletedBy
-     *     The deleted_by
+     *            The deleted_by
      */
     public void setDeletedBy(Object deletedBy) {
         this.deletedBy = deletedBy;
@@ -315,8 +301,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The prefs
+     * @return The prefs
      */
     public Prefs getPrefs() {
         return prefs;
@@ -325,7 +310,7 @@ public class Usergroup {
     /**
      *
      * @param prefs
-     *     The prefs
+     *            The prefs
      */
     public void setPrefs(Prefs prefs) {
         this.prefs = prefs;
@@ -333,8 +318,7 @@ public class Usergroup {
 
     /**
      *
-     * @return
-     *     The userCount
+     * @return The userCount
      */
     public String getUserCount() {
         return userCount;
@@ -343,7 +327,7 @@ public class Usergroup {
     /**
      *
      * @param userCount
-     *     The user_count
+     *            The user_count
      */
     public void setUserCount(String userCount) {
         this.userCount = userCount;

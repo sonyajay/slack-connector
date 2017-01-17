@@ -9,14 +9,16 @@ package org.mule.modules.slack.client.utils;
  */
 public enum Sort {
 
-    TimeStamp("timestamp"), Score("score");
+    TimeStamp("timestamp"),
+    Score("score");
+
     private String value;
 
     private Sort(String value) {
         this.value = value;
     }
 
-    public String toString(){
+    public String toString() {
         return value;
     }
 }

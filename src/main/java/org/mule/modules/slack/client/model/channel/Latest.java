@@ -3,7 +3,6 @@
  * a copy of which has been included with this distribution in the LICENSE.md file.
  */
 
-
 package org.mule.modules.slack.client.model.channel;
 
 import java.util.ArrayList;
@@ -27,8 +26,7 @@ public class Latest {
 
     /**
      *
-     * @return
-     *     The type
+     * @return The type
      */
     public String getType() {
         return type;
@@ -37,7 +35,7 @@ public class Latest {
     /**
      *
      * @param type
-     *     The type
+     *            The type
      */
     public void setType(String type) {
         this.type = type;
@@ -45,8 +43,7 @@ public class Latest {
 
     /**
      *
-     * @return
-     *     The user
+     * @return The user
      */
     public String getUser() {
         return user;
@@ -55,7 +52,7 @@ public class Latest {
     /**
      *
      * @param user
-     *     The user
+     *            The user
      */
     public void setUser(String user) {
         this.user = user;
@@ -63,8 +60,7 @@ public class Latest {
 
     /**
      *
-     * @return
-     *     The text
+     * @return The text
      */
     public String getText() {
         return text;
@@ -73,7 +69,7 @@ public class Latest {
     /**
      *
      * @param text
-     *     The text
+     *            The text
      */
     public void setText(String text) {
         this.text = text;
@@ -81,8 +77,7 @@ public class Latest {
 
     /**
      *
-     * @return
-     *     The attachments
+     * @return The attachments
      */
     public List<Attachment> getAttachments() {
         return attachments;
@@ -91,7 +86,7 @@ public class Latest {
     /**
      *
      * @param attachments
-     *     The attachments
+     *            The attachments
      */
     public void setAttachments(List<Attachment> attachments) {
         this.attachments = attachments;
@@ -99,8 +94,7 @@ public class Latest {
 
     /**
      *
-     * @return
-     *     The ts
+     * @return The ts
      */
     public String getTs() {
         return ts;
@@ -109,7 +103,7 @@ public class Latest {
     /**
      *
      * @param ts
-     *     The ts
+     *            The ts
      */
     public void setTs(String ts) {
         this.ts = ts;

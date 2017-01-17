@@ -4,24 +4,16 @@
  */
 package org.mule.modules.slack.config;
 
-
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.display.FriendlyName;
 import org.mule.api.annotations.oauth.*;
 import org.mule.modules.slack.client.SlackClient;
 
-import java.util.Map;
+@OAuth2(configElementName = "oauth2-config", friendlyName = "OAuth2 Configuration", accessTokenUrl = "https://slack.com/api/oauth.access", authorizationUrl = "https://slack.com/oauth/authorize")
+public class SlackOAuth2Config implements SlackConfig {
 
-@OAuth2( configElementName = "oauth2-type", friendlyName="OAuth2 Configuration",
-        accessTokenUrl = "https://slack.com/api/oauth.access",
-        authorizationUrl = "https://slack.com/oauth/authorize",
-        accessTokenRegex = "\"access_token\":\"([^&]+?)\"",
-        expirationRegex = "\"expires_in\":([^&]+?),",
-        refreshTokenRegex = "\"refresh_token\":\"([^&]+?)\"" )
-public class SlackOAuth2Config implements BasicSlackConfig {
-
-    SlackClient client;
+    private SlackClient client;
 
     /**
      * The OAuth access token
@@ -78,7 +70,8 @@ public class SlackOAuth2Config implements BasicSlackConfig {
     /**
      * Set consumerKey
      *
-     * @param consumerKey The consumerKey
+     * @param consumerKey
+     *            The consumerKey
      */
     public void setConsumerKey(String consumerKey) {
         this.consumerKey = consumerKey;
@@ -94,7 +87,8 @@ public class SlackOAuth2Config implements BasicSlackConfig {
     /**
      * Set consumerSecret
      *
-     * @param consumerSecret The consumerSecret
+     * @param consumerSecret
+     *            The consumerSecret
      */
     public void setConsumerSecret(String consumerSecret) {
         this.consumerSecret = consumerSecret;
@@ -133,10 +127,5 @@ public class SlackOAuth2Config implements BasicSlackConfig {
 
     public Boolean isAuthorized() {
         return accessToken != null;
-    }
-
-    @Override
-    public Map<String, Map<String, Object>> getUserMap() {
-        return null;
     }
 }

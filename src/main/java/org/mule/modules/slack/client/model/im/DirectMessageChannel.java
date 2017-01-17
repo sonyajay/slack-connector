@@ -27,8 +27,7 @@ public class DirectMessageChannel {
 
     /**
      *
-     * @return
-     * The id
+     * @return The id
      */
     public String getId() {
         return id;
@@ -37,7 +36,7 @@ public class DirectMessageChannel {
     /**
      *
      * @param id
-     * The id
+     *            The id
      */
     public void setId(String id) {
         this.id = id;
@@ -45,8 +44,7 @@ public class DirectMessageChannel {
 
     /**
      *
-     * @return
-     * The isIm
+     * @return The isIm
      */
     public Boolean getIsIm() {
         return isIm;
@@ -55,7 +53,7 @@ public class DirectMessageChannel {
     /**
      *
      * @param isIm
-     * The is_im
+     *            The is_im
      */
     public void setIsIm(Boolean isIm) {
         this.isIm = isIm;
@@ -63,8 +61,7 @@ public class DirectMessageChannel {
 
     /**
      *
-     * @return
-     * The user
+     * @return The user
      */
     public String getUser() {
         return user;
@@ -73,7 +70,7 @@ public class DirectMessageChannel {
     /**
      *
      * @param user
-     * The user
+     *            The user
      */
     public void setUser(String user) {
         this.user = user;
@@ -81,8 +78,7 @@ public class DirectMessageChannel {
 
     /**
      *
-     * @return
-     * The created
+     * @return The created
      */
     public Integer getCreated() {
         return created;
@@ -91,7 +87,7 @@ public class DirectMessageChannel {
     /**
      *
      * @param created
-     * The created
+     *            The created
      */
     public void setCreated(Integer created) {
         this.created = created;
@@ -99,8 +95,7 @@ public class DirectMessageChannel {
 
     /**
      *
-     * @return
-     * The isUserDeleted
+     * @return The isUserDeleted
      */
     public Boolean getIsUserDeleted() {
         return isUserDeleted;
@@ -109,7 +104,7 @@ public class DirectMessageChannel {
     /**
      *
      * @param isUserDeleted
-     * The is_user_deleted
+     *            The is_user_deleted
      */
     public void setIsUserDeleted(Boolean isUserDeleted) {
         this.isUserDeleted = isUserDeleted;

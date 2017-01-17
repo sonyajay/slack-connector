@@ -5,7 +5,6 @@
 
 package org.mule.modules.slack.metadata;
 
-
 import org.mule.api.annotations.MetaDataKeyRetriever;
 import org.mule.api.annotations.MetaDataRetriever;
 import org.mule.api.annotations.components.MetaDataCategory;
@@ -32,11 +31,12 @@ public class UserCategory {
     public List<MetaDataKey> getEntities() throws Exception {
         List<MetaDataKey> entities = new ArrayList<MetaDataKey>();
         List<User> userList = connector.slack().users.getUserList();
-        for(User user: userList){
-            entities.add(new DefaultMetaDataKey(user.getId(),user.getName()+" - "+user.getId()));
+        for (User user : userList) {
+            entities.add(new DefaultMetaDataKey(user.getId(), user.getName() + " - " + user.getId()));
         }
         return entities;
     }
+
     @MetaDataRetriever
     public MetaData describeEntity(MetaDataKey entityKey) throws Exception {
         DefaultMetaDataBuilder builder = new DefaultMetaDataBuilder();

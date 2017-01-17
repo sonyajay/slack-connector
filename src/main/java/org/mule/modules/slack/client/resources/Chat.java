@@ -53,21 +53,14 @@ public class Chat {
     }
 
     public Boolean deleteMessage(String timeStamp, String channelId) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHAT_DELETE)
-                .queryParam("channel", channelId)
-                .queryParam("ts", timeStamp);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHAT_DELETE).queryParam("channel", channelId).queryParam("ts", timeStamp);
 
         String output = SlackRequester.sendRequest(webTarget);
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean updateMessage(String timeStamp, String channelId, String message) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHAT_UPDATE)
-                .queryParam("channel", channelId)
-                .queryParam("text", message)
-                .queryParam("ts", timeStamp);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHAT_UPDATE).queryParam("channel", channelId).queryParam("text", message).queryParam("ts", timeStamp);
 
         String output = SlackRequester.sendRequest(webTarget);
 

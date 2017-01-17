@@ -21,14 +21,12 @@ public class ConfigurableHandler implements EventHandler {
     private List<EventNotifier> observerList;
     private List<EventFilter> eventFilterList;
 
-
     public ConfigurableHandler(SourceCallback sourceCallback, List<EventNotifier> eventNotifierList, List<EventFilter> eventFilterList) {
         this.sourceCallback = sourceCallback;
         gson = new Gson();
         this.observerList = eventNotifierList;
         this.eventFilterList = eventFilterList;
     }
-
 
     public void onMessage(String message) {
         Map messageMap = gson.fromJson(message, stringStringMap);

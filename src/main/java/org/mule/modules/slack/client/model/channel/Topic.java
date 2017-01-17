@@ -3,7 +3,6 @@
  * a copy of which has been included with this distribution in the LICENSE.md file.
  */
 
-
 package org.mule.modules.slack.client.model.channel;
 
 import javax.annotation.Generated;
@@ -23,8 +22,7 @@ public class Topic {
 
     /**
      *
-     * @return
-     *     The value
+     * @return The value
      */
     public String getValue() {
         return value;
@@ -33,7 +31,7 @@ public class Topic {
     /**
      *
      * @param value
-     *     The value
+     *            The value
      */
     public void setValue(String value) {
         this.value = value;
@@ -41,8 +39,7 @@ public class Topic {
 
     /**
      *
-     * @return
-     *     The creator
+     * @return The creator
      */
     public String getCreator() {
         return creator;
@@ -51,7 +48,7 @@ public class Topic {
     /**
      *
      * @param creator
-     *     The creator
+     *            The creator
      */
     public void setCreator(String creator) {
         this.creator = creator;
@@ -59,8 +56,7 @@ public class Topic {
 
     /**
      *
-     * @return
-     *     The lastSet
+     * @return The lastSet
      */
     public Integer getLastSet() {
         return lastSet;
@@ -69,7 +65,7 @@ public class Topic {
     /**
      *
      * @param lastSet
-     *     The last_set
+     *            The last_set
      */
     public void setLastSet(Integer lastSet) {
         this.lastSet = lastSet;

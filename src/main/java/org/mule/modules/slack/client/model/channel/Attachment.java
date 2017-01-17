@@ -3,7 +3,6 @@
  * a copy of which has been included with this distribution in the LICENSE.md file.
  */
 
-
 package org.mule.modules.slack.client.model.channel;
 
 import javax.annotation.Generated;
@@ -45,8 +44,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The serviceName
+     * @return The serviceName
      */
     public String getServiceName() {
         return serviceName;
@@ -55,7 +53,7 @@ public class Attachment {
     /**
      *
      * @param serviceName
-     *     The service_name
+     *            The service_name
      */
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
@@ -63,8 +61,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The title
+     * @return The title
      */
     public String getTitle() {
         return title;
@@ -73,7 +70,7 @@ public class Attachment {
     /**
      *
      * @param title
-     *     The title
+     *            The title
      */
     public void setTitle(String title) {
         this.title = title;
@@ -81,8 +78,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The titleLink
+     * @return The titleLink
      */
     public String getTitleLink() {
         return titleLink;
@@ -91,7 +87,7 @@ public class Attachment {
     /**
      *
      * @param titleLink
-     *     The title_link
+     *            The title_link
      */
     public void setTitleLink(String titleLink) {
         this.titleLink = titleLink;
@@ -99,8 +95,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The text
+     * @return The text
      */
     public String getText() {
         return text;
@@ -109,7 +104,7 @@ public class Attachment {
     /**
      *
      * @param text
-     *     The text
+     *            The text
      */
     public void setText(String text) {
         this.text = text;
@@ -117,8 +112,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The fallback
+     * @return The fallback
      */
     public String getFallback() {
         return fallback;
@@ -127,7 +121,7 @@ public class Attachment {
     /**
      *
      * @param fallback
-     *     The fallback
+     *            The fallback
      */
     public void setFallback(String fallback) {
         this.fallback = fallback;
@@ -135,8 +129,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The imageUrl
+     * @return The imageUrl
      */
     public String getImageUrl() {
         return imageUrl;
@@ -145,7 +138,7 @@ public class Attachment {
     /**
      *
      * @param imageUrl
-     *     The image_url
+     *            The image_url
      */
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
@@ -153,8 +146,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The fromUrl
+     * @return The fromUrl
      */
     public String getFromUrl() {
         return fromUrl;
@@ -163,7 +155,7 @@ public class Attachment {
     /**
      *
      * @param fromUrl
-     *     The from_url
+     *            The from_url
      */
     public void setFromUrl(String fromUrl) {
         this.fromUrl = fromUrl;
@@ -171,8 +163,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The imageWidth
+     * @return The imageWidth
      */
     public Integer getImageWidth() {
         return imageWidth;
@@ -181,7 +172,7 @@ public class Attachment {
     /**
      *
      * @param imageWidth
-     *     The image_width
+     *            The image_width
      */
     public void setImageWidth(Integer imageWidth) {
         this.imageWidth = imageWidth;
@@ -189,8 +180,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The imageHeight
+     * @return The imageHeight
      */
     public Integer getImageHeight() {
         return imageHeight;
@@ -199,7 +189,7 @@ public class Attachment {
     /**
      *
      * @param imageHeight
-     *     The image_height
+     *            The image_height
      */
     public void setImageHeight(Integer imageHeight) {
         this.imageHeight = imageHeight;
@@ -207,8 +197,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The imageBytes
+     * @return The imageBytes
      */
     public Integer getImageBytes() {
         return imageBytes;
@@ -217,7 +206,7 @@ public class Attachment {
     /**
      *
      * @param imageBytes
-     *     The image_bytes
+     *            The image_bytes
      */
     public void setImageBytes(Integer imageBytes) {
         this.imageBytes = imageBytes;
@@ -225,8 +214,7 @@ public class Attachment {
 
     /**
      *
-     * @return
-     *     The id
+     * @return The id
      */
     public Integer getId() {
         return id;
@@ -235,7 +223,7 @@ public class Attachment {
     /**
      *
      * @param id
-     *     The id
+     *            The id
      */
     public void setId(Integer id) {
         this.id = id;

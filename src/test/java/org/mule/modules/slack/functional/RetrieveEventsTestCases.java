@@ -4,31 +4,40 @@
  */
 package org.mule.modules.slack.functional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.modules.slack.runner.AbstractSlackTestCase;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class RetrieveEventsTestCases extends AbstractSlackTestCase {
 
+    private static final String TEST_MESSAGE = "Test";
+    private static final String TEXT_PROPERTY = "text";
+    private static final String RETRIEVE_EVENTS_SOURCE = "retrieveEvents";
+
     @Before
     public void setUp() throws Throwable{
-        Object[] signature = {null, true, false, false, true, false, false, false, false, false, null, null};
-        getDispatcher().initializeSource("retrieveEvents", signature);
+        Object[] signature = {null, true, false, false, true, false, false, false, false, false, false, null, null};
+        getDispatcher().initializeSource(RETRIEVE_EVENTS_SOURCE, signature);
     }
 
     @Test
     public void testSource() throws InterruptedException {
-        getConnector().postMessage("Test", CHANNEL_ID, null, null, true);
-        List<Object> events = getDispatcher().getSourceMessages("retrieveEvents");
-        System.out.println(events);
+        getConnector().postMessage(TEST_MESSAGE, CHANNEL_ID, null, null, true);
+        Thread.sleep(5000);
+        List<Object> result = getDispatcher().getSourceMessages(RETRIEVE_EVENTS_SOURCE);
+        assertTrue(!result.isEmpty());
+        HashMap<String, Object> event = (HashMap<String, Object>) result.get(0);
+        assertEquals(event.get(TEXT_PROPERTY), TEST_MESSAGE);
     }
 
     @After
     public void tearDown() throws Throwable{
-        getDispatcher().shutDownSource("retrieveEvents");
+        getDispatcher().shutDownSource(RETRIEVE_EVENTS_SOURCE);
     }
-
 }

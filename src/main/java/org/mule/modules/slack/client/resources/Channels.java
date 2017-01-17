@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.mule.modules.slack.client.Operations;
 import org.mule.modules.slack.client.SlackRequester;
-import org.mule.modules.slack.client.exceptions.ChannelNotFoundException;
+import org.mule.modules.slack.client.exceptions.SlackException;
 import org.mule.modules.slack.client.model.channel.Channel;
 import org.mule.modules.slack.client.model.chat.Message;
 
@@ -42,18 +42,14 @@ public class Channels {
     }
 
     public Boolean leaveChannel(String channelId) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_LEAVE)
-                .queryParam("channel", channelId);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_LEAVE).queryParam("channel", channelId);
         String output = SlackRequester.sendRequest(webTarget);
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Channel getChannelById(String id) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_INFO)
-                .queryParam("channel", id);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_INFO).queryParam("channel", id);
         String output = SlackRequester.sendRequest(webTarget);
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
@@ -65,9 +61,7 @@ public class Channels {
     }
 
     public Channel createChannel(String channelName) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_CREATE)
-                .queryParam("name", channelName);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_CREATE).queryParam("name", channelName);
         String output = SlackRequester.sendRequest(webTarget);
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
@@ -75,10 +69,7 @@ public class Channels {
     }
 
     public Channel renameChannel(String channelId, String newName) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_RENAME)
-                .queryParam("name", newName)
-                .queryParam("channel", channelId);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_RENAME).queryParam("name", newName).queryParam("channel", channelId);
         String output = SlackRequester.sendRequest(webTarget);
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
@@ -86,9 +77,7 @@ public class Channels {
     }
 
     public Channel joinChannel(String channelName) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_JOIN)
-                .queryParam("name", channelName);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_JOIN).queryParam("name", channelName);
         String output = SlackRequester.sendRequest(webTarget);
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
@@ -102,63 +91,46 @@ public class Channels {
                 return channel;
             }
         }
-        throw new ChannelNotFoundException("Channel: " + name + " does not exist.");
+        throw new SlackException("Channel: " + name + " does not exist.");
     }
 
     public Boolean setChannelPurpose(String channelID, String purpose) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_SETPURPOSE)
-                .queryParam("channel", channelID)
-                .queryParam("purpose", purpose);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_SETPURPOSE).queryParam("channel", channelID).queryParam("purpose", purpose);
         String output = SlackRequester.sendRequest(webTarget);
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean setChannelTopic(String channelID, String topic) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_SETTOPIC)
-                .queryParam("channel", channelID)
-                .queryParam("topic", topic);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_SETTOPIC).queryParam("channel", channelID).queryParam("topic", topic);
         String output = SlackRequester.sendRequest(webTarget);
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean markViewChannel(String channelID, String timeStamp) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_MARK)
-                .queryParam("channel", channelID)
-                .queryParam("ts", timeStamp);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_MARK).queryParam("channel", channelID).queryParam("ts", timeStamp);
         String output = SlackRequester.sendRequest(webTarget);
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean kickUserFromChannel(String channelID, String user) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_KICK)
-                .queryParam("channel", channelID)
-                .queryParam("user", user);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_KICK).queryParam("channel", channelID).queryParam("user", user);
         String output = SlackRequester.sendRequest(webTarget);
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean inviteUserToChannel(String channelID, String user) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_INVITE)
-                .queryParam("channel", channelID)
-                .queryParam("user", user);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_INVITE).queryParam("channel", channelID).queryParam("user", user);
         String output = SlackRequester.sendRequest(webTarget);
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean unarchiveChannel(String channelID) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_UNARCHIVE)
-                .queryParam("channel", channelID);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_UNARCHIVE).queryParam("channel", channelID);
 
         String output = SlackRequester.sendRequest(webTarget);
 
@@ -166,9 +138,7 @@ public class Channels {
     }
 
     public Boolean archiveChannel(String channelID) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHANNELS_ARCHIVE)
-                .queryParam("channel", channelID);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.CHANNELS_ARCHIVE).queryParam("channel", channelID);
 
         String output = SlackRequester.sendRequest(webTarget);
 

@@ -19,10 +19,6 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by esteban on 19/02/15.
- */
-
 @MetaDataCategory
 public class ChannelCategory {
 
@@ -33,12 +29,13 @@ public class ChannelCategory {
     public List<MetaDataKey> getEntities() throws Exception {
         List<MetaDataKey> entities = new ArrayList<MetaDataKey>();
         List<Channel> channelList = connector.slack().channels.getChannelList();
-        for(Channel channel: channelList){
-            entities.add(new DefaultMetaDataKey(channel.getId(),channel.getName() + " - " + channel.getId()));
+        for (Channel channel : channelList) {
+            entities.add(new DefaultMetaDataKey(channel.getId(), channel.getName() + " - " + channel.getId()));
         }
 
         return entities;
     }
+
     @MetaDataRetriever
     public MetaData describeEntity(MetaDataKey entityKey) throws Exception {
         return null;

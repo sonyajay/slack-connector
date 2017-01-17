@@ -3,7 +3,6 @@
  * a copy of which has been included with this distribution in the LICENSE.md file.
  */
 
-
 package org.mule.modules.slack.client.model.channel;
 
 import java.util.ArrayList;
@@ -55,8 +54,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The id
+     * @return The id
      */
     public String getId() {
         return id;
@@ -65,7 +63,7 @@ public class Channel {
     /**
      *
      * @param id
-     *     The id
+     *            The id
      */
     public void setId(String id) {
         this.id = id;
@@ -73,8 +71,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The name
+     * @return The name
      */
     public String getName() {
         return name;
@@ -83,7 +80,7 @@ public class Channel {
     /**
      *
      * @param name
-     *     The name
+     *            The name
      */
     public void setName(String name) {
         this.name = name;
@@ -91,8 +88,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The isChannel
+     * @return The isChannel
      */
     public Boolean getIsChannel() {
         return isChannel;
@@ -101,7 +97,7 @@ public class Channel {
     /**
      *
      * @param isChannel
-     *     The is_channel
+     *            The is_channel
      */
     public void setIsChannel(Boolean isChannel) {
         this.isChannel = isChannel;
@@ -109,8 +105,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The created
+     * @return The created
      */
     public Integer getCreated() {
         return created;
@@ -119,7 +114,7 @@ public class Channel {
     /**
      *
      * @param created
-     *     The created
+     *            The created
      */
     public void setCreated(Integer created) {
         this.created = created;
@@ -127,8 +122,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The creator
+     * @return The creator
      */
     public String getCreator() {
         return creator;
@@ -137,7 +131,7 @@ public class Channel {
     /**
      *
      * @param creator
-     *     The creator
+     *            The creator
      */
     public void setCreator(String creator) {
         this.creator = creator;
@@ -145,8 +139,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The isArchived
+     * @return The isArchived
      */
     public Boolean getIsArchived() {
         return isArchived;
@@ -155,7 +148,7 @@ public class Channel {
     /**
      *
      * @param isArchived
-     *     The is_archived
+     *            The is_archived
      */
     public void setIsArchived(Boolean isArchived) {
         this.isArchived = isArchived;
@@ -163,8 +156,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The isGeneral
+     * @return The isGeneral
      */
     public Boolean getIsGeneral() {
         return isGeneral;
@@ -173,7 +165,7 @@ public class Channel {
     /**
      *
      * @param isGeneral
-     *     The is_general
+     *            The is_general
      */
     public void setIsGeneral(Boolean isGeneral) {
         this.isGeneral = isGeneral;
@@ -181,8 +173,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The isMember
+     * @return The isMember
      */
     public Boolean getIsMember() {
         return isMember;
@@ -191,7 +182,7 @@ public class Channel {
     /**
      *
      * @param isMember
-     *     The is_member
+     *            The is_member
      */
     public void setIsMember(Boolean isMember) {
         this.isMember = isMember;
@@ -199,8 +190,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The lastRead
+     * @return The lastRead
      */
     public String getLastRead() {
         return lastRead;
@@ -209,7 +199,7 @@ public class Channel {
     /**
      *
      * @param lastRead
-     *     The last_read
+     *            The last_read
      */
     public void setLastRead(String lastRead) {
         this.lastRead = lastRead;
@@ -217,8 +207,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The latest
+     * @return The latest
      */
     public Latest getLatest() {
         return latest;
@@ -227,7 +216,7 @@ public class Channel {
     /**
      *
      * @param latest
-     *     The latest
+     *            The latest
      */
     public void setLatest(Latest latest) {
         this.latest = latest;
@@ -235,8 +224,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The unreadCount
+     * @return The unreadCount
      */
     public Integer getUnreadCount() {
         return unreadCount;
@@ -245,7 +233,7 @@ public class Channel {
     /**
      *
      * @param unreadCount
-     *     The unread_count
+     *            The unread_count
      */
     public void setUnreadCount(Integer unreadCount) {
         this.unreadCount = unreadCount;
@@ -253,8 +241,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The unreadCountDisplay
+     * @return The unreadCountDisplay
      */
     public Integer getUnreadCountDisplay() {
         return unreadCountDisplay;
@@ -263,7 +250,7 @@ public class Channel {
     /**
      *
      * @param unreadCountDisplay
-     *     The unread_count_display
+     *            The unread_count_display
      */
     public void setUnreadCountDisplay(Integer unreadCountDisplay) {
         this.unreadCountDisplay = unreadCountDisplay;
@@ -271,8 +258,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The members
+     * @return The members
      */
     public List<String> getMembers() {
         return members;
@@ -281,7 +267,7 @@ public class Channel {
     /**
      *
      * @param members
-     *     The members
+     *            The members
      */
     public void setMembers(List<String> members) {
         this.members = members;
@@ -289,8 +275,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The topic
+     * @return The topic
      */
     public Topic getTopic() {
         return topic;
@@ -299,7 +284,7 @@ public class Channel {
     /**
      *
      * @param topic
-     *     The topic
+     *            The topic
      */
     public void setTopic(Topic topic) {
         this.topic = topic;
@@ -307,8 +292,7 @@ public class Channel {
 
     /**
      *
-     * @return
-     *     The purpose
+     * @return The purpose
      */
     public Purpose getPurpose() {
         return purpose;
@@ -317,7 +301,7 @@ public class Channel {
     /**
      *
      * @param purpose
-     *     The purpose
+     *            The purpose
      */
     public void setPurpose(Purpose purpose) {
         this.purpose = purpose;

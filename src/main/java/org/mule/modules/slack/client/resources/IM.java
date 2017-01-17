@@ -17,7 +17,8 @@ import java.util.List;
 
 public class IM {
 
-    private final Type channelListType = new TypeToken<List<DirectMessageChannel>>(){}.getType();
+    private final Type channelListType = new TypeToken<List<DirectMessageChannel>>() {
+    }.getType();
     private final SlackRequester slackRequester;
     private final Gson gson;
 
@@ -27,9 +28,7 @@ public class IM {
     }
 
     public DirectMessageChannelCreationResponse openDirectMessageChannel(String userId) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.IM_OPEN)
-                .queryParam("user", userId);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.IM_OPEN).queryParam("user", userId);
 
         String output = SlackRequester.sendRequest(webTarget);
 
@@ -38,8 +37,7 @@ public class IM {
     }
 
     public List<DirectMessageChannel> getDirectMessageChannelsList() {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.IM_LIST);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.IM_LIST);
 
         String output = SlackRequester.sendRequest(webTarget);
 
@@ -52,10 +50,7 @@ public class IM {
     }
 
     public Boolean markViewDirectMessageChannel(String channelID, String timeStamp) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.IM_MARK)
-                .queryParam("channel", channelID)
-                .queryParam("ts", timeStamp);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.IM_MARK).queryParam("channel", channelID).queryParam("ts", timeStamp);
 
         String output = SlackRequester.sendRequest(webTarget);
 
@@ -63,9 +58,7 @@ public class IM {
     }
 
     public Boolean closeDirectMessageChannel(String channelID) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.IM_CLOSE)
-                .queryParam("channel", channelID);
+        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.IM_CLOSE).queryParam("channel", channelID);
 
         String output = SlackRequester.sendRequest(webTarget);
 

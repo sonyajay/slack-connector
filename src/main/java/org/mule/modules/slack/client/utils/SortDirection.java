@@ -9,14 +9,16 @@ package org.mule.modules.slack.client.utils;
  */
 public enum SortDirection {
 
-    Ascending("asc"), Descending("desc");
+    Ascending("asc"),
+    Descending("desc");
+
     private String value;
 
     private SortDirection(String value) {
         this.value = value;
     }
 
-    public String toString(){
+    public String toString() {
         return value;
     }
 }
