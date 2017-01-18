@@ -3,10 +3,10 @@
 ## Pre-requisites
 . Slack Account
 . Twitter Account _(Optional. Required for Twitter-Slack integration)_
-. Mule Server 3.5.X EE
+. Mule Server 3.6.X EE
 
 ## Preparation
-. Import this DEMO in Anypoint Studio going to *File* -> *Import...* -> *Anypoint Studio Project from External Localtion*, select the demo project root and choose as server runtime *Mule Server 3.5.x EE*.
+. Import this DEMO in Anypoint Studio going to *File* -> *Import...* -> *Anypoint Studio Project from External Localtion*, select the demo project root and choose as server runtime *Mule Server 3.6.x EE*.
 . Once imported, in *src/main/app* you will find *mule-app.properties* file, this contains all the placeholders for the required properties to make the DEMO work. Open it. It will be like the following:
 +
 ```

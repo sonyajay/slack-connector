@@ -65,7 +65,7 @@ import java.util.List;
  */
 
 @Connector(name = "slack", friendlyName = "Slack")
-public class SlackConnector {
+public class SlackConnector { //NOSONAR
 
     private static final Logger logger = Logger.getLogger(SlackConnector.class);
     private static final String NUMBER_OF_MESSAGES = "Number of messages to return, the value should be between 1 and 1000.";
