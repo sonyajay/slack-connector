@@ -903,7 +903,7 @@ public class SlackConnector { //NOSONAR
             @Placement(group = "Events to accept") @Default("false") Boolean allEvents,
             @Placement(group = "Custom Filter", tab = "Advanced") @Summary("You can refer an external class to work as a custom filter. (This class must implement 'org.mule.modules.slack.client.rtm.filter.EventFilter')") @Optional String filterClassName,
             @Placement(group = "Custom Notifier", tab = "Advanced") @Summary("You can refer an external class to work as a custom notifier. (This class must implement 'org.mule.modules.slack.client.rtm.filter.EventNotifier')") @Optional String notifierClassName)
-            throws IOException, InterruptedException, DeploymentException {
+            throws IOException, InterruptedException, DeploymentException { //NOSONAR
 
         if (getSlackConfig() instanceof SlackOAuth2Config) {
             logger.error("Retrieve Events source doesn't work with OAuth 2 configuration, please use Token Config");
@@ -957,7 +957,7 @@ public class SlackConnector { //NOSONAR
         slack().startRealTimeCommunication(new ConfigurableHandler(sourceCallback, observerList, eventFilterList));
     }
 
-    private EventFilter getFilterInstance(String className) {
+    private EventFilter getFilterInstance(String className) { //NOSONAR
         try {
             logger.info("Detected custom filter class: " + className);
             Class<?> aClass = Class.forName(className, true, getMuleContext().getExecutionClassLoader());
@@ -972,7 +972,7 @@ public class SlackConnector { //NOSONAR
         }
     }
 
-    private EventNotifier getNotifierInstance(String className) {
+    private EventNotifier getNotifierInstance(String className) { //NOSONAR
         try {
             logger.info("Detected custom filter class: " + className);
             Class<?> aClass = Class.forName(className, true, getMuleContext().getExecutionClassLoader());
