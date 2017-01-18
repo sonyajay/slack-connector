@@ -738,7 +738,7 @@ public class SlackConnector { //NOSONAR
                                                        @Optional String fileType,
                                                        @Summary("Message title") @Optional String title,
                                                        @Optional String initialComment,
-                                                       @Summary("Input Stream Reference of where to look the file to upload") @Default("#[payload]") InputStream inputStream)
+                                                       @Summary("Input Stream Reference of where to look the file to upload") @RefOnly @Default("#[payload]") InputStream inputStream)
             throws IOException {
         return slack().files.sendFile(channelID, fileName, fileType, title, initialComment, inputStream);
     }

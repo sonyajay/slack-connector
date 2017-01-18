@@ -22,6 +22,7 @@
         <jersey-client.version>2.11</jersey-client.version>
         <sonar.exclusions>
             **/client/model/**/*
+            **/modules/slack/**/*
         </sonar.exclusions>
     </properties>
 
