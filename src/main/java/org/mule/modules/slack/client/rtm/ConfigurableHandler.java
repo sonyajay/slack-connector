@@ -5,19 +5,23 @@
 package org.mule.modules.slack.client.rtm;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.apache.log4j.Logger;
 import org.mule.api.callback.SourceCallback;
-import org.mule.modules.slack.client.rtm.filter.EventNotifier;
 import org.mule.modules.slack.client.rtm.filter.EventFilter;
+import org.mule.modules.slack.client.rtm.filter.EventNotifier;
 
-import java.util.HashMap;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
 public class ConfigurableHandler implements EventHandler {
 
-    SourceCallback sourceCallback;
-    Gson gson;
-    Class<? extends Map> stringStringMap = HashMap.class;
+    private static final Logger logger = Logger.getLogger(ConfigurableHandler.class);
+    private SourceCallback sourceCallback;
+    private Gson gson;
+    private Type type = new TypeToken<Map<String, Object>>() {
+    }.getType();
     private List<EventNotifier> observerList;
     private List<EventFilter> eventFilterList;
 
@@ -29,14 +33,14 @@ public class ConfigurableHandler implements EventHandler {
     }
 
     public void onMessage(String message) {
-        Map messageMap = gson.fromJson(message, stringStringMap);
+        Map<String, Object> messageMap = gson.fromJson(message, type);
 
         if (shouldBeAccepted(messageMap, eventFilterList)) {
             if (shouldBeSent(messageMap, observerList)) {
                 try {
                     sourceCallback.process(messageMap);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e);
                 }
             }
         }
@@ -59,5 +63,4 @@ public class ConfigurableHandler implements EventHandler {
         }
         return false;
     }
-
 }

@@ -50,10 +50,6 @@ import org.mule.modules.slack.metadata.AllChannelCategory;
 import org.mule.modules.slack.metadata.ChannelCategory;
 import org.mule.modules.slack.metadata.GroupCategory;
 import org.mule.modules.slack.metadata.UserCategory;
-import org.mule.modules.slack.retrievers.ChannelMessageRetriever;
-import org.mule.modules.slack.retrievers.DirectMessageRetriever;
-import org.mule.modules.slack.retrievers.GroupMessageRetriever;
-import org.mule.modules.slack.retrievers.MessageRetriever;
 
 import javax.inject.Inject;
 import javax.websocket.DeploymentException;
@@ -94,8 +90,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:get-user-info}
      *
-     * @param id
-     *            ID of the desired User
+     * @param id ID of the desired User
      * @return The desired User
      */
     @OAuthProtected
@@ -111,8 +106,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:get-user-info-by-name}
      *
-     * @param username
-     *            Username of the desired User
+     * @param username Username of the desired User
      * @return The desired User
      */
 
@@ -163,14 +157,10 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:get-channel-history}
      *
-     * @param channelId
-     *            Channel to fetch history for
-     * @param latestTimestamp
-     *            End of time range of messages to include in results. Leave it blank to select current time.
-     * @param oldestTimestamp
-     *            Start of time range of messages to include in results. Leave it blank for timestamp 0
-     * @param mountOfMessages
-     *            Number of messages to return, the value should be between 1 and 1000.
+     * @param channelId       Channel to fetch history for
+     * @param latestTimestamp End of time range of messages to include in results. Leave it blank to select current time.
+     * @param oldestTimestamp Start of time range of messages to include in results. Leave it blank for timestamp 0
+     * @param amountOfMessages Number of messages to return, the value should be between 1 and 1000.
      * @return List of messages of a Channel
      */
 
@@ -179,10 +169,10 @@ public class SlackConnector {
     @Processor(friendlyName = "Channel - History")
     @MetaDataScope(ChannelCategory.class)
     public List<Message> getChannelHistory(@FriendlyName("Channel ID") @Summary("Channel to fetch history for") @MetaDataKeyParam String channelId,
-            @Optional @Summary("End of time range of messages to include in results. Leave it blank to select current time.") String latestTimestamp,
-            @Optional @Summary("Start of time range of messages to include in results. Leave it blank for timestamp 0") String oldestTimestamp,
-            @Default("100") @Summary(NUMBER_OF_MESSAGES) String mountOfMessages) {
-        return slack().channels.getChannelHistory(channelId, latestTimestamp, oldestTimestamp, mountOfMessages);
+                                           @Summary("End of time range of messages to include in results. Leave it blank to select current time.") @Optional String latestTimestamp,
+                                           @Summary("Start of time range of messages to include in results. Leave it blank for timestamp 0") @Optional String oldestTimestamp,
+                                           @Summary(NUMBER_OF_MESSAGES) @Default("100") String amountOfMessages) {
+        return slack().channels.getChannelHistory(channelId, latestTimestamp, oldestTimestamp, amountOfMessages);
     }
 
     /**
@@ -190,8 +180,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:get-channel-info}
      *
-     * @param channelId
-     *            Channel to get info on
+     * @param channelId Channel to get info on
      * @return A Channel
      */
 
@@ -208,8 +197,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:get-channel-by-name}
      *
-     * @param channelName
-     *            Channel name to get info on
+     * @param channelName Channel name to get info on
      * @return A Channel
      */
 
@@ -224,8 +212,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:create-channel}
      *
-     * @param channelName
-     *            Name of channel to create
+     * @param channelName Name of channel to create
      * @return A Channel
      */
 
@@ -242,10 +229,8 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:rename-channel}
      *
-     * @param channelId
-     *            Channel to rename
-     * @param channelName
-     *            New channel name
+     * @param channelId   Channel to rename
+     * @param channelName New channel name
      * @return A Channel
      */
 
@@ -262,8 +247,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:join-channel}
      *
-     * @param channelName
-     *            Name of the channel to Join
+     * @param channelName Name of the channel to Join
      * @return If successful, the command returns a channel object, including state information:
      */
 
@@ -279,8 +263,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:leave-channel}
      *
-     * @param channelId
-     *            ID of the channel to Leave
+     * @param channelId ID of the channel to Leave
      * @return Boolean result. This method will not return an error if the user was not in the channel before it was called.
      */
 
@@ -296,8 +279,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:archive-channel}
      *
-     * @param channelID
-     *            ID of the Channel to Archive
+     * @param channelID ID of the Channel to Archive
      * @return Boolean result
      */
 
@@ -313,8 +295,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:unarchive-channel}
      *
-     * @param channelID
-     *            ID of the Channel to Unarchive
+     * @param channelID ID of the Channel to Unarchive
      * @return Boolean result
      */
     @OAuthProtected
@@ -329,10 +310,8 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:set-channel-topic}
      *
-     * @param channelID
-     *            ID of the channel to change the topic
-     * @param topic
-     *            New channel topic
+     * @param channelID ID of the channel to change the topic
+     * @param topic     New channel topic
      * @return Boolean result
      */
     @OAuthProtected
@@ -347,10 +326,8 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:set-channel-purpose}
      *
-     * @param channelID
-     *            ID of the channel to change the purpose
-     * @param purpose
-     *            New channel purpose
+     * @param channelID ID of the channel to change the purpose
+     * @param purpose   New channel purpose
      * @return Boolean result
      */
     @OAuthProtected
@@ -369,23 +346,21 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:post-message}
      *
-     * @param message
-     *            Message to post
-     * @param channelId
-     *            ID of the channel to post the message
-     * @param username
-     *            Name to show in the message
-     * @param iconURL
-     *            Icon URL of the icon to show in the message
-     * @param asUser
-     *            Boolean indicating if the message is showed as a User or as a Bot
+     * @param message   Message to post
+     * @param channelId ID of the channel to post the message
+     * @param username  Name to show in the message
+     * @param iconURL   Icon URL of the icon to show in the message
+     * @param asUser    Boolean indicating if the message is showed as a User or as a Bot
      * @return MessageResponse
      */
     @OAuthProtected
     @Processor(friendlyName = "Chat - Post message")
     @MetaDataScope(AllChannelCategory.class)
-    public MessageResponse postMessage(String message, @FriendlyName("Channel ID") @MetaDataKeyParam String channelId, @Optional @FriendlyName("Name to show") String username,
-            @Optional @FriendlyName("Icon URL") String iconURL, @Optional Boolean asUser) {
+    public MessageResponse postMessage(String message,
+                                       @FriendlyName("Channel ID") @MetaDataKeyParam String channelId,
+                                       @FriendlyName("Name to show") @Optional String username,
+                                       @FriendlyName("Icon URL") @Optional String iconURL,
+                                       @Optional Boolean asUser) {
         return slack().chat.sendMessage(message, channelId, username, iconURL, BooleanUtils.toBoolean(asUser));
     }
 
@@ -394,26 +369,23 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:post-message-with-attachment}
      *
-     * @param message
-     *            Message to post
-     * @param channelId
-     *            ID of the channel to post the message
-     * @param username
-     *            Name to show in the message
-     * @param iconURL
-     *            Icon URL of the icon to show in the message
-     * @param chatAttachmentList
-     *            List of attachments to be sent in the message
-     * @param asUser
-     *            Boolean indicating if the message is showed as a User or as a Bot
+     * @param message            Message to post
+     * @param channelId          ID of the channel to post the message
+     * @param username           Name to show in the message
+     * @param iconURL            Icon URL of the icon to show in the message
+     * @param chatAttachmentList List of attachments to be sent in the message
+     * @param asUser             Boolean indicating if the message is showed as a User or as a Bot
      * @return MessageResponse
      */
     @OAuthProtected
     @Processor(friendlyName = "Chat - Post message with attachment")
     @MetaDataScope(AllChannelCategory.class)
-    public MessageResponse postMessageWithAttachment(@Optional String message, @FriendlyName("Channel ID") @MetaDataKeyParam String channelId,
-            @Optional @FriendlyName("Name to show") String username, @Optional @FriendlyName("Icon URL") String iconURL,
-            @FriendlyName("Attachment List") @Default("#[payload]") @RefOnly List<ChatAttachment> chatAttachmentList, @Optional Boolean asUser) {
+    public MessageResponse postMessageWithAttachment(@Optional String message,
+                                                     @FriendlyName("Channel ID") @MetaDataKeyParam String channelId,
+                                                     @FriendlyName("Name to show") @Optional String username,
+                                                     @FriendlyName("Icon URL") @Optional String iconURL,
+                                                     @FriendlyName("Attachment List") @RefOnly @Default("#[payload]") List<ChatAttachment> chatAttachmentList,
+                                                     @Optional Boolean asUser) {
         return slack().chat.sendMessageWithAttachment(message, channelId, username, iconURL, chatAttachmentList, BooleanUtils.toBoolean(asUser));
     }
 
@@ -422,10 +394,8 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:delete-message}
      *
-     * @param timeStamp
-     *            TimeStamp of the message to delete
-     * @param channelId
-     *            ID of the channel of the message
+     * @param timeStamp TimeStamp of the message to delete
+     * @param channelId ID of the channel of the message
      * @return Boolean
      */
     @OAuthProtected
@@ -440,12 +410,9 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:update-message}
      *
-     * @param timeStamp
-     *            TimeStamp of the message to delete
-     * @param channelId
-     *            ID of the channel of the message
-     * @param message
-     *            New message
+     * @param timeStamp TimeStamp of the message to delete
+     * @param channelId ID of the channel of the message
+     * @param message   New message
      * @return Boolean
      */
     @OAuthProtected
@@ -464,8 +431,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:open-direct-message-channel}
      *
-     * @param userId
-     *            User ID to open a direct message channel with.
+     * @param userId User ID to open a direct message channel with.
      * @return DirectMessageChannelCreationResponse. If the channel was already open the response will include no_op and already_open properties:
      */
     @OAuthProtected
@@ -480,8 +446,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:close-direct-message-channel}
      *
-     * @param channelId
-     *            Direct message channel ID to close.
+     * @param channelId Direct message channel ID to close.
      * @return Boolean result
      */
     @OAuthProtected
@@ -510,14 +475,10 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:get-d-m-history}
      *
-     * @param channelID
-     *            Channel to fetch history for
-     * @param latestTimestamp
-     *            End of time range of messages to include in results. Leave it blank to select current time.
-     * @param oldestTimestamp
-     *            Start of time range of messages to include in results. Leave it blank for timestamp 0
-     * @param mountOfMessages
-     *            Number of messages to return. The value should be between 1 and 1000.
+     * @param channelID       Channel to fetch history for
+     * @param latestTimestamp End of time range of messages to include in results. Leave it blank to select current time.
+     * @param oldestTimestamp Start of time range of messages to include in results. Leave it blank for timestamp 0
+     * @param mountOfMessages Number of messages to return. The value should be between 1 and 1000.
      * @return List of messages of a Channel
      */
     @OAuthProtected
@@ -525,9 +486,9 @@ public class SlackConnector {
     @Processor(friendlyName = "IM - History")
     @MetaDataScope(UserCategory.class)
     public List<Message> getDMHistory(@FriendlyName("Channel ID") @Summary("Channel to fetch history for") @MetaDataKeyParam String channelID,
-            @Optional @Summary("End of time range of messages to include in results. Leave it blank to select current time.") String latestTimestamp,
-            @Optional @Summary("Start of time range of messages to include in results. Leave it blank for timestamp 0") String oldestTimestamp,
-            @Default("100") @Summary("Number of messages to return, between 1 and 1000.") String mountOfMessages) {
+                                      @Summary("End of time range of messages to include in results. Leave it blank to select current time.") @Optional String latestTimestamp,
+                                      @Summary("Start of time range of messages to include in results. Leave it blank for timestamp 0") @Optional String oldestTimestamp,
+                                      @Summary("Number of messages to return, between 1 and 1000.") @Default("100") String mountOfMessages) {
         return slack().im.getDirectChannelHistory(channelID, latestTimestamp, oldestTimestamp, mountOfMessages);
     }
 
@@ -555,14 +516,10 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:get-group-history}
      *
-     * @param groupID
-     *            Group to fetch history for
-     * @param latestTimestamp
-     *            End of time range of messages to include in results. Leave it blank to select current time.
-     * @param oldestTimestamp
-     *            Start of time range of messages to include in results. Leave it blank for timestamp 0
-     * @param mountOfMessages
-     *            Number of messages to return, between 1 and 1000.
+     * @param groupID         Group to fetch history for
+     * @param latestTimestamp End of time range of messages to include in results. Leave it blank to select current time.
+     * @param oldestTimestamp Start of time range of messages to include in results. Leave it blank for timestamp 0
+     * @param mountOfMessages Number of messages to return, between 1 and 1000.
      * @return List of messages of a Channel
      */
     @OAuthProtected
@@ -570,9 +527,9 @@ public class SlackConnector {
     @Processor(friendlyName = "Group - History")
     @MetaDataScope(GroupCategory.class)
     public List<Message> getGroupHistory(@FriendlyName("Channel ID") @Summary("Group to fetch history for") @MetaDataKeyParam String groupID,
-            @Optional @Summary("End of time range of messages to include in results. Leave it blank to select current time.") String latestTimestamp,
-            @Optional @Summary("Start of time range of messages to include in results. Leave it blank for timestamp 0") String oldestTimestamp,
-            @Default("100") @Summary("Number of messages to return, between 1 and 1000.") String mountOfMessages) {
+                                         @Summary("End of time range of messages to include in results. Leave it blank to select current time.") @Optional String latestTimestamp,
+                                         @Summary("Start of time range of messages to include in results. Leave it blank for timestamp 0") @Optional String oldestTimestamp,
+                                         @Summary("Number of messages to return, between 1 and 1000.") @Default("100") String mountOfMessages) {
         return slack().groups.getGroupHistory(groupID, latestTimestamp, oldestTimestamp, mountOfMessages);
     }
 
@@ -581,10 +538,8 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:set-group-topic}
      *
-     * @param channelID
-     *            ID of the group to set the new topic
-     * @param topic
-     *            The new topic
+     * @param channelID ID of the group to set the new topic
+     * @param topic     The new topic
      * @return Boolean result
      */
     @OAuthProtected
@@ -599,10 +554,8 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:set-group-purpose}
      *
-     * @param channelID
-     *            ID of the group to set the new purpose
-     * @param purpose
-     *            The new group purpose
+     * @param channelID ID of the group to set the new purpose
+     * @param purpose   The new group purpose
      * @return Boolean result
      */
     @OAuthProtected
@@ -617,8 +570,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:create-group}
      *
-     * @param groupName
-     *            Name of the group to create
+     * @param groupName Name of the group to create
      * @return If successful, the command returns a group object, including state information.
      */
     @OAuthProtected
@@ -632,8 +584,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:close-group}
      *
-     * @param channelID
-     *            ID of the group to close
+     * @param channelID ID of the group to close
      * @return Boolean result
      */
     @OAuthProtected
@@ -648,8 +599,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:open-group}
      *
-     * @param channelID
-     *            ID of the group to open
+     * @param channelID ID of the group to open
      * @return Boolean result
      */
     @OAuthProtected
@@ -664,8 +614,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:archive-group}
      *
-     * @param channelID
-     *            ID of the group to archive
+     * @param channelID ID of the group to archive
      * @return Boolean result
      */
     @OAuthProtected
@@ -680,8 +629,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:unarchive-group}
      *
-     * @param channelID
-     *            ID of the group to unarchive
+     * @param channelID ID of the group to unarchive
      * @return Boolean result
      */
     @OAuthProtected
@@ -696,10 +644,8 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:rename-group}
      *
-     * @param groupId
-     *            ID of the group to rename
-     * @param groupName
-     *            Channel
+     * @param groupId   ID of the group to rename
+     * @param groupName Channel
      * @return Group
      */
     @OAuthProtected
@@ -714,8 +660,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:get-group-info}
      *
-     * @param channelId
-     *            ID of the group to get info on
+     * @param channelId ID of the group to get info on
      * @return Group
      */
     @OAuthProtected
@@ -731,8 +676,7 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:leave-group}
      *
-     * @param channelId
-     *            ID of the group to leave
+     * @param channelId ID of the group to leave
      * @return Boolean result
      */
     @OAuthProtected
@@ -751,27 +695,24 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:upload-file}
      *
-     * @param channelID
-     *            ID of the channel to upload a file
-     * @param fileName
-     *            File name
-     * @param fileType
-     *            File type
-     * @param title
-     *            Message title
-     * @param initialComment
-     *            Message initial comment
-     * @param filePath
-     *            Path of the file to upload
+     * @param channelID      ID of the channel to upload a file
+     * @param fileName       File name
+     * @param fileType       File type
+     * @param title          Message title
+     * @param initialComment Message initial comment
+     * @param filePath       Path of the file to upload
      * @return File Upload Response
-     * @throws IOException
-     *             When the selected file doesn't exist
+     * @throws IOException When the selected file doesn't exist
      */
     @OAuthProtected
     @Processor(friendlyName = "File - Upload")
     @MetaDataScope(AllChannelCategory.class)
-    public FileUploadResponse uploadFile(@FriendlyName("Channel ID") @MetaDataKeyParam String channelID, @Optional String fileName, @Optional String fileType,
-            @Optional String title, @Optional String initialComment, @Summary("File path of the file to upload") @Path String filePath) throws IOException {
+    public FileUploadResponse uploadFile(@FriendlyName("Channel ID") @MetaDataKeyParam String channelID,
+                                         @Optional String fileName,
+                                         @Optional String fileType,
+                                         @Optional String title,
+                                         @Optional String initialComment,
+                                         @Summary("File path of the file to upload") @Path String filePath) throws IOException {
         return slack().files.sendFile(channelID, fileName, fileType, title, initialComment, filePath);
     }
 
@@ -780,28 +721,24 @@ public class SlackConnector {
      * <p/>
      * {@sample.xml ../../../doc/slack-connector.xml.sample slack:upload-file-as-input-streams}
      *
-     * @param channelID
-     *            ID of the channel to upload a file
-     * @param fileName
-     *            File name
-     * @param fileType
-     *            File type
-     * @param title
-     *            Message title
-     * @param initialComment
-     *            Message initial comment
-     * @param inputStream
-     *            Input stream of the file to upload
+     * @param channelID      ID of the channel to upload a file
+     * @param fileName       File name
+     * @param fileType       File type
+     * @param title          Message title
+     * @param initialComment Message initial comment
+     * @param inputStream    Input stream of the file to upload
      * @return File upload Response
-     * @throws IOException
-     *             When the selected inputStream doesn't exist
+     * @throws IOException When the selected inputStream doesn't exist
      */
     @OAuthProtected
     @Processor(friendlyName = "File - Upload as Input Stream")
     @MetaDataScope(AllChannelCategory.class)
     public FileUploadResponse uploadFileAsInputStreams(@Summary("Channel ID to send the message") @FriendlyName("Channel ID") @MetaDataKeyParam String channelID,
-            @Summary("File name to show in the Slack message") @Optional String fileName, @Optional String fileType, @Summary("Message title") @Optional String title,
-            @Optional String initialComment, @Summary("Input Stream Reference of where to look the file to upload") @Default("#[payload]") InputStream inputStream)
+                                                       @Summary("File name to show in the Slack message") @Optional String fileName,
+                                                       @Optional String fileType,
+                                                       @Summary("Message title") @Optional String title,
+                                                       @Optional String initialComment,
+                                                       @Summary("Input Stream Reference of where to look the file to upload") @Default("#[payload]") InputStream inputStream)
             throws IOException {
         return slack().files.sendFile(channelID, fileName, fileType, title, initialComment, inputStream);
     }
@@ -813,120 +750,100 @@ public class SlackConnector {
     /**
      * This method returns a list of all User Groups in the team. This can optionally include disabled User Groups.
      *
-     * @param includeDisabled
-     *            Include disabled user groups
-     * @param includeCount
-     *            Include the number of user in each user group
-     * @param includeUsers
-     *            Include the list of user for each user group
+     * @param includeDisabled Include disabled user groups
+     * @param includeCount    Include the number of user in each user group
+     * @param includeUsers    Include the list of user for each user group
      * @return The list of User Groups in the team
      */
     @OAuthProtected
     @Processor(friendlyName = "UserGroups - List")
     public List<Usergroup> listUserGroups(@Summary("Include disabled user groups.") @Default("false") Boolean includeDisabled,
-            @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount,
-            @Summary("Include the list of user for each user group.") @Default("false") Boolean includeUsers) {
+                                          @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount,
+                                          @Summary("Include the list of user for each user group.") @Default("false") Boolean includeUsers) {
         return slack().usergroups.listUserGroups(includeDisabled, includeCount, includeUsers);
     }
 
     /**
      * This method enables a User Group which was previously disabled.
      *
-     * @param userGroupId
-     *            The encoded ID of the User Group to enable
-     * @param includeCount
-     *            Include the number of user in each user group.
+     * @param userGroupId  The encoded ID of the User Group to enable
+     * @param includeCount Include the number of user in each user group.
      * @return the enabled User Group
      */
     @OAuthProtected
     @Processor(friendlyName = "UserGroups - Enable")
     public Usergroup enableUserGroup(@Summary("The encoded ID of the User Group to enable.") String userGroupId,
-            @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
+                                     @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
         return slack().usergroups.enableUserGroup(userGroupId, includeCount);
     }
 
     /**
      * This method disables a User Group
      *
-     * @param userGroupId
-     *            The encoded ID of the User Group to disable
-     * @param includeCount
-     *            Include the number of user in each user group.
+     * @param userGroupId  The encoded ID of the User Group to disable
+     * @param includeCount Include the number of user in each user group.
      * @return the disabled User Group
      */
     @OAuthProtected
     @Processor(friendlyName = "UserGroups - Disable")
     public Usergroup disableUserGroup(@Summary("The encoded ID of the User Group to disable.") String userGroupId,
-            @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
+                                      @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
         return slack().usergroups.disableUserGroup(userGroupId, includeCount);
     }
 
     /**
      * Create a User Group
      *
-     * @param userGroupName
-     *            A name for the User Group. Must be unique among User Groups.
-     * @param handle
-     *            A mention handle. Must be unique among channels, user and User Groups
-     * @param description
-     *            A short description of the User Group
-     * @param channels
-     *            A list channel IDs for which the User Group uses as a default
-     * @param includeCount
-     *            Include the number of user in each user group
+     * @param userGroupName A name for the User Group. Must be unique among User Groups.
+     * @param handle        A mention handle. Must be unique among channels, user and User Groups
+     * @param description   A short description of the User Group
+     * @param channels      A list channel IDs for which the User Group uses as a default
+     * @param includeCount  Include the number of user in each user group
      * @return the created User Group
      */
     @OAuthProtected
     @Processor(friendlyName = "UserGroups - Create")
     public Usergroup createUserGroup(@Summary("A name for the User Group. Must be unique among User Groups.") String userGroupName,
-            @Optional @Summary("A mention handle. Must be unique among channels, user and User Groups.") String handle,
-            @Optional @Summary("A short description of the User Group.") String description,
-            @Optional @Summary("A list channel IDs for which the User Group uses as a default.") List<String> channels,
-            @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
+                                     @Summary("A mention handle. Must be unique among channels, user and User Groups.") @Optional String handle,
+                                     @Summary("A short description of the User Group.") @Optional String description,
+                                     @Summary("A list channel IDs for which the User Group uses as a default.") @Optional List<String> channels,
+                                     @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
         return slack().usergroups.createUserGroup(userGroupName, handle, description, channels, includeCount);
     }
 
     /**
      * Update an existing User Group
      *
-     * @param userGroupId
-     *            The ID of the User Group
-     * @param userGroupName
-     *            A name for the User Group. Must be unique among User Groups.
-     * @param handle
-     *            A mention handle. Must be unique among channels, user and User Groups
-     * @param description
-     *            A short description of the User Group
-     * @param channels
-     *            A list channel IDs for which the User Group uses as a default
-     * @param includeCount
-     *            Include the number of user in each user group
+     * @param userGroupId   The ID of the User Group
+     * @param userGroupName A name for the User Group. Must be unique among User Groups.
+     * @param handle        A mention handle. Must be unique among channels, user and User Groups
+     * @param description   A short description of the User Group
+     * @param channels      A list channel IDs for which the User Group uses as a default
+     * @param includeCount  Include the number of user in each user group
      * @return the updated User Group
      */
     @OAuthProtected
     @Processor(friendlyName = "UserGroups - Update")
     public Usergroup updateUserGroup(@Summary("The ID of the User Group") String userGroupId,
-            @Optional @Summary("A name for the User Group. Must be unique among User Groups.") String userGroupName,
-            @Optional @Summary("A mention handle. Must be unique among channels, user and User Groups.") String handle,
-            @Optional @Summary("A short description of the User Group.") String description,
-            @Optional @Summary("A list channel IDs for which the User Group uses as a default.") List<String> channels,
-            @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
+                                     @Summary("A name for the User Group. Must be unique among User Groups.") @Optional String userGroupName,
+                                     @Summary("A mention handle. Must be unique among channels, user and User Groups.") @Optional String handle,
+                                     @Summary("A short description of the User Group.") @Optional String description,
+                                     @Summary("A list channel IDs for which the User Group uses as a default.") @Optional  List<String> channels,
+                                     @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
         return slack().usergroups.updateUserGroup(userGroupId, userGroupName, handle, description, channels, includeCount);
     }
 
     /**
      * Update an existing User Group
      *
-     * @param userGroupId
-     *            The ID of the User Group."
-     * @param includeDisabled
-     *            Include disabled users
+     * @param userGroupId     The ID of the User Group."
+     * @param includeDisabled Include disabled users
      * @return a list with all the Users id of the UserGroup
      */
     @OAuthProtected
     @Processor(friendlyName = "UserGroups - Users - List")
     public List<String> listUsersFromUserGroup(@Summary("The ID of the User Group.") String userGroupId,
-            @Summary("Include the number of user in each user group.") @Default("false") Boolean includeDisabled) {
+                                               @Summary("Include the number of user in each user group.") @Default("false") Boolean includeDisabled) {
         return slack().usergroups.listUsersFromUserGroup(userGroupId, includeDisabled);
     }
 
@@ -934,19 +851,16 @@ public class SlackConnector {
      * This operation updates the list of users that belong to a User Group. This operation replaces all users in a User Group with the list of users provided in the users
      * parameter.
      *
-     * @param userGroupId
-     *            The ID of the User Group
-     * @param users
-     *            A string list of user IDs that represent the entire list of users for the User Group.
-     * @param includeCount
-     *            Include disabled users
+     * @param userGroupId  The ID of the User Group
+     * @param users        A string list of user IDs that represent the entire list of users for the User Group.
+     * @param includeCount Include disabled users
      * @return the updated UserGroup
      */
     @OAuthProtected
     @Processor(friendlyName = "UserGroups - Users - Update")
     public Usergroup updateUsersFromUserGroup(@Summary("The ID of the User Group.") String userGroupId,
-            @Summary("A string list of user IDs that represent the entire list of users for the User Group.") List<String> users,
-            @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
+                                              @Summary("A string list of user IDs that represent the entire list of users for the User Group.") List<String> users,
+                                              @Summary("Include the number of user in each user group.") @Default("false") Boolean includeCount) {
         return slack().usergroups.updateUsersFromUserGroup(userGroupId, users, includeCount);
     }
 
@@ -957,38 +871,22 @@ public class SlackConnector {
     /**
      * gdgdf
      *
-     * @param sourceCallback
-     *            gdf
-     * @param messages
-     *            gdf
-     * @param userTyping
-     *            gdf
-     * @param directMessages
-     *            gfd
-     * @param onlyNewMessages
-     *            gdf
-     * @param ignoreSelfEvents
-     *            gfd
-     * @param imCreated
-     *            gfd
-     * @param fileCreated
-     *            gdf
-     * @param fileShared
-     *            gfd
-     * @param filePublic
-     *            gfd
-     * @param allEvents
-     *            dfg
-     * @param filterClassName
-     *            dfg
-     * @param notifierClassName
-     *            dfg
-     * @throws IOException
-     *             dfg
-     * @throws InterruptedException
-     *             dfg
-     * @throws DeploymentException
-     *             dfg
+     * @param sourceCallback    gdf
+     * @param messages          gdf
+     * @param userTyping        gdf
+     * @param directMessages    gfd
+     * @param onlyNewMessages   gdf
+     * @param ignoreSelfEvents  gfd
+     * @param imCreated         gfd
+     * @param fileCreated       gdf
+     * @param fileShared        gfd
+     * @param filePublic        gfd
+     * @param allEvents         dfg
+     * @param filterClassName   dfg
+     * @param notifierClassName dfg
+     * @throws IOException          dfg
+     * @throws InterruptedException dfg
+     * @throws DeploymentException  dfg
      */
     @Source(friendlyName = "Retrieve events")
     public void retrieveEvents(
