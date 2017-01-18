@@ -14,8 +14,8 @@ import org.mule.tools.devkit.ctf.mockup.ConnectorTestContext;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ArchiveAndUnArchiveChannelTestCases.class,
-        ArchiveAndUnArchiveGroupTestCases.class,
+        ArchiveChannelTestCases.class,
+        ArchiveGroupTestCases.class,
         CloseAndOpenGroupTestCases.class,
         CloseDirectMessageChannelTestCases.class,
         GetChannelByNameTestCases.class,
@@ -37,6 +37,8 @@ import org.mule.tools.devkit.ctf.mockup.ConnectorTestContext;
         SetChannelTopicTestCases.class,
         SetGroupPurposeTestCases.class,
         SetGroupTopicTestCases.class,
+        UnarchiveGroupTestCases.class,
+        UnarchiveChannelTestCases.class,
         UpdateAndDeleteMessageTestCases.class,
         UploadFileAsInputStreamTestCases.class
 })
