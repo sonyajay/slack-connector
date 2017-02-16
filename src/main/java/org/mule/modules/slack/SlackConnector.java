@@ -13,7 +13,6 @@ import org.mule.api.annotations.Config;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.MetaDataScope;
 import org.mule.api.annotations.Processor;
-import org.mule.api.annotations.Query;
 import org.mule.api.annotations.Source;
 import org.mule.api.annotations.display.FriendlyName;
 import org.mule.api.annotations.display.Path;
@@ -97,7 +96,7 @@ public class SlackConnector { //NOSONAR
     @Processor(friendlyName = "User - Info")
     @Summary("This processor returns information about a team member.")
     @MetaDataScope(UserCategory.class)
-    public User getUserInfo(@MetaDataKeyParam @Summary("User ID to get info on") @Query @FriendlyName("User ID") String id) {
+    public User getUserInfo(@MetaDataKeyParam @Summary("User ID to get info on") @FriendlyName("User ID") String id) {
         return slack().users.getUserInfo(id);
     }
 
