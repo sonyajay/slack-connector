@@ -4,18 +4,14 @@
  */
 package org.mule.modules.slack.automation.functional;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.Test;
-import org.mule.modules.slack.client.model.chat.MessageResponse;
+import org.mule.modules.slack.automation.runner.AbstractSlackTestCase;
 import org.mule.modules.slack.client.model.chat.attachment.ChatAttachment;
 import org.mule.modules.slack.client.model.chat.attachment.Field;
-import org.mule.modules.slack.automation.runner.AbstractSlackTestCase;
 
-/**
- * Created by estebanwasinger on 8/8/15.
- */
+import org.junit.Test;
+
+import java.util.Arrays;
+
 public class PostMessageWithAttachmentTestCases extends AbstractSlackTestCase {
 
     @Test
@@ -27,8 +23,7 @@ public class PostMessageWithAttachmentTestCases extends AbstractSlackTestCase {
         field.setTitle("myOtherTitle");
         field.setValue("myOtherValue");
         chatAttachment.setFields(Arrays.asList(field));
-        List<ChatAttachment> chatAttachmentList = Arrays.asList(chatAttachment);
-        MessageResponse response = getConnector().postMessageWithAttachment(TEST_MESSAGE,CHANNEL_ID,null,null,chatAttachmentList,null);
+        String response = getConnector().postMessageWithAttachment(TEST_MESSAGE,CHANNEL_ID,null,null,null,null);
     }
 
 }

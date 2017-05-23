@@ -5,9 +5,7 @@
 
 package org.mule.modules.slack;
 
-import org.apache.commons.lang.BooleanUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import static org.mule.api.annotations.param.MetaDataKeyParamAffectsType.INPUT;
 import org.mule.api.MuleContext;
 import org.mule.api.annotations.Config;
 import org.mule.api.annotations.Connector;
@@ -30,7 +28,6 @@ import org.mule.modules.slack.client.model.User;
 import org.mule.modules.slack.client.model.channel.Channel;
 import org.mule.modules.slack.client.model.chat.Message;
 import org.mule.modules.slack.client.model.chat.MessageResponse;
-import org.mule.modules.slack.client.model.chat.attachment.ChatAttachment;
 import org.mule.modules.slack.client.model.file.FileUploadResponse;
 import org.mule.modules.slack.client.model.group.Group;
 import org.mule.modules.slack.client.model.im.DirectMessageChannel;
@@ -46,16 +43,22 @@ import org.mule.modules.slack.client.rtm.filter.SelfEventsFilter;
 import org.mule.modules.slack.config.SlackConfig;
 import org.mule.modules.slack.config.SlackOAuth2Config;
 import org.mule.modules.slack.metadata.AllChannelCategory;
+import org.mule.modules.slack.metadata.AllChannelCategoryWithAttachment;
 import org.mule.modules.slack.metadata.ChannelCategory;
 import org.mule.modules.slack.metadata.GroupCategory;
 import org.mule.modules.slack.metadata.UserCategory;
 
-import javax.inject.Inject;
-import javax.websocket.DeploymentException;
+import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.websocket.DeploymentException;
 
 /**
  * Slack Anypoint Connector
@@ -372,20 +375,20 @@ public class SlackConnector { //NOSONAR
      * @param channelId          ID of the channel to post the message
      * @param username           Name to show in the message
      * @param iconURL            Icon URL of the icon to show in the message
-     * @param chatAttachmentList List of attachments to be sent in the message
+     * @param attachments        List of attachments to be sent in the message
      * @param asUser             Boolean indicating if the message is showed as a User or as a Bot
      * @return MessageResponse
      */
     @OAuthProtected
     @Processor(friendlyName = "Chat - Post message with attachment")
-    @MetaDataScope(AllChannelCategory.class)
-    public MessageResponse postMessageWithAttachment(@Optional String message,
-                                                     @FriendlyName("Channel ID") @MetaDataKeyParam String channelId,
+    @MetaDataScope(AllChannelCategoryWithAttachment.class)
+    public String postMessageWithAttachment(@Optional String message,
+                                                     @FriendlyName("Channel ID") @MetaDataKeyParam(affects = INPUT) String channelId,
                                                      @FriendlyName("Name to show") @Optional String username,
                                                      @FriendlyName("Icon URL") @Optional String iconURL,
-                                                     @FriendlyName("Attachment List") @RefOnly @Default("#[payload]") List<ChatAttachment> chatAttachmentList,
-                                                     @Optional Boolean asUser) {
-        return slack().chat.sendMessageWithAttachment(message, channelId, username, iconURL, chatAttachmentList, BooleanUtils.toBoolean(asUser));
+                                                     @FriendlyName("Attachment List") @RefOnly @Default("#[payload]") String attachments,
+                                                     @Default("false") Boolean asUser) {
+        return slack().chat.sendMessageWithAttachmentAsString(message, channelId, username, iconURL, attachments, asUser);
     }
 
     /**
@@ -963,7 +966,7 @@ public class SlackConnector { //NOSONAR
             return (EventFilter) aClass.newInstance();
         } catch (ClassCastException e) {
             String errorMessage = String.format("The configured class [%s] does not implements 'org.mule.modules.slack.client.rtm.filter.SlackEventFilter'", className);
-            logger.error(errorMessage);
+            logger.error(errorMessage, e);
             throw new SlackException(errorMessage);
         } catch (Exception e) {
             logger.error("Error loading Custom filter class", e);
@@ -971,14 +974,14 @@ public class SlackConnector { //NOSONAR
         }
     }
 
-    private EventNotifier getNotifierInstance(String className) { //NOSONAR
+    private EventNotifier getNotifierInstance(String className) throws SlackException { //NOSONAR
         try {
             logger.info("Detected custom filter class: " + className);
             Class<?> aClass = Class.forName(className, true, getMuleContext().getExecutionClassLoader());
             return (EventNotifier) aClass.newInstance();
         } catch (ClassCastException e) {
             String errorMessage = String.format("The configured class [%s] does not implements 'org.mule.modules.slack.client.rtm.filter.EventObserver'", className);
-            logger.error(errorMessage);
+            logger.error(errorMessage, e);
             throw new SlackException(errorMessage);
         } catch (Exception e) {
             logger.error("Error loading Custom filter class", e);

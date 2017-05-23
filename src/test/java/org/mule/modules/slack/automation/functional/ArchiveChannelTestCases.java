@@ -5,21 +5,28 @@
 package org.mule.modules.slack.automation.functional;
 
 import static org.junit.Assert.assertEquals;
-import org.junit.Test;
 import org.mule.modules.slack.automation.runner.AbstractSlackTestCase;
+import org.mule.modules.slack.client.model.channel.Channel;
+
+import org.junit.Before;
+import org.junit.Test;
 
 public class ArchiveChannelTestCases extends AbstractSlackTestCase {
 
-    @Test
+    public static Channel channel;
+
+    @Before
     public void setUp() {
-        if (getConnector().getChannelInfo(CHANNEL_RENAMING).getIsArchived()) {
-            getConnector().unarchiveChannel(CHANNEL_RENAMING);
+        channel = getConnector().createChannel(String.valueOf(Math.random()));
+
+        if (getConnector().getChannelInfo(channel.getId()).getIsArchived()) {
+            getConnector().unarchiveChannel(channel.getId());
         }
     }
 
     @Test
     public void archiveChannel() {
-        getConnector().archiveChannel(CHANNEL_RENAMING);
-        assertEquals(false, getConnector().getChannelInfo(CHANNEL_RENAMING).getIsArchived());
+        getConnector().archiveChannel(channel.getId());
+        assertEquals(true, getConnector().getChannelInfo(channel.getId()).getIsArchived());
     }
 }

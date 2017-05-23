@@ -1,15 +1,19 @@
 package org.mule.modules.slack.client.resources;
 
-import com.google.gson.Gson;
-import org.glassfish.jersey.uri.UriComponent;
-import org.json.JSONObject;
+import static org.glassfish.jersey.uri.UriComponent.encode;
+import static org.mule.modules.slack.client.Operations.CHAT_POSTMESSAGE;
 import org.mule.modules.slack.client.Operations;
 import org.mule.modules.slack.client.SlackRequester;
 import org.mule.modules.slack.client.model.chat.MessageResponse;
 import org.mule.modules.slack.client.model.chat.attachment.ChatAttachment;
 
-import javax.ws.rs.client.WebTarget;
+import com.google.gson.Gson;
+import org.glassfish.jersey.uri.UriComponent;
+import org.json.JSONObject;
+
 import java.util.List;
+
+import javax.ws.rs.client.WebTarget;
 
 public class Chat {
 
@@ -23,9 +27,9 @@ public class Chat {
 
     public MessageResponse sendMessage(String message, String channelId, String username, String iconUrl, Boolean asUser) {
         WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHAT_POSTMESSAGE)
+                .path(CHAT_POSTMESSAGE)
                 .queryParam("channel", channelId)
-                .queryParam("text", UriComponent.encode(message, UriComponent.Type.QUERY_PARAM_SPACE_ENCODED))
+                .queryParam("text", encode(message, UriComponent.Type.QUERY_PARAM_SPACE_ENCODED))
                 .queryParam("username", username)
                 .queryParam("icon_url", iconUrl)
                 .queryParam("as_user", String.valueOf(asUser));
@@ -38,7 +42,7 @@ public class Chat {
     public MessageResponse sendMessageWithAttachment(String message, String channelId, String username, String iconUrl, List<ChatAttachment> chatAttachmentArrayList, Boolean asUser) {
 
         WebTarget webTarget = slackRequester.getWebTarget()
-                .path(Operations.CHAT_POSTMESSAGE)
+                .path(CHAT_POSTMESSAGE)
                 .queryParam("channel", channelId)
                 .queryParam("text", message)
                 .queryParam("username", username)
@@ -50,6 +54,20 @@ public class Chat {
         String output = SlackRequester.sendRequest(webTarget);
 
         return gson.fromJson(output, MessageResponse.class);
+    }
+
+    public String sendMessageWithAttachmentAsString(String message, String channelId, String username, String iconUrl, String attachments, Boolean asUser) {
+
+        WebTarget webTarget = slackRequester.getWebTarget()
+                .path(CHAT_POSTMESSAGE)
+                .queryParam("channel", channelId)
+                .queryParam("text", message)
+                .queryParam("username", username)
+                .queryParam("icon_url", iconUrl)
+                .queryParam("as_user", asUser)
+                .queryParam("attachments", attachments);
+
+        return SlackRequester.sendRequest(webTarget);
     }
 
     public Boolean deleteMessage(String timeStamp, String channelId) {

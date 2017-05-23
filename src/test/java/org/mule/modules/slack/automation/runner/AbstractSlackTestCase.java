@@ -13,8 +13,8 @@ public abstract class AbstractSlackTestCase extends AbstractTestCase<SlackConnec
 
     public static final String TEST_MESSAGE = "test message";
     public static final String USER_ID = "U03NE28RL";
-    public static final String GROUP_ID = "G03R7DHNY";
-    public static final String CHANNEL_ID = "C03NE28RY";
+    public static String GROUP_ID = "G03R7DHNY";
+    public static String CHANNEL_ID = "C03NE28RY";
     public static final String CHANNEL_RENAMING ="C04KG7XAM";
     public static final String CHANNEL_NAME = "random";
     public static final String ESTEBANWASINGER = "estebanwasinger";
