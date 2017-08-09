@@ -25,9 +25,6 @@ import javax.inject.Inject;
 @MetaDataCategory
 public class AllChannelCategoryWithAttachment extends AllChannelCategory {
 
-    @Inject
-    private SlackConnector connector;
-
     @MetaDataRetriever
     public MetaData describeEntity(MetaDataKey entityKey) throws Exception {
         DefaultMetaDataBuilder builder = new DefaultMetaDataBuilder();
@@ -36,22 +33,9 @@ public class AllChannelCategoryWithAttachment extends AllChannelCategory {
         return new DefaultMetaData(metaDataBuilder.build());
     }
 
-//    @MetaDataOutputRetriever
-//    public MetaData describeOutput(MetaDataKey entityKey) throws Exception {
-//        De
-//    }
-
     private String getJsonSchema() throws IOException {
         File attachmentsSchemaFile = new File(getClass().getClassLoader().getResource("schemas/attachments-schema.json").getFile());
         return IOUtils.toString(new FileInputStream(attachmentsSchemaFile));
-    }
-
-    public SlackConnector getConnector() {
-        return connector;
-    }
-
-    public void setConnector(SlackConnector connector) {
-        this.connector = connector;
     }
 
     private static final String attachmentsSchema = "{\n" +

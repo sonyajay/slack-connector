@@ -965,7 +965,7 @@ public class SlackConnector { //NOSONAR
             Class<?> aClass = Class.forName(className, true, getMuleContext().getExecutionClassLoader());
             return (EventFilter) aClass.newInstance();
         } catch (ClassCastException e) {
-            String errorMessage = String.format("The configured class [%s] does not implements 'org.mule.modules.slack.client.rtm.filter.SlackEventFilter'", className);
+            String errorMessage = String.format("The configured class [%s] does not implements 'org.mule.modules.slack.client.rtm.filter.EventFilter'", className);
             logger.error(errorMessage, e);
             throw new SlackException(errorMessage);
         } catch (Exception e) {
@@ -980,7 +980,7 @@ public class SlackConnector { //NOSONAR
             Class<?> aClass = Class.forName(className, true, getMuleContext().getExecutionClassLoader());
             return (EventNotifier) aClass.newInstance();
         } catch (ClassCastException e) {
-            String errorMessage = String.format("The configured class [%s] does not implements 'org.mule.modules.slack.client.rtm.filter.EventObserver'", className);
+            String errorMessage = String.format("The configured class [%s] does not implements 'org.mule.modules.slack.client.rtm.filter.EventNotifier'", className);
             logger.error(errorMessage, e);
             throw new SlackException(errorMessage);
         } catch (Exception e) {

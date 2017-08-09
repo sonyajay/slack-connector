@@ -1,5 +1,6 @@
 package org.mule.modules.slack.client.resources;
 
+import static org.glassfish.jersey.uri.UriComponent.Type.QUERY_PARAM_SPACE_ENCODED;
 import static org.glassfish.jersey.uri.UriComponent.encode;
 import static org.mule.modules.slack.client.Operations.CHAT_POSTMESSAGE;
 import org.mule.modules.slack.client.Operations;
@@ -29,7 +30,7 @@ public class Chat {
         WebTarget webTarget = slackRequester.getWebTarget()
                 .path(CHAT_POSTMESSAGE)
                 .queryParam("channel", channelId)
-                .queryParam("text", encode(message, UriComponent.Type.QUERY_PARAM_SPACE_ENCODED))
+                .queryParam("text", encode(message, QUERY_PARAM_SPACE_ENCODED))
                 .queryParam("username", username)
                 .queryParam("icon_url", iconUrl)
                 .queryParam("as_user", String.valueOf(asUser));
@@ -49,7 +50,7 @@ public class Chat {
                 .queryParam("icon_url", iconUrl)
                 .queryParam("as_user", String.valueOf(asUser));
 
-        webTarget = webTarget.queryParam("attachments", UriComponent.encode(gson.toJson(chatAttachmentArrayList), UriComponent.Type.QUERY_PARAM_SPACE_ENCODED));
+        webTarget = webTarget.queryParam("attachments", encode(gson.toJson(chatAttachmentArrayList), QUERY_PARAM_SPACE_ENCODED));
 
         String output = SlackRequester.sendRequest(webTarget);
 
@@ -65,7 +66,7 @@ public class Chat {
                 .queryParam("username", username)
                 .queryParam("icon_url", iconUrl)
                 .queryParam("as_user", asUser)
-                .queryParam("attachments", attachments);
+                .queryParam("attachments", encode(attachments, QUERY_PARAM_SPACE_ENCODED));
 
         return SlackRequester.sendRequest(webTarget);
     }
