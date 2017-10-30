@@ -34,7 +34,7 @@ public class RetrieveEventsTestCases extends AbstractSlackTestCase {
         List<Object> result = getDispatcher().getSourceMessages(RETRIEVE_EVENTS_SOURCE);
         assertTrue(!result.isEmpty());
         Map<String, Object> event = (Map<String, Object>) result.get(0);
-        assertEquals(TEST_MESSAGE, event.get(TEXT_PROPERTY));
+        assertEquals(event.get(TEXT_PROPERTY), TEST_MESSAGE);
     }
 
     @After
