@@ -22,7 +22,7 @@ public class GetUserInfoTestCases extends AbstractSlackTestCase {
         assertEquals(response.getName(), ESTEBANWASINGER);
     }
 
-    @Test(expected = SlackException.class)
+    @Test(expected = Exception.class)
     public void testGetNoExistingUserInfo() {
         getConnector().getUserInfo("sdadsa");
     }

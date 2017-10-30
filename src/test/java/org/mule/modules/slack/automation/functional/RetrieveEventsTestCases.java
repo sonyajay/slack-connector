@@ -13,6 +13,7 @@ import org.mule.modules.slack.automation.runner.AbstractSlackTestCase;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RetrieveEventsTestCases extends AbstractSlackTestCase {
 
@@ -32,8 +33,8 @@ public class RetrieveEventsTestCases extends AbstractSlackTestCase {
         Thread.sleep(5000);
         List<Object> result = getDispatcher().getSourceMessages(RETRIEVE_EVENTS_SOURCE);
         assertTrue(!result.isEmpty());
-        HashMap<String, Object> event = (HashMap<String, Object>) result.get(0);
-        assertEquals(event.get(TEXT_PROPERTY), TEST_MESSAGE);
+        Map<String, Object> event = (Map<String, Object>) result.get(0);
+        assertEquals(TEST_MESSAGE, event.get(TEXT_PROPERTY));
     }
 
     @After

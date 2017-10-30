@@ -21,7 +21,7 @@ public class GetChannelInfoTestCases extends AbstractSlackTestCase {
         Assert.assertEquals(channel.getName(), CHANNEL_NAME);
     }
 
-    @Test(expected = SlackException.class)
+    @Test(expected = Exception.class)
     public void testGetBadChannelInfo(){
         getConnector().getChannelInfo("321321");
     }
