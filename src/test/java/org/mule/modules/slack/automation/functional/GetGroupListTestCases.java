@@ -15,7 +15,7 @@ public class GetGroupListTestCases extends AbstractSlackTestCase {
     @Test
     public void testGetGroupList() {
         Boolean found = false;
-        for (Group group : getConnector().getGroupList()) {
+        for (Group group : getConnector().getGroupList(false, false)) {
             if(group.getName().equals("othergroup")) found = true;
         }
         assertEquals(true,found);

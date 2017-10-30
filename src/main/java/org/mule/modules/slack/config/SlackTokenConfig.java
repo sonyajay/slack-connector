@@ -5,8 +5,14 @@
 
 package org.mule.modules.slack.config;
 
+import static org.mule.module.http.internal.request.DefaultHttpRequesterConfig.OBJECT_HTTP_CLIENT_FACTORY;
+
 import org.mule.api.ConnectionException;
 import org.mule.api.ConnectionExceptionCode;
+import org.mule.api.MuleContext;
+import org.mule.api.MuleException;
+import org.mule.api.MuleRuntimeException;
+import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Connect;
 import org.mule.api.annotations.ConnectionIdentifier;
 import org.mule.api.annotations.Disconnect;
@@ -14,6 +20,14 @@ import org.mule.api.annotations.TestConnectivity;
 import org.mule.api.annotations.ValidateConnection;
 import org.mule.api.annotations.components.ConnectionManagement;
 import org.mule.api.annotations.param.ConnectionKey;
+import org.mule.api.annotations.param.Default;
+import org.mule.api.context.MuleContextAware;
+import org.mule.module.http.internal.request.HttpClient;
+import org.mule.module.http.internal.request.HttpClientConfiguration;
+import org.mule.module.http.internal.request.HttpClientFactory;
+import org.mule.module.http.internal.request.grizzly.GrizzlyHttpClient;
+import org.mule.modules.slack.client.JerseySlackRequestBuilder;
+import org.mule.modules.slack.client.MuleHttpClientSlackRequestBuilder;
 import org.mule.modules.slack.client.SlackClient;
 
 /**
@@ -22,10 +36,11 @@ import org.mule.modules.slack.client.SlackClient;
  * @author Esteban Wasinger.
  */
 @ConnectionManagement(configElementName = "token-config", friendlyName = "Token Configuration")
-public class SlackTokenConfig implements SlackConfig {
+public class SlackTokenConfig extends SlackConfig implements MuleContextAware {
 
     private SlackClient slackClient;
     private String accessToken;
+    private MuleContext muleContext;
 
     /**
      * @throws ConnectionException
@@ -33,7 +48,8 @@ public class SlackTokenConfig implements SlackConfig {
     @TestConnectivity
     @Connect
     public void connect(@ConnectionKey String accessToken) throws ConnectionException {
-        slackClient = new SlackClient(accessToken);
+        slackClient = createSlackClient(accessToken, muleContext);
+
         if (!slackClient.auth.isConnected()) {
             throw new ConnectionException(ConnectionExceptionCode.INCORRECT_CREDENTIALS, "Invalid Token", "Invalid Token");
         }
@@ -42,6 +58,13 @@ public class SlackTokenConfig implements SlackConfig {
     @Disconnect
     public void disconnect() {
         slackClient = null;
+        try {
+            if(httpClient != null){
+                httpClient.stop();
+            }
+        } catch (Exception e){
+            throw new MuleRuntimeException(e);
+        }
     }
 
     @ValidateConnection
@@ -77,5 +100,10 @@ public class SlackTokenConfig implements SlackConfig {
 
     public Boolean isAuthorized() {
         return accessToken != null;
+    }
+
+    @Override
+    public void setMuleContext(MuleContext muleContext) {
+        this.muleContext = muleContext;
     }
 }

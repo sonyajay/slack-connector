@@ -27,7 +27,7 @@ public class GroupCategory {
     @MetaDataKeyRetriever
     public List<MetaDataKey> getEntities() throws Exception {
         List<MetaDataKey> entities = new ArrayList<MetaDataKey>();
-        List<Group> groupList = connector.slack().groups.getGroupList();
+        List<Group> groupList = connector.slack().groups.getGroupList(true, true);
         for (Group group : groupList) {
             entities.add(new DefaultMetaDataKey(group.getId(), group.getName() + " - " + group.getId()));
         }

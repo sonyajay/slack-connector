@@ -28,18 +28,17 @@ public class IM {
     }
 
     public DirectMessageChannelCreationResponse openDirectMessageChannel(String userId) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.IM_OPEN).queryParam("user", userId);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.IM_OPEN)
+                .withParam("user", userId)
+                .build().execute();
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
         return gson.fromJson(slackResponse.toString(), DirectMessageChannelCreationResponse.class);
     }
 
     public List<DirectMessageChannel> getDirectMessageChannelsList() {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.IM_LIST);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.IM_LIST)
+                .build().execute();
 
         JSONArray slackResponse = (JSONArray) new JSONObject(output).get("ims");
         return gson.fromJson(slackResponse.toString(), channelListType);
@@ -50,30 +49,29 @@ public class IM {
     }
 
     public Boolean markViewDirectMessageChannel(String channelID, String timeStamp) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.IM_MARK).queryParam("channel", channelID).queryParam("ts", timeStamp);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.IM_MARK)
+                .withParam("channel", channelID)
+                .withParam("ts", timeStamp)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean closeDirectMessageChannel(String channelID) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.IM_CLOSE).queryParam("channel", channelID);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.IM_CLOSE)
+                .withParam("channel", channelID)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public List<Message> getMessages(String channelId, String latest, String oldest, String count, String operation) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(operation)
-                .queryParam("channel", channelId)
-                .queryParam("latest", latest)
-                .queryParam("oldest", oldest)
-                .queryParam("count", count);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(operation)
+                .withParam("channel", channelId)
+                .withParam("latest", latest)
+                .withParam("oldest", oldest)
+                .withParam("count", count)
+                .build().execute();
 
         JSONArray slackResponse = (JSONArray) new JSONObject(output).get("messages");
         Type listType = new TypeToken<ArrayList<Message>>() {

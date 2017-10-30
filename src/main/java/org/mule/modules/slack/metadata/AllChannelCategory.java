@@ -28,7 +28,7 @@ public class AllChannelCategory {
     @MetaDataKeyRetriever
     public List<MetaDataKey> getEntities() throws Exception {
         List<MetaDataKey> entities = new ArrayList<MetaDataKey>();
-        List<Channel> channelList = connector.slack().channels.getChannelList();
+        List<Channel> channelList = connector.slack().channels.getChannelList(true, true, 0, null);
         for (Channel channel : channelList) {
             entities.add(new DefaultMetaDataKey(channel.getId(), channel.getName() + " - " + channel.getId()));
         }
@@ -39,7 +39,7 @@ public class AllChannelCategory {
             entities.add(new DefaultMetaDataKey(group.getId(), userName(userList, group.getUser()) + " - " + group.getId()));
         }
 
-        List<Group> groupList = connector.slack().groups.getGroupList();
+        List<Group> groupList = connector.slack().groups.getGroupList(true, true);
         for (Group group : groupList) {
             entities.add(new DefaultMetaDataKey(group.getId(), group.getName() + " - " + group.getId()));
         }

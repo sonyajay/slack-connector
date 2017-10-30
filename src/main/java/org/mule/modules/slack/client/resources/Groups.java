@@ -1,5 +1,17 @@
 package org.mule.modules.slack.client.resources;
 
+import static org.mule.modules.slack.client.Operations.GROUPS_ARCHIVE;
+import static org.mule.modules.slack.client.Operations.GROUPS_CLOSE;
+import static org.mule.modules.slack.client.Operations.GROUPS_CREATE;
+import static org.mule.modules.slack.client.Operations.GROUPS_HISTORY;
+import static org.mule.modules.slack.client.Operations.GROUPS_INFO;
+import static org.mule.modules.slack.client.Operations.GROUPS_LEAVE;
+import static org.mule.modules.slack.client.Operations.GROUPS_LIST;
+import static org.mule.modules.slack.client.Operations.GROUPS_MARK;
+import static org.mule.modules.slack.client.Operations.GROUPS_OPEN;
+import static org.mule.modules.slack.client.Operations.GROUPS_SETPORPUSE;
+import static org.mule.modules.slack.client.Operations.GROUPS_SETTOPIC;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
@@ -9,7 +21,6 @@ import org.mule.modules.slack.client.SlackRequester;
 import org.mule.modules.slack.client.model.chat.Message;
 import org.mule.modules.slack.client.model.group.Group;
 
-import javax.ws.rs.client.WebTarget;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,133 +39,139 @@ public class Groups {
     }
 
     public List<Message> getGroupHistory(String channelId, String latest, String oldest, String count) {
-        return getMessages(channelId, latest, oldest, count, Operations.GROUPS_HISTORY);
+        return getMessages(channelId, latest, oldest, count, GROUPS_HISTORY);
     }
 
-    public List<Group> getGroupList() {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_LIST);
-
-        String output = SlackRequester.sendRequest(webTarget);
+    public List<Group> getGroupList(Boolean excludeMembers, Boolean excludeArchived) {
+        String output = slackRequester.newRequest(GROUPS_LIST)
+                .withParam("exclude_members", excludeMembers)
+                .withParam("exclude_archived", excludeArchived)
+                .build().execute();
 
         JSONArray slackResponse = (JSONArray) new JSONObject(output).get("groups");
         return gson.fromJson(slackResponse.toString(), groupsListType);
     }
 
     public Group createGroup(String name) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_CREATE).queryParam("name", name);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(GROUPS_CREATE)
+                .withParam("name", name)
+                .build().execute();
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("group");
         return gson.fromJson(slackResponse.toString(), Group.class);
     }
 
     public Boolean openGroup(String channelID) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_OPEN).queryParam("channel", channelID);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(GROUPS_OPEN)
+                .withParam("channel", channelID)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean leaveGroup(String channelID) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_LEAVE).queryParam("channel", channelID);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(GROUPS_LEAVE)
+                .withParam("channel", channelID)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean archiveGroup(String channelID) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_ARCHIVE).queryParam("channel", channelID);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(GROUPS_ARCHIVE)
+                .withParam("channel", channelID)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean setGroupPurpose(String channelID, String purpose) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_SETPORPUSE).queryParam("channel", channelID).queryParam("purpose", purpose);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(GROUPS_SETPORPUSE)
+                .withParam("channel", channelID)
+                .withParam("purpose", purpose)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean setGroupTopic(String channelID, String topic) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_SETTOPIC).queryParam("channel", channelID).queryParam("topic", topic);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(GROUPS_SETTOPIC)
+                .withParam("channel", channelID)
+                .withParam("topic", topic)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean closeGroup(String channelID) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_CLOSE).queryParam("channel", channelID);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(GROUPS_CLOSE)
+                .withParam("channel", channelID)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean markViewGroup(String channelID, String timeStamp) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_MARK).queryParam("channel", channelID).queryParam("ts", timeStamp);
+        String output = slackRequester.newRequest(GROUPS_MARK)
+                .withParam("channel", channelID)
+                .withParam("ts", timeStamp)
+                .build().execute();
 
-        String output = SlackRequester.sendRequest(webTarget);
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean kickUserFromGroup(String channelID, String user) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_KICK).queryParam("channel", channelID).queryParam("user", user);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.GROUPS_KICK)
+                .withParam("channel", channelID)
+                .withParam("user", user)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean inviteUserToGroup(String channelID, String user) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_INVITE).queryParam("channel", channelID).queryParam("user", user);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.GROUPS_INVITE)
+                .withParam("channel", channelID)
+                .withParam("user", user)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Boolean unarchiveGroup(String groupID) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_UNARCHIVE).queryParam("channel", groupID);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.GROUPS_UNARCHIVE)
+                .withParam("channel", groupID)
+                .build().execute();
 
         return new JSONObject(output).getBoolean("ok");
     }
 
     public Group renameGroup(String channelId, String newName) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_RENAME).queryParam("channel", channelId).queryParam("name", newName);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.GROUPS_RENAME)
+                .withParam("channel", channelId)
+                .withParam("name", newName)
+                .build().execute();
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("channel");
         return gson.fromJson(slackResponse.toString(), Group.class);
     }
 
     public Group getGroupInfo(String groupId) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.GROUPS_INFO).queryParam("channel", groupId);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(GROUPS_INFO)
+                .withParam("channel", groupId)
+                .build().execute();
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("group");
         return gson.fromJson(slackResponse.toString(), Group.class);
     }
 
     public List<Message> getMessages(String channelId, String latest, String oldest, String count, String operation) {
-        WebTarget webTarget = slackRequester.getWebTarget()
-                .path(operation)
-                .queryParam("channel", channelId)
-                .queryParam("latest", latest)
-                .queryParam("oldest", oldest)
-                .queryParam("count", count);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(operation)
+                .withParam("channel", channelId)
+                .withParam("latest", latest)
+                .withParam("oldest", oldest)
+                .withParam("count", count)
+                .build().execute();
 
         JSONArray slackResponse = (JSONArray) new JSONObject(output).get("messages");
         Type listType = new TypeToken<ArrayList<Message>>() {

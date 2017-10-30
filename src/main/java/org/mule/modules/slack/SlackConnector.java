@@ -6,7 +6,9 @@
 package org.mule.modules.slack;
 
 import static org.mule.api.annotations.param.MetaDataKeyParamAffectsType.INPUT;
+
 import org.mule.api.MuleContext;
+import org.mule.api.MuleException;
 import org.mule.api.annotations.Config;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.MetaDataScope;
@@ -22,6 +24,13 @@ import org.mule.api.annotations.param.MetaDataKeyParam;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.annotations.param.RefOnly;
 import org.mule.api.callback.SourceCallback;
+import org.mule.module.http.internal.ParameterMap;
+import org.mule.module.http.internal.domain.ByteArrayHttpEntity;
+import org.mule.module.http.internal.domain.HttpEntity;
+import org.mule.module.http.internal.domain.InputStreamHttpEntity;
+import org.mule.module.http.internal.domain.request.HttpRequest;
+import org.mule.module.http.internal.domain.request.HttpRequestBuilder;
+import org.mule.module.http.internal.domain.response.HttpResponse;
 import org.mule.modules.slack.client.SlackClient;
 import org.mule.modules.slack.client.exceptions.SlackException;
 import org.mule.modules.slack.client.model.User;
@@ -47,6 +56,7 @@ import org.mule.modules.slack.metadata.AllChannelCategoryWithAttachment;
 import org.mule.modules.slack.metadata.ChannelCategory;
 import org.mule.modules.slack.metadata.GroupCategory;
 import org.mule.modules.slack.metadata.UserCategory;
+import org.mule.util.IOUtils;
 
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
@@ -56,6 +66,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 import javax.websocket.DeploymentException;
@@ -101,6 +112,26 @@ public class SlackConnector { //NOSONAR
     @MetaDataScope(UserCategory.class)
     public User getUserInfo(@MetaDataKeyParam @Summary("User ID to get info on") @FriendlyName("User ID") String id) {
         return slack().users.getUserInfo(id);
+    }
+
+    @Processor
+    public String someOp() throws IOException, TimeoutException, MuleException {
+
+        HttpRequest httpRequest = new HttpRequestBuilder()
+                .setUri("https://slack.com/api/api.test")
+                .setMethod("GET")
+                .setQueryParams(new ParameterMap())
+                .build();
+        HttpResponse response = slackConfig.getHttpClient().send(httpRequest, 10000, false, null);
+        HttpEntity entity = response.getEntity();
+        String stringResponse = null;
+        if(entity instanceof InputStreamHttpEntity){
+            stringResponse = IOUtils.toString(((InputStreamHttpEntity) entity).getInputStream());
+        } else if( entity instanceof ByteArrayHttpEntity) {
+            stringResponse = IOUtils.toString(((ByteArrayHttpEntity) entity).getContent());
+        }
+
+        return stringResponse;
     }
 
     /**
@@ -150,8 +181,8 @@ public class SlackConnector { //NOSONAR
     @OAuthProtected
     @Summary("This processor returns a list of all channels in the team. This includes channels the caller is in, channels they are not currently in, and archived channels. The number of (non-deactivated) members in each channel is also returned.")
     @Processor(friendlyName = "Channel - List")
-    public List<Channel> getChannelList() {
-        return slack().channels.getChannelList();
+    public List<Channel> getChannelList(@Default("false") Boolean excludeArchived, @Default("false") Boolean excludeMembers, @Default("0") int limit, @Optional String cursor) {
+        return slack().channels.getChannelList(excludeArchived, excludeMembers, limit, cursor);
     }
 
     /**
@@ -388,7 +419,7 @@ public class SlackConnector { //NOSONAR
                                                      @FriendlyName("Icon URL") @Optional String iconURL,
                                                      @FriendlyName("Attachment List") @RefOnly @Default("#[payload]") String attachments,
                                                      @Default("false") Boolean asUser) {
-        return slack().chat.sendMessageWithAttachmentAsString(message, channelId, username, iconURL, attachments, asUser);
+        return slack().chat.sendMessageWithAttachments(message, channelId, username, iconURL, attachments, asUser);
     }
 
     /**
@@ -508,8 +539,8 @@ public class SlackConnector { //NOSONAR
      */
     @OAuthProtected
     @Processor(friendlyName = "Group - List")
-    public List<Group> getGroupList() {
-        return slack().groups.getGroupList();
+    public List<Group> getGroupList(@Default("false") Boolean excludeMembers, @Default("false") Boolean excludeArchived) {
+        return slack().groups.getGroupList(excludeMembers, excludeArchived);
     }
 
     /**

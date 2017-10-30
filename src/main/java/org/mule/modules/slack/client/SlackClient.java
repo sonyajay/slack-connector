@@ -34,7 +34,12 @@ public class SlackClient {
     public final IM im;
 
     public SlackClient(String token) {
-        slackRequester = new SlackRequester(token);
+        this(token, JerseySlackRequestBuilder.getFactory());
+    }
+
+    public SlackClient(String token, RequestBuilderFactory requestBuilderFactory) {
+        slackRequester = new SlackRequester(token, requestBuilderFactory);
+
         this.token = token;
         gson = new Gson();
         usergroups = new UserGroups(slackRequester, gson);
@@ -52,10 +57,9 @@ public class SlackClient {
     // ******************
 
     public String getWebSockerURI() {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.RTM_START);
-        String s = SlackRequester.sendRequest(webTarget);
-        selfId = new JSONObject(s).getJSONObject("self").getString("id");
-        return new JSONObject(s).getString("url");
+        String output = slackRequester.newRequest(Operations.RTM_START).build().execute();
+        selfId = new JSONObject(output).getJSONObject("self").getString("id");
+        return new JSONObject(output).getString("url");
     }
 
     public void startRealTimeCommunication(EventHandler messageHandler) throws DeploymentException, InterruptedException, IOException {

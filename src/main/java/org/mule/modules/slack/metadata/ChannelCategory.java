@@ -11,7 +11,6 @@ import org.mule.api.annotations.components.MetaDataCategory;
 import org.mule.common.metadata.DefaultMetaDataKey;
 import org.mule.common.metadata.MetaData;
 import org.mule.common.metadata.MetaDataKey;
-import org.mule.common.metadata.builder.DefaultMetaDataBuilder;
 import org.mule.modules.slack.SlackConnector;
 import org.mule.modules.slack.client.model.channel.Channel;
 
@@ -28,7 +27,7 @@ public class ChannelCategory {
     @MetaDataKeyRetriever
     public List<MetaDataKey> getEntities() throws Exception {
         List<MetaDataKey> entities = new ArrayList<MetaDataKey>();
-        List<Channel> channelList = connector.slack().channels.getChannelList();
+        List<Channel> channelList = connector.slack().channels.getChannelList(true, true, 0, null);
         for (Channel channel : channelList) {
             entities.add(new DefaultMetaDataKey(channel.getId(), channel.getName() + " - " + channel.getId()));
         }

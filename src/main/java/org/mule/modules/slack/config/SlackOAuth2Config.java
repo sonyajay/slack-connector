@@ -4,14 +4,18 @@
  */
 package org.mule.modules.slack.config;
 
+import org.mule.api.ConnectionException;
+import org.mule.api.MuleContext;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.display.FriendlyName;
 import org.mule.api.annotations.oauth.*;
+import org.mule.api.context.MuleContextAware;
+import org.mule.module.http.internal.request.HttpClient;
 import org.mule.modules.slack.client.SlackClient;
 
 @OAuth2(configElementName = "oauth2-config", friendlyName = "OAuth2 Configuration", accessTokenUrl = "https://slack.com/api/oauth.access", authorizationUrl = "https://slack.com/oauth/authorize")
-public class SlackOAuth2Config implements SlackConfig {
+public class SlackOAuth2Config extends SlackConfig implements MuleContextAware {
 
     private SlackClient client;
 
@@ -45,9 +49,11 @@ public class SlackOAuth2Config implements SlackConfig {
     @OAuthScope
     private String scope;
 
+    private MuleContext muleContext;
+
     @OAuthPostAuthorization
-    public void postAuthorize() {
-        client = new SlackClient(accessToken);
+    public void postAuthorize() throws ConnectionException {
+        client = createSlackClient(accessToken, muleContext);
     }
 
     /**
@@ -127,5 +133,10 @@ public class SlackOAuth2Config implements SlackConfig {
 
     public Boolean isAuthorized() {
         return accessToken != null;
+    }
+
+    @Override
+    public void setMuleContext(MuleContext muleContext) {
+        this.muleContext = muleContext;
     }
 }

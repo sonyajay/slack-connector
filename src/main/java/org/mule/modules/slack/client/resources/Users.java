@@ -26,18 +26,17 @@ public class Users {
     }
 
     public org.mule.modules.slack.client.model.User getUserInfo(String id) {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.USER_INFO).queryParam("user", id);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.USER_INFO)
+                .withParam("user", id)
+                .build().execute();
 
         JSONObject slackResponse = (JSONObject) new JSONObject(output).get("user");
         return gson.fromJson(slackResponse.toString(), org.mule.modules.slack.client.model.User.class);
     }
 
     public List<org.mule.modules.slack.client.model.User> getUserList() {
-        WebTarget webTarget = slackRequester.getWebTarget().path(Operations.USER_LIST);
-
-        String output = SlackRequester.sendRequest(webTarget);
+        String output = slackRequester.newRequest(Operations.USER_LIST)
+                .build().execute();
 
         JSONArray slackResponse = (JSONArray) new JSONObject(output).get("members");
         return gson.fromJson(slackResponse.toString(), usersListType);
