@@ -5,6 +5,8 @@
 
 package org.mule.modules.slack.client;
 
+import static java.lang.String.format;
+
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -13,17 +15,14 @@ import org.mule.modules.slack.client.rtm.EventHandler;
 import org.mule.modules.slack.client.rtm.SlackMessageHandler;
 
 import javax.websocket.DeploymentException;
-import javax.ws.rs.client.WebTarget;
+
 import java.io.IOException;
 
 public class SlackClient {
 
     private static final Logger logger = Logger.getLogger(SlackClient.class);
     private SlackRequester slackRequester;
-    private SlackMessageHandler slackMessageHandler;
     private String selfId;
-    private String token;
-    private Gson gson;
     public final Chat chat;
     public final Users users;
     public final UserGroups usergroups;
@@ -40,8 +39,7 @@ public class SlackClient {
     public SlackClient(String token, RequestBuilderFactory requestBuilderFactory) {
         slackRequester = new SlackRequester(token, requestBuilderFactory);
 
-        this.token = token;
-        gson = new Gson();
+        Gson gson = new Gson();
         usergroups = new UserGroups(slackRequester, gson);
         channels = new Channels(slackRequester, gson);
         users = new Users(slackRequester, gson);
@@ -56,35 +54,26 @@ public class SlackClient {
     // RTM
     // ******************
 
-    public String getWebSockerURI() {
+    private String getWebSockerURI() {
         String output = slackRequester.newRequest(Operations.RTM_START).build().execute();
         selfId = new JSONObject(output).getJSONObject("self").getString("id");
         return new JSONObject(output).getString("url");
     }
 
-    public void startRealTimeCommunication(EventHandler messageHandler) throws DeploymentException, InterruptedException, IOException {
-        slackMessageHandler = new SlackMessageHandler(this.getWebSockerURI());
-        slackMessageHandler.messageHandler = messageHandler;
+    public void startRealTimeCommunication(EventHandler messageHandler, int reconnectionFrequency) throws DeploymentException, InterruptedException, IOException {
+        SlackMessageHandler slackMessageHandler = new SlackMessageHandler(this.getWebSockerURI(), messageHandler);
         while (true) {
             try {
                 slackMessageHandler.connect();
+            } catch (InterruptedException e){
+                logger.warn("The event listener has been interrupted and stopped definitely");
             } catch (Exception e) {
                 logger.error("Error Cause: ", e);
-                logger.warn("Retrying RTM Communication in 20 Seconds");
-                Thread.sleep(20000);
+                logger.warn(format("Retrying RTM Communication in %s Seconds", reconnectionFrequency / 1000));
+                Thread.sleep(reconnectionFrequency);
                 logger.warn("Starting RTM Communication");
-                slackMessageHandler = new SlackMessageHandler(this.getWebSockerURI());
-                slackMessageHandler.messageHandler = messageHandler;
+                slackMessageHandler = new SlackMessageHandler(this.getWebSockerURI(), messageHandler);
             }
         }
     }
-
-    public SlackMessageHandler getSlackMessageHandler() {
-        return slackMessageHandler;
-    }
-
-    private String getURL(String operation) {
-        return "https://slack.com/api/" + operation + "?token=" + token;
-    }
-
 }

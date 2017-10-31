@@ -20,10 +20,11 @@ public class SlackMessageHandler implements MessageHandler.Whole<String> {
     private volatile long lastPingAck = 0;
     private boolean reconnectOnDisconnection = true;
     private long messageId = 0;
-    public EventHandler messageHandler;
+    private final EventHandler messageHandler;
 
-    public SlackMessageHandler(String webSocketUrl) {
+    public SlackMessageHandler(String webSocketUrl, EventHandler messageHandler) {
         this.webSocketUrl = webSocketUrl;
+        this.messageHandler = messageHandler;
     }
 
     public void connect() throws IOException, DeploymentException, InterruptedException {

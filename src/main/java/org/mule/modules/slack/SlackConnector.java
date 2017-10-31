@@ -935,7 +935,8 @@ public class SlackConnector { //NOSONAR
             @Placement(group = "Events to accept") @Default("false") Boolean filePublic,
             @Placement(group = "Events to accept") @Default("false") Boolean allEvents,
             @Placement(group = "Custom Filter", tab = "Advanced") @Summary("You can refer an external class to work as a custom filter. (This class must implement 'org.mule.modules.slack.client.rtm.filter.EventFilter')") @Optional String filterClassName,
-            @Placement(group = "Custom Notifier", tab = "Advanced") @Summary("You can refer an external class to work as a custom notifier. (This class must implement 'org.mule.modules.slack.client.rtm.filter.EventNotifier')") @Optional String notifierClassName)
+            @Placement(group = "Custom Notifier", tab = "Advanced") @Summary("You can refer an external class to work as a custom notifier. (This class must implement 'org.mule.modules.slack.client.rtm.filter.EventNotifier')") @Optional String notifierClassName,
+            @Placement(group = "Reconnection", tab = "Advanced") @Default("10000") int reconnectionFrequency)
             throws IOException, InterruptedException, DeploymentException { //NOSONAR
 
         if (getSlackConfig() instanceof SlackOAuth2Config) {
@@ -987,7 +988,7 @@ public class SlackConnector { //NOSONAR
             eventFilterList.add(new SelfEventsFilter(slack().auth.getSelfId()));
         }
 
-        slack().startRealTimeCommunication(new ConfigurableHandler(sourceCallback, observerList, eventFilterList));
+        slack().startRealTimeCommunication(new ConfigurableHandler(sourceCallback, observerList, eventFilterList), reconnectionFrequency);
     }
 
     private EventFilter getFilterInstance(String className) { //NOSONAR
