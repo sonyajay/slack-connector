@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.modules</groupId>
     <artifactId>slack-connector</artifactId>
-    <version>3.1.0</version>
+    <version>3.1.1-SNAPSHOT</version>
     <packaging>mule-module</packaging>
     <name>Mule Slack Anypoint Connector</name>
 
@@ -214,7 +214,7 @@
         <connection>scm:git:git://github.com:estebanwasinger/slack-connector.git</connection>
         <developerConnection>scm:git:git@github.com:estebanwasinger/slack-connector.git</developerConnection>
         <url>https://github.com/estebanwasinger/slack-connector</url>
-      <tag>slack-connector-3.1.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
 </project>
