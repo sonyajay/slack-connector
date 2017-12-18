@@ -75,7 +75,7 @@ ${consumeSecret}" doc:name="Slack: OAuth2 Configuration">
   <slack:authorize config-ref="Slack__OAuth2_Configuration" doc:name="Slack"/>
 </flow>
 ```
-. Then in a browser enter to http://localhost:8081/authorize and authorize your user.
+. Then in a browser enter to http://localhost:8081/test and authorize your user.
 
 === See Also
 
