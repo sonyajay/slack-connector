@@ -6,6 +6,7 @@ import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICAT
 import org.mule.extension.slack.internal.connection.SlackConnection;
 import org.mule.extension.slack.internal.metadata.IMListOutputResolver;
 import org.mule.extension.slack.internal.metadata.OpenIMOutputResolver;
+import org.mule.runtime.extension.api.annotation.Alias;
 import org.mule.runtime.extension.api.annotation.metadata.MetadataKeyId;
 import org.mule.runtime.extension.api.annotation.metadata.OutputResolver;
 import org.mule.runtime.extension.api.annotation.param.Connection;
@@ -18,6 +19,15 @@ import java.io.InputStream;
 
 public class IMOperations extends SlackOperations {
 
+    /**
+     * This operation returns a list of all im channels that the user has.
+     *
+     * @param slackConnection The connection
+     * @param cursor
+     * @param limit           The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of
+     *                        the users list hasn't been reached.
+     * @param callback
+     */
     @OutputResolver(output = IMListOutputResolver.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("IM - List")
@@ -31,9 +41,19 @@ public class IMOperations extends SlackOperations {
                 .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.ims]", "#[payload.response_metadata]", EXECUTION, callback));
     }
 
+    /**
+     * This operation opens a direct message channel with another member of your Slack team.
+     *
+     * @param slackConnection
+     * @param user            User to open a direct message channel with.
+     * @param includeLocale   Set this to true to receive the locale for this im. Defaults to false
+     * @param returnIm        Boolean, indicates you want the full IM channel definition in the response.
+     * @param callback
+     */
     @MediaType(APPLICATION_JSON)
     @OutputResolver(output = OpenIMOutputResolver.class, attributes = OpenIMOutputResolver.class)
     @DisplayName("IM - Open")
+    @Alias("open-im")
     public void openIM(@Connection SlackConnection slackConnection,
                        String user,
                        @Optional(defaultValue = "FALSE") boolean includeLocale,

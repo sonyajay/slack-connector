@@ -16,7 +16,7 @@ public class UsersValueProvider extends BaseValueProvider {
         return completionCallback -> {
             UsersOperations usersOperations = new UsersOperations();
             usersOperations.setExpressionManager(expressionManager);
-            usersOperations.listUsers(slackConnection, null, false, 0, false, completionCallback);
+            usersOperations.listUsers(slackConnection, false, 0, false, null, completionCallback);
         };
     }
 }

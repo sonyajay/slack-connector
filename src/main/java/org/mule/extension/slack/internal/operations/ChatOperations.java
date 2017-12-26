@@ -20,6 +20,7 @@ import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.ParameterGroup;
 import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
+import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.values.OfValues;
 import org.mule.runtime.extension.api.runtime.process.CompletionCallback;
 
@@ -33,9 +34,9 @@ public class ChatOperations extends SlackOperations {
      * @param slackConnection      The connection
      * @param channel              Channel, private group, or IM channel to send message to. Can be an encoded ID, or
      *                             a name.
-     * @param message              Text of the message to send. This field is usually required, unless you're providing
-     *                             only attachments instead.
+     * @param message              New text for the message. It's not required when presenting attachments.
      * @param attachments          A JSON-based array of structured attachments, presented as a URL-encoded string.
+     *                             This field is required when not presenting text.
      * @param messageConfiguration Group of parameter
      * @param callback             Non-blocking callback
      */
@@ -54,6 +55,24 @@ public class ChatOperations extends SlackOperations {
                 .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.message]", "#[payload - 'message' - 'ok']", PUBLISHING, callback));
     }
 
+    /**
+     * This operation updates a message in a channel.
+     * </p>
+     * Ephemeral messages created by chat.postEphemeral or otherwise cannot be updated with this method.
+     *
+     * @param slackConnection The connection
+     * @param channel         Channel containing the message to be updated.
+     * @param message         New text for the message. It's not required when presenting attachments.
+     * @param attachments     A JSON-based array of structured attachments, presented as a URL-encoded string. This
+     *                        field is required when not presenting text.
+     * @param timestamp       Timestamp of the message to be updated.
+     * @param asUser          Pass true to update the message as the authed user. Bot users in this context are
+     *                        considered authed users.
+     * @param linkNames       Find and link channel names and usernames. Defaults to none. This parameter should be used
+     *                        in conjunction with parse. To set link_names to TRUE, specify a parse mode of FULL.
+     * @param parse           Change how messages are treated. See: https://api.slack.com/methods/chat.update#formatting
+     * @param callback
+     */
     @Throws(PostMessageErrorProvider.class)
     @OutputResolver(output = PostMessageOutputResolver.class, attributes = PostMessageAttributesResolver.class)
     @MediaType(APPLICATION_JSON)
@@ -62,7 +81,7 @@ public class ChatOperations extends SlackOperations {
                        @OfValues(ChannelsKeyResolver.class) String channel,
                        @Optional @Content(primary = true) String message,
                        @Content @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream attachments,
-                       String timestamp,
+                       @Example("1405894322.002768") String timestamp,
                        @Optional(defaultValue = "false") boolean asUser,
                        @Optional(defaultValue = "false") boolean linkNames,
                        @Optional(defaultValue = "NONE") ParsingMode parse,

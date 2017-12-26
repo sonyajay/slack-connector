@@ -54,6 +54,16 @@ public class ChannelOperations extends SlackOperations {
                 .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channels]", CHANNEL_LISTING, callback));
     }
 
+    /**
+     * Returns information about a team channel.
+     * </p>
+     * To retrieve information on a private channel, use group-info operation.
+     *
+     * @param slackConnection Connection
+     * @param channel         Channel to get info on
+     * @param includeLocale   Set this to true to receive the locale for this channel. Defaults to false
+     * @param callback
+     */
     @OutputResolver(output = ChannelInfoOutputResolver.class)
     @MediaType(MediaType.APPLICATION_JSON)
     @DisplayName("Channels - Info")
@@ -66,36 +76,65 @@ public class ChannelOperations extends SlackOperations {
                 .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", CHANNEL_LISTING, callback));
     }
 
+    /**
+     * This operation is used to change the topic of a channel. The calling user must be a member of the channel.
+     *
+     * @param slackConnection The connection
+     * @param channel         Channel to set the topic of
+     * @param topic           The new topic
+     * @param callback
+     */
     @MediaType(MediaType.APPLICATION_JSON)
     @DisplayName("Channels - Set Topic")
     @OutputResolver(output = StringOutputResolver.class)
     public void setChannelTopic(@Connection SlackConnection slackConnection,
                                 @OfValues(ChannelsValueProvider.class) @Example("C1234567890") @Optional String channel,
-                                String topic,
+                                @Example("Channel to talk about the Application Network")  String topic,
                                 CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .setTopic(channel, topic)
                 .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.topic]", CHANNEL_LISTING, callback));
     }
 
+    /**
+     * This operation is used to change the purpose of a channel. The calling user must be a member of the channel.
+     *
+     * @param slackConnection The connection
+     * @param channel         Channel to set the purpose of
+     * @param purpose         The new purpose
+     * @param callback
+     */
     @MediaType(MediaType.APPLICATION_JSON)
     @DisplayName("Channels - Set Purpose")
     @OutputResolver(output = StringOutputResolver.class)
     public void setChannelPurpose(@Connection SlackConnection slackConnection,
                                   @OfValues(ChannelsValueProvider.class) @Example("C1234567890") @Optional String channel,
-                                  String purpose,
+                                  @Example("Channel to talk about the Application Network") String purpose,
                                   CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .setPurpose(channel, purpose)
                 .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.purpose]", CHANNEL_LISTING, callback));
     }
 
+    /**
+     * This method renames a team channel.
+     * </p>
+     * The only people who can rename a channel are Team Admins, or the person that originally created the channel.
+     * Others will receive a "not_authorized" error.
+     *
+     * @param slackConnection The Connection
+     * @param channel         Channel to rename
+     * @param name            New name for channel.
+     * @param validate        Whether to return errors on invalid channel name instead of modifying it to meet the
+     *                        specified criteria.
+     * @param callback
+     */
     @OutputResolver(output = ChannelInfoOutputResolver.class)
     @MediaType(MediaType.APPLICATION_JSON)
     @DisplayName("Channels - Rename")
     public void renameChannel(@Connection SlackConnection slackConnection,
                               @OfValues(ChannelsValueProvider.class) @Example("C1234567890") @Optional String channel,
-                              String name,
+                              @Example("mule-engineers-channel") String name,
                               @Optional(defaultValue = "false") boolean validate,
                               CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
@@ -103,6 +142,14 @@ public class ChannelOperations extends SlackOperations {
                 .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", CHANNEL_LISTING, callback));
     }
 
+    /**
+     * This method is used to invite a user to a channel. The calling user must be a member of the channel.
+     *
+     * @param slackConnection The Connection
+     * @param channel         Channel to invite user to.
+     * @param user            User to invite to channel.
+     * @param callback
+     */
     @OutputResolver(output = ChannelInfoOutputResolver.class)
     @MediaType(MediaType.APPLICATION_JSON)
     @DisplayName("Channels - Invite")
