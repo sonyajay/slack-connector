@@ -1,0 +1,146 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "$id": "http://example.com/example.json",
+  "properties": {
+    "id": {
+      "type": "string",
+      "$id": "/properties/id"
+    },
+    "team_id": {
+      "type": "string",
+      "$id": "/properties/team_id"
+    },
+    "name": {
+      "type": "string",
+      "$id": "/properties/name"
+    },
+    "deleted": {
+      "type": "boolean",
+      "$id": "/properties/deleted"
+    },
+    "color": {
+      "type": "string",
+      "$id": "/properties/color"
+    },
+    "real_name": {
+      "type": "string",
+      "$id": "/properties/real_name"
+    },
+    "tz": {
+      "type": "string",
+      "$id": "/properties/tz"
+    },
+    "tz_label": {
+      "type": "string",
+      "$id": "/properties/tz_label"
+    },
+    "tz_offset": {
+      "type": "integer",
+      "$id": "/properties/tz_offset"
+    },
+    "profile": {
+      "type": "object",
+      "$id": "/properties/profile",
+      "properties": {
+        "avatar_hash": {
+          "type": "string",
+          "$id": "/properties/profile/properties/avatar_hash"
+        },
+        "status_text": {
+          "type": "string",
+          "$id": "/properties/profile/properties/status_text"
+        },
+        "status_emoji": {
+          "type": "string",
+          "$id": "/properties/profile/properties/status_emoji"
+        },
+        "real_name": {
+          "type": "string",
+          "$id": "/properties/profile/properties/real_name"
+        },
+        "display_name": {
+          "type": "string",
+          "$id": "/properties/profile/properties/display_name"
+        },
+        "real_name_normalized": {
+          "type": "string",
+          "$id": "/properties/profile/properties/real_name_normalized"
+        },
+        "display_name_normalized": {
+          "type": "string",
+          "$id": "/properties/profile/properties/display_name_normalized"
+        },
+        "email": {
+          "type": "string",
+          "$id": "/properties/profile/properties/email"
+        },
+        "image_24": {
+          "type": "string",
+          "$id": "/properties/profile/properties/image_24"
+        },
+        "image_32": {
+          "type": "string",
+          "$id": "/properties/profile/properties/image_32"
+        },
+        "image_48": {
+          "type": "string",
+          "$id": "/properties/profile/properties/image_48"
+        },
+        "image_72": {
+          "type": "string",
+          "$id": "/properties/profile/properties/image_72"
+        },
+        "image_192": {
+          "type": "string",
+          "$id": "/properties/profile/properties/image_192"
+        },
+        "image_512": {
+          "type": "string",
+          "$id": "/properties/profile/properties/image_512"
+        },
+        "team": {
+          "type": "string",
+          "$id": "/properties/profile/properties/team"
+        }
+      }
+    },
+    "is_admin": {
+      "type": "boolean",
+      "$id": "/properties/is_admin"
+    },
+    "is_owner": {
+      "type": "boolean",
+      "$id": "/properties/is_owner"
+    },
+    "is_primary_owner": {
+      "type": "boolean",
+      "$id": "/properties/is_primary_owner"
+    },
+    "is_restricted": {
+      "type": "boolean",
+      "$id": "/properties/is_restricted"
+    },
+    "is_ultra_restricted": {
+      "type": "boolean",
+      "$id": "/properties/is_ultra_restricted"
+    },
+    "is_bot": {
+      "type": "boolean",
+      "$id": "/properties/is_bot"
+    },
+    "updated": {
+      "type": "integer",
+      "$id": "/properties/updated"
+    },
+    "is_app_user": {
+      "type": "boolean",
+      "$id": "/properties/is_app_user"
+    },
+    "has_2fa": {
+      "type": "boolean",
+      "$id": "/properties/has_2fa"
+    }
+  }
+}

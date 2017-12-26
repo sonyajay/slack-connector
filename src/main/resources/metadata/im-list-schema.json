@@ -1,0 +1,44 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://example.com/example.json",
+  "type": "array",
+  "items": {
+    "$id": "http://example.com/example.json/items",
+    "type": "object",
+    "properties": {
+      "id": {
+        "$id": "http://example.com/example.json/items/properties/id",
+        "type": "string"
+      },
+      "created": {
+        "$id": "http://example.com/example.json/items/properties/created",
+        "type": "integer"
+      },
+      "is_im": {
+        "$id": "http://example.com/example.json/items/properties/is_im",
+        "type": "boolean"
+      },
+      "is_org_shared": {
+        "$id": "http://example.com/example.json/items/properties/is_org_shared",
+        "type": "boolean"
+      },
+      "user": {
+        "$id": "http://example.com/example.json/items/properties/user",
+        "type": "string"
+      },
+      "is_user_deleted": {
+        "$id": "http://example.com/example.json/items/properties/is_user_deleted",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id",
+      "created",
+      "is_im",
+      "is_org_shared",
+      "user",
+      "is_user_deleted"
+    ]
+  }
+}

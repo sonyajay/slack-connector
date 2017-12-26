@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:slack="http://www.mulesoft.org/schema/mule/slack"
+
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+               http://www.mulesoft.org/schema/mule/slack http://www.mulesoft.org/schema/mule/slack/current/mule-slack.xsd">
+
+    <configuration-properties file="automation-credentials.properties"/>
+
+    <slack:config name="slack-config">
+        <slack:token-connection token="${slack.token}"/>
+    </slack:config>
+
+    <flow name="uploadFile">
+        <slack:upload-file config-ref="slack-config" fileName="algo.json">
+            <slack:content>
+                #[vars.content]
+            </slack:content>
+            <slack:channels>
+                #[payload]
+            </slack:channels>
+        </slack:upload-file>
+        <logger message="#[output application/json --- payload]" level="ERROR"/>
+        <set-payload value="#[output application/java --- payload]"/>
+    </flow>
+
+</mule>

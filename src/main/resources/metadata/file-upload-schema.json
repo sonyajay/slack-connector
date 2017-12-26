@@ -1,0 +1,440 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$id": "/properties/id",
+      "type": "string",
+      "title": "The Id Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "F8K03AYFP"
+      ]
+    },
+    "created": {
+      "$id": "/properties/created",
+      "type": "integer",
+      "title": "The Created Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        1514043252
+      ]
+    },
+    "timestamp": {
+      "$id": "/properties/timestamp",
+      "type": "integer",
+      "title": "The Timestamp Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        1514043252
+      ]
+    },
+    "name": {
+      "$id": "/properties/name",
+      "type": "string",
+      "title": "The Name Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "algo.json"
+      ]
+    },
+    "title": {
+      "$id": "/properties/title",
+      "type": "string",
+      "title": "The Title Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "algo"
+      ]
+    },
+    "mimetype": {
+      "$id": "/properties/mimetype",
+      "type": "string",
+      "title": "The Mimetype Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "image/jpeg"
+      ]
+    },
+    "filetype": {
+      "$id": "/properties/filetype",
+      "type": "string",
+      "title": "The Filetype Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "jpg"
+      ]
+    },
+    "pretty_type": {
+      "$id": "/properties/pretty_type",
+      "type": "string",
+      "title": "The Pretty_type Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "JPEG"
+      ]
+    },
+    "user": {
+      "$id": "/properties/user",
+      "type": "string",
+      "title": "The User Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "U78MV2NDS"
+      ]
+    },
+    "editable": {
+      "$id": "/properties/editable",
+      "type": "boolean",
+      "title": "The Editable Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "size": {
+      "$id": "/properties/size",
+      "type": "integer",
+      "title": "The Size Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        73066
+      ]
+    },
+    "mode": {
+      "$id": "/properties/mode",
+      "type": "string",
+      "title": "The Mode Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "hosted"
+      ]
+    },
+    "is_external": {
+      "$id": "/properties/is_external",
+      "type": "boolean",
+      "title": "The Is_external Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "external_type": {
+      "$id": "/properties/external_type",
+      "type": "string",
+      "title": "The External_type Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        ""
+      ]
+    },
+    "is_public": {
+      "$id": "/properties/is_public",
+      "type": "boolean",
+      "title": "The Is_public Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        true
+      ]
+    },
+    "public_url_shared": {
+      "$id": "/properties/public_url_shared",
+      "type": "boolean",
+      "title": "The Public_url_shared Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "display_as_bot": {
+      "$id": "/properties/display_as_bot",
+      "type": "boolean",
+      "title": "The Display_as_bot Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "username": {
+      "$id": "/properties/username",
+      "type": "string",
+      "title": "The Username Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        ""
+      ]
+    },
+    "url_private": {
+      "$id": "/properties/url_private",
+      "type": "string",
+      "title": "The Url_private Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://files.slack.com/files-pri/T03NE28RJ-F8K03AYFP/algo.json"
+      ]
+    },
+    "url_private_download": {
+      "$id": "/properties/url_private_download",
+      "type": "string",
+      "title": "The Url_private_download Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://files.slack.com/files-pri/T03NE28RJ-F8K03AYFP/download/algo.json"
+      ]
+    },
+    "thumb_64": {
+      "$id": "/properties/thumb_64",
+      "type": "string",
+      "title": "The Thumb_64 Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://files.slack.com/files-tmb/T03NE28RJ-F8K03AYFP-69b1fc4aac/algo_64.jpg"
+      ]
+    },
+    "thumb_80": {
+      "$id": "/properties/thumb_80",
+      "type": "string",
+      "title": "The Thumb_80 Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://files.slack.com/files-tmb/T03NE28RJ-F8K03AYFP-69b1fc4aac/algo_80.jpg"
+      ]
+    },
+    "thumb_360": {
+      "$id": "/properties/thumb_360",
+      "type": "string",
+      "title": "The Thumb_360 Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://files.slack.com/files-tmb/T03NE28RJ-F8K03AYFP-69b1fc4aac/algo_360.jpg"
+      ]
+    },
+    "thumb_360_w": {
+      "$id": "/properties/thumb_360_w",
+      "type": "integer",
+      "title": "The Thumb_360_w Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        360
+      ]
+    },
+    "thumb_360_h": {
+      "$id": "/properties/thumb_360_h",
+      "type": "integer",
+      "title": "The Thumb_360_h Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        360
+      ]
+    },
+    "thumb_480": {
+      "$id": "/properties/thumb_480",
+      "type": "string",
+      "title": "The Thumb_480 Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://files.slack.com/files-tmb/T03NE28RJ-F8K03AYFP-69b1fc4aac/algo_480.jpg"
+      ]
+    },
+    "thumb_480_w": {
+      "$id": "/properties/thumb_480_w",
+      "type": "integer",
+      "title": "The Thumb_480_w Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        480
+      ]
+    },
+    "thumb_480_h": {
+      "$id": "/properties/thumb_480_h",
+      "type": "integer",
+      "title": "The Thumb_480_h Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        480
+      ]
+    },
+    "thumb_160": {
+      "$id": "/properties/thumb_160",
+      "type": "string",
+      "title": "The Thumb_160 Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://files.slack.com/files-tmb/T03NE28RJ-F8K03AYFP-69b1fc4aac/algo_160.jpg"
+      ]
+    },
+    "image_exif_rotation": {
+      "$id": "/properties/image_exif_rotation",
+      "type": "integer",
+      "title": "The Image_exif_rotation Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        1
+      ]
+    },
+    "original_w": {
+      "$id": "/properties/original_w",
+      "type": "integer",
+      "title": "The Original_w Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        700
+      ]
+    },
+    "original_h": {
+      "$id": "/properties/original_h",
+      "type": "integer",
+      "title": "The Original_h Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        700
+      ]
+    },
+    "permalink": {
+      "$id": "/properties/permalink",
+      "type": "string",
+      "title": "The Permalink Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://slackconnector.slack.com/files/U78MV2NDS/F8K03AYFP/algo.json"
+      ]
+    },
+    "permalink_public": {
+      "$id": "/properties/permalink_public",
+      "type": "string",
+      "title": "The Permalink_public Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://slack-files.com/T03NE28RJ-F8K03AYFP-664ae32ace"
+      ]
+    },
+    "channels": {
+      "$id": "/properties/channels",
+      "type": "array",
+      "items": {
+        "$id": "/properties/channels/items",
+        "type": "string",
+        "title": "The 0 Schema.",
+        "description": "An explanation about the purpose of this instance.",
+        "default": "",
+        "examples": [
+          "C03NE28RY"
+        ]
+      }
+    },
+    "groups": {
+      "$id": "/properties/groups",
+      "type": "array",
+      "items": {
+        "$id": "/properties/groups/items",
+        "type": "string",
+        "title": "The 0 Schema.",
+        "description": "An explanation about the purpose of this instance.",
+        "default": "",
+        "examples": [
+          "C03NE28RY"
+        ]
+      }
+    },
+    "ims": {
+      "$id": "/properties/ims",
+      "type": "array",
+      "items": {
+        "$id": "/properties/ims/items",
+        "type": "string",
+        "title": "The 0 Schema.",
+        "description": "An explanation about the purpose of this instance.",
+        "default": "",
+        "examples": [
+          "C03NE28RY"
+        ]
+      }
+    },
+    "comments_count": {
+      "$id": "/properties/comments_count",
+      "type": "integer",
+      "title": "The Comments_count Schema.",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        0
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "created",
+    "timestamp",
+    "name",
+    "title",
+    "mimetype",
+    "filetype",
+    "pretty_type",
+    "user",
+    "editable",
+    "size",
+    "mode",
+    "is_external",
+    "external_type",
+    "is_public",
+    "public_url_shared",
+    "display_as_bot",
+    "username",
+    "url_private",
+    "url_private_download",
+    "thumb_64",
+    "thumb_80",
+    "thumb_360",
+    "thumb_360_w",
+    "thumb_360_h",
+    "thumb_480",
+    "thumb_480_w",
+    "thumb_480_h",
+    "thumb_160",
+    "image_exif_rotation",
+    "original_w",
+    "original_h",
+    "permalink",
+    "permalink_public",
+    "channels",
+    "groups",
+    "ims",
+    "comments_count"
+  ]
+}

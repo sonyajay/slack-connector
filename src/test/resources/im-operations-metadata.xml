@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:slack="http://www.mulesoft.org/schema/mule/slack"
+
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+               http://www.mulesoft.org/schema/mule/slack http://www.mulesoft.org/schema/mule/slack/current/mule-slack.xsd">
+
+    <configuration-properties file="automation-credentials.properties"/>
+
+    <slack:config name="slack-config">
+        <slack:token-connection token="${slack.token}"/>
+    </slack:config>
+
+    <flow name="openIm">
+        <slack:open-im config-ref="slack-config"/>
+    </flow>
+
+    <flow name="openImWithReturnIm">
+        <slack:open-im returnIm="true" config-ref="slack-config"/>
+    </flow>
+</mule>

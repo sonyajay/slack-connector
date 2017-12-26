@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "definitions": {},
+  "id": "http://example.com/example.json",
+  "properties": {
+    "attachments": {
+      "id": "/properties/attachments",
+      "items": {
+        "id": "/properties/attachments/items",
+        "properties": {
+          "actions": {
+            "id": "/properties/attachments/items/properties/actions",
+            "items": {
+              "id": "/properties/attachments/items/properties/actions/items",
+              "properties": {
+                "id": {
+                  "id": "/properties/attachments/items/properties/actions/items/properties/id",
+                  "type": "string"
+                },
+                "name": {
+                  "id": "/properties/attachments/items/properties/actions/items/properties/name",
+                  "type": "string"
+                },
+                "style": {
+                  "id": "/properties/attachments/items/properties/actions/items/properties/style",
+                  "type": "string"
+                },
+                "text": {
+                  "id": "/properties/attachments/items/properties/actions/items/properties/text",
+                  "type": "string"
+                },
+                "type": {
+                  "id": "/properties/attachments/items/properties/actions/items/properties/type",
+                  "type": "string"
+                },
+                "value": {
+                  "id": "/properties/attachments/items/properties/actions/items/properties/value",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "fallback": {
+            "id": "/properties/attachments/items/properties/fallback",
+            "type": "string"
+          },
+          "fields": {
+            "id": "/properties/attachments/items/properties/fields",
+            "items": {
+              "id": "/properties/attachments/items/properties/fields/items",
+              "properties": {
+                "short": {
+                  "id": "/properties/attachments/items/properties/fields/items/properties/short",
+                  "type": "boolean"
+                },
+                "title": {
+                  "id": "/properties/attachments/items/properties/fields/items/properties/title",
+                  "type": "string"
+                },
+                "value": {
+                  "id": "/properties/attachments/items/properties/fields/items/properties/value",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "id": {
+            "id": "/properties/attachments/items/properties/id",
+            "type": "integer"
+          },
+          "text": {
+            "id": "/properties/attachments/items/properties/text",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "bot_id": {
+      "id": "/properties/bot_id",
+      "type": "string"
+    },
+    "subtype": {
+      "id": "/properties/subtype",
+      "type": "string"
+    },
+    "text": {
+      "id": "/properties/text",
+      "type": "string"
+    },
+    "user": {
+      "id": "/properties/user",
+      "type": "string"
+    },
+    "ts": {
+      "id": "/properties/ts",
+      "type": "string"
+    },
+    "type": {
+      "id": "/properties/type",
+      "type": "string"
+    },
+    "username": {
+      "id": "/properties/username",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

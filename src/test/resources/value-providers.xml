@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:slack="http://www.mulesoft.org/schema/mule/slack"
+
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+               http://www.mulesoft.org/schema/mule/slack http://www.mulesoft.org/schema/mule/slack/current/mule-slack.xsd">
+
+    <configuration-properties file="automation-credentials.properties"/>
+
+    <slack:config name="slack-config">
+        <slack:token-connection token="${slack.token}"/>
+    </slack:config>
+
+    <flow name="channelInfo">
+        <slack:channel-info config-ref="slack-config"/>
+    </flow>
+
+    <flow name="groupInfo">
+        <slack:group-info config-ref="slack-config"/>
+    </flow>
+
+    <flow name="inviteToChannel">
+        <slack:invite-to-channel config-ref="slack-config"/>
+    </flow>
+
+    <flow name="postMessage">
+        <slack:post-message config-ref="slack-config"/>
+    </flow>
+</mule>

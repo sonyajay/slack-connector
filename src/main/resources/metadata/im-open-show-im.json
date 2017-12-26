@@ -1,0 +1,64 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$id": "/properties/id",
+      "type": "string"
+    },
+    "created": {
+      "$id": "/properties/created",
+      "type": "integer"
+    },
+    "is_im": {
+      "$id": "/properties/is_im",
+      "type": "boolean"
+    },
+    "is_org_shared": {
+      "$id": "/properties/is_org_shared",
+      "type": "boolean"
+    },
+    "user": {
+      "$id": "/properties/user",
+      "type": "string"
+    },
+    "last_read": {
+      "$id": "/properties/last_read",
+      "type": "string"
+    },
+    "latest": {
+      "$id": "/properties/latest",
+      "type": "null"
+    },
+    "unread_count": {
+      "$id": "/properties/unread_count",
+      "type": "integer"
+    },
+    "unread_count_display": {
+      "$id": "/properties/unread_count_display",
+      "type": "integer"
+    },
+    "is_open": {
+      "$id": "/properties/is_open",
+      "type": "boolean"
+    },
+    "locale": {
+      "$id": "/properties/locale",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "created",
+    "is_im",
+    "is_org_shared",
+    "user",
+    "last_read",
+    "latest",
+    "unread_count",
+    "unread_count_display",
+    "is_open"
+  ]
+}

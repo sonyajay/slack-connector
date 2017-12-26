@@ -1,0 +1,161 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$id": "/properties/id",
+      "type": "string"
+    },
+    "name": {
+      "$id": "/properties/name",
+      "type": "string"
+    },
+    "is_group": {
+      "$id": "/properties/is_group",
+      "type": "boolean"
+    },
+    "created": {
+      "$id": "/properties/created",
+      "type": "integer"
+    },
+    "creator": {
+      "$id": "/properties/creator",
+      "type": "string"
+    },
+    "is_archived": {
+      "$id": "/properties/is_archived",
+      "type": "boolean"
+    },
+    "name_normalized": {
+      "$id": "/properties/name_normalized",
+      "type": "string"
+    },
+    "is_mpim": {
+      "$id": "/properties/is_mpim",
+      "type": "boolean"
+    },
+    "is_open": {
+      "$id": "/properties/is_open",
+      "type": "boolean"
+    },
+    "last_read": {
+      "$id": "/properties/last_read",
+      "type": "string"
+    },
+    "latest": {
+      "$id": "/properties/latest",
+      "type": "object",
+      "properties": {
+        "user": {
+          "$id": "/properties/latest/properties/user",
+          "type": "string"
+        },
+        "text": {
+          "$id": "/properties/latest/properties/text",
+          "type": "string"
+        },
+        "type": {
+          "$id": "/properties/latest/properties/type",
+          "type": "string"
+        },
+        "subtype": {
+          "$id": "/properties/latest/properties/subtype",
+          "type": "string"
+        },
+        "ts": {
+          "$id": "/properties/latest/properties/ts",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user",
+        "text",
+        "type",
+        "subtype",
+        "ts"
+      ]
+    },
+    "unread_count": {
+      "$id": "/properties/unread_count",
+      "type": "integer"
+    },
+    "unread_count_display": {
+      "$id": "/properties/unread_count_display",
+      "type": "integer"
+    },
+    "members": {
+      "$id": "/properties/members",
+      "type": "array",
+      "items": {
+        "$id": "/properties/members/items",
+        "type": "string"
+      }
+    },
+    "topic": {
+      "$id": "/properties/topic",
+      "type": "object",
+      "properties": {
+        "value": {
+          "$id": "/properties/topic/properties/value",
+          "type": "string"
+        },
+        "creator": {
+          "$id": "/properties/topic/properties/creator",
+          "type": "string"
+        },
+        "last_set": {
+          "$id": "/properties/topic/properties/last_set",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value",
+        "creator",
+        "last_set"
+      ]
+    },
+    "purpose": {
+      "$id": "/properties/purpose",
+      "type": "object",
+      "properties": {
+        "value": {
+          "$id": "/properties/purpose/properties/value",
+          "type": "string"
+        },
+        "creator": {
+          "$id": "/properties/purpose/properties/creator",
+          "type": "string"
+        },
+        "last_set": {
+          "$id": "/properties/purpose/properties/last_set",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value",
+        "creator",
+        "last_set"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "is_group",
+    "created",
+    "creator",
+    "is_archived",
+    "name_normalized",
+    "is_mpim",
+    "is_open",
+    "last_read",
+    "latest",
+    "unread_count",
+    "unread_count_display",
+    "members",
+    "topic",
+    "purpose"
+  ]
+}

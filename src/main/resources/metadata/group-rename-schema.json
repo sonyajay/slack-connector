@@ -1,0 +1,107 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$id": "/properties/id",
+      "type": "string"
+    },
+    "name": {
+      "$id": "/properties/name",
+      "type": "string"
+    },
+    "is_group": {
+      "$id": "/properties/is_group",
+      "type": "boolean"
+    },
+    "created": {
+      "$id": "/properties/created",
+      "type": "integer"
+    },
+    "creator": {
+      "$id": "/properties/creator",
+      "type": "string"
+    },
+    "is_archived": {
+      "$id": "/properties/is_archived",
+      "type": "boolean"
+    },
+    "name_normalized": {
+      "$id": "/properties/name_normalized",
+      "type": "string"
+    },
+    "is_mpim": {
+      "$id": "/properties/is_mpim",
+      "type": "boolean"
+    },
+    "members": {
+      "$id": "/properties/members",
+      "type": "array",
+      "items": {
+        "$id": "/properties/members/items",
+        "type": "string"
+      }
+    },
+    "topic": {
+      "$id": "/properties/topic",
+      "type": "object",
+      "properties": {
+        "value": {
+          "$id": "/properties/topic/properties/value",
+          "type": "string"
+        },
+        "creator": {
+          "$id": "/properties/topic/properties/creator",
+          "type": "string"
+        },
+        "last_set": {
+          "$id": "/properties/topic/properties/last_set",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value",
+        "creator",
+        "last_set"
+      ]
+    },
+    "purpose": {
+      "$id": "/properties/purpose",
+      "type": "object",
+      "properties": {
+        "value": {
+          "$id": "/properties/purpose/properties/value",
+          "type": "string"
+        },
+        "creator": {
+          "$id": "/properties/purpose/properties/creator",
+          "type": "string"
+        },
+        "last_set": {
+          "$id": "/properties/purpose/properties/last_set",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value",
+        "creator",
+        "last_set"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "is_group",
+    "created",
+    "creator",
+    "is_archived",
+    "name_normalized",
+    "is_mpim",
+    "members",
+    "topic",
+    "purpose"
+  ]
+}

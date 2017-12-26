@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:slack="http://www.mulesoft.org/schema/mule/slack"
+
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+               http://www.mulesoft.org/schema/mule/slack http://www.mulesoft.org/schema/mule/slack/current/mule-slack.xsd">
+
+    <configuration-properties file="automation-credentials.properties"/>
+
+    <slack:config name="slack-config">
+        <slack:token-connection token="${slack.token}"/>
+    </slack:config>
+
+    <!--<flow name="postMessage">-->
+    <!--<slack:post-message channel="C03NC72BD" config-ref="slack-config">-->
+    <!--<slack:message>#[payload]</slack:message>-->
+    <!--</slack:post-message>-->
+    <!--<slack:post-message channel="C03NC72BD" config-ref="slack-config">-->
+    <!--<slack:message>-->
+    <!--break line-->
+    <!--3rd line-->
+    <!--</slack:message>-->
+    <!--</slack:post-message>-->
+    <!--<logger message="#[payload]" level="ERROR"/>-->
+    <!--</flow>-->
+
+    <!--<flow name="listener" initialState="stopped">-->
+    <!--<slack:message-listener config-ref="slack-config"/>-->
+    <!--<logger message="#[payload]" level="ERROR"/>-->
+    <!--</flow>-->
+
+    <!--<flow name="listChannels">-->
+    <!--<slack:list-channels config-ref="slack-config">-->
+    <!--<repeatable-in-memory-stream initialBufferSize="10" bufferSizeIncrement="5" maxBufferSize="1048760"-->
+    <!--bufferUnit="KB"/>-->
+    <!--</slack:list-channels>-->
+    <!--<logger message="#[payload]" level="ERROR"/>-->
+    <!--<logger message="#[payload map {id : $.id,name : $.name}]" level="ERROR"/>-->
+    <!--</flow>-->
+
+    <!--<flow name="listUsers">-->
+    <!--<slack:list-users config-ref="slack-config">-->
+    <!--<repeatable-in-memory-stream initialBufferSize="10" bufferSizeIncrement="5" maxBufferSize="1048760"-->
+    <!--bufferUnit="KB"/>-->
+    <!--</slack:list-users>-->
+    <!--<logger message="#[payload]" level="ERROR"/>-->
+    <!--</flow>-->
+
+    <!--<flow name="justPrintNames">-->
+    <!--<slack:list-channels config-ref="Slack_Connector_Config"/>-->
+    <!--<logger level="ERROR" message="#[payload]"/>-->
+    <!--<foreach collection="#[payload.channels]">-->
+    <!--<logger level="ERROR" message='#["The channels is called: $(payload.name)"]'/>-->
+    <!--</foreach>-->
+    <!--</flow>-->
+
+    <!--<flow name="listConversations">-->
+    <!--&lt;!&ndash;<slack:list-conversations limit="200" config-ref="slack-config"/>&ndash;&gt;-->
+    <!--<slack:list-conversations config-ref="slack-config"-->
+    <!--privateChannels="true" im="true"-->
+    <!--mpim="true" limit="500"/>-->
+    <!--<logger level="ERROR" message="#[payload]"/>-->
+    <!--<logger level="ERROR" message="#[attributes]"/>-->
+    <!--</flow>-->
+
+    <!--<flow name="lookUp">-->
+    <!--<set-payload value="#[lookup('userInfo', payload)]"/>-->
+    <!--</flow>-->
+
+    <!--<flow name="userInfo">-->
+    <!--<logger level="ERROR" message="#[payload.hi]"/>-->
+    <!--<slack:user-info config-ref="slack-config" user="U5PC9LZ5W"/>-->
+    <!--<logger level="ERROR" message="#[payload]"/>-->
+    <!--</flow>-->
+
+    <!--<flow name="channelInfo">-->
+
+    <!--</flow>-->
+</mule>

@@ -1,0 +1,150 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "array",
+  "$id": "http://example.com/example.json",
+  "items": {
+    "type": "object",
+    "$id": "http://example.com/example.json/items",
+    "properties": {
+      "id": {
+        "type": "string",
+        "$id": "http://example.com/example.json/items/properties/id"
+      },
+      "team_id": {
+        "type": "string",
+        "$id": "http://example.com/example.json/items/properties/team_id"
+      },
+      "name": {
+        "type": "string",
+        "$id": "http://example.com/example.json/items/properties/name"
+      },
+      "deleted": {
+        "type": "boolean",
+        "$id": "http://example.com/example.json/items/properties/deleted"
+      },
+      "color": {
+        "type": "string",
+        "$id": "http://example.com/example.json/items/properties/color"
+      },
+      "real_name": {
+        "type": "string",
+        "$id": "http://example.com/example.json/items/properties/real_name"
+      },
+      "tz": {
+        "type": "string",
+        "$id": "http://example.com/example.json/items/properties/tz"
+      },
+      "tz_label": {
+        "type": "string",
+        "$id": "http://example.com/example.json/items/properties/tz_label"
+      },
+      "tz_offset": {
+        "type": "integer",
+        "$id": "http://example.com/example.json/items/properties/tz_offset"
+      },
+      "profile": {
+        "type": "object",
+        "$id": "http://example.com/example.json/items/properties/profile",
+        "properties": {
+          "avatar_hash": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/avatar_hash"
+          },
+          "status_text": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/status_text"
+          },
+          "status_emoji": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/status_emoji"
+          },
+          "real_name": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/real_name"
+          },
+          "display_name": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/display_name"
+          },
+          "real_name_normalized": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/real_name_normalized"
+          },
+          "display_name_normalized": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/display_name_normalized"
+          },
+          "email": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/email"
+          },
+          "image_24": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/image_24"
+          },
+          "image_32": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/image_32"
+          },
+          "image_48": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/image_48"
+          },
+          "image_72": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/image_72"
+          },
+          "image_192": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/image_192"
+          },
+          "image_512": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/image_512"
+          },
+          "team": {
+            "type": "string",
+            "$id": "http://example.com/example.json/items/properties/profile/properties/team"
+          }
+        }
+      },
+      "is_admin": {
+        "type": "boolean",
+        "$id": "http://example.com/example.json/items/properties/is_admin"
+      },
+      "is_owner": {
+        "type": "boolean",
+        "$id": "http://example.com/example.json/items/properties/is_owner"
+      },
+      "is_primary_owner": {
+        "type": "boolean",
+        "$id": "http://example.com/example.json/items/properties/is_primary_owner"
+      },
+      "is_restricted": {
+        "type": "boolean",
+        "$id": "http://example.com/example.json/items/properties/is_restricted"
+      },
+      "is_ultra_restricted": {
+        "type": "boolean",
+        "$id": "http://example.com/example.json/items/properties/is_ultra_restricted"
+      },
+      "is_bot": {
+        "type": "boolean",
+        "$id": "http://example.com/example.json/items/properties/is_bot"
+      },
+      "updated": {
+        "type": "integer",
+        "$id": "http://example.com/example.json/items/properties/updated"
+      },
+      "is_app_user": {
+        "type": "boolean",
+        "$id": "http://example.com/example.json/items/properties/is_app_user"
+      },
+      "has_2fa": {
+        "type": "boolean",
+        "$id": "http://example.com/example.json/items/properties/has_2fa"
+      }
+    }
+  }
+}

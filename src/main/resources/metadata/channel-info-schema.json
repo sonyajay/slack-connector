@@ -1,0 +1,133 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$id": "/properties/id",
+      "type": "string"
+    },
+    "name": {
+      "$id": "/properties/name",
+      "type": "string"
+    },
+    "is_channel": {
+      "$id": "/properties/is_channel",
+      "type": "boolean"
+    },
+    "created": {
+      "$id": "/properties/created",
+      "type": "integer"
+    },
+    "is_archived": {
+      "$id": "/properties/is_archived",
+      "type": "boolean"
+    },
+    "is_general": {
+      "$id": "/properties/is_general",
+      "type": "boolean"
+    },
+    "unlinked": {
+      "$id": "/properties/unlinked",
+      "type": "integer"
+    },
+    "creator": {
+      "$id": "/properties/creator",
+      "type": "string"
+    },
+    "name_normalized": {
+      "$id": "/properties/name_normalized",
+      "type": "string"
+    },
+    "is_shared": {
+      "$id": "/properties/is_shared",
+      "type": "boolean"
+    },
+    "is_org_shared": {
+      "$id": "/properties/is_org_shared",
+      "type": "boolean"
+    },
+    "is_member": {
+      "$id": "/properties/is_member",
+      "type": "boolean"
+    },
+    "is_private": {
+      "$id": "/properties/is_private",
+      "type": "boolean"
+    },
+    "is_mpim": {
+      "$id": "/properties/is_mpim",
+      "type": "boolean"
+    },
+    "members": {
+      "$id": "/properties/members",
+      "type": "array",
+      "items": {
+        "$id": "/properties/members/items",
+        "type": "string"
+      }
+    },
+    "topic": {
+      "$id": "/properties/topic",
+      "type": "object",
+      "properties": {
+        "value": {
+          "$id": "/properties/topic/properties/value",
+          "type": "string"
+        },
+        "creator": {
+          "$id": "/properties/topic/properties/creator",
+          "type": "string"
+        },
+        "last_set": {
+          "$id": "/properties/topic/properties/last_set",
+          "type": "integer"
+        }
+      }
+    },
+    "purpose": {
+      "$id": "/properties/purpose",
+      "type": "object",
+      "properties": {
+        "value": {
+          "$id": "/properties/purpose/properties/value",
+          "type": "string"
+        },
+        "creator": {
+          "$id": "/properties/purpose/properties/creator",
+          "type": "string"
+        },
+        "last_set": {
+          "$id": "/properties/purpose/properties/last_set",
+          "type": "integer"
+        }
+      }
+    },
+    "previous_names": {
+      "$id": "/properties/previous_names",
+      "type": "array",
+      "items": {
+        "$id": "atlasbear",
+        "title": "Empty Object",
+        "description": "This accepts anything, as long as it's valid JSON."
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "is_channel",
+    "created",
+    "is_archived",
+    "is_general",
+    "unlinked",
+    "creator",
+    "name_normalized",
+    "is_shared",
+    "is_org_shared",
+    "is_member",
+    "is_private",
+    "is_mpim"
+  ]
+}

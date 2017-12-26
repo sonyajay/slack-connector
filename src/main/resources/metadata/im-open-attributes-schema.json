@@ -1,0 +1,20 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "properties": {
+    "no_op": {
+      "$id": "/properties/no_op",
+      "type": "boolean"
+    },
+    "already_open": {
+      "$id": "/properties/already_open",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "no_op",
+    "already_open"
+  ]
+}
