@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mule.tck.junit4.matcher.ValueMatcher.valueWithId;
 
 import org.mule.runtime.api.component.location.Location;
+import org.mule.runtime.api.connection.ConnectionValidationResult;
 import org.mule.runtime.api.value.ValueResult;
 
 import org.junit.Test;
@@ -43,6 +44,12 @@ public class ValueResolverTestCase extends SlackToolingTestCase {
         ValueResult values = valueProviderService.getValues(Location.builder().globalName("postMessage").addProcessorsPart().addIndexPart(0).build(), "channel");
         assertThat(values.isSuccess(), is(true));
         assertThat(values.getValues(), hasItems(valueWithId("G03R6ABL2").withDisplayName("somegroup")));
+    }
+
+    @Test
+    public void testConnection() {
+        ConnectionValidationResult result = connectivityTestingService.testConnection(Location.builder().globalName("slack-config").build());
+        System.out.println(result);
     }
 
 

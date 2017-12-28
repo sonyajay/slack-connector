@@ -75,7 +75,7 @@ public abstract class SlackOperations {
         this.expressionManager = expressionManager;
     }
 
-    class HttpResponseConsumer<P, A> implements BiConsumer<HttpResponse, Throwable> {
+    public class HttpResponseConsumer<P, A> implements BiConsumer<HttpResponse, Throwable> {
 
         private final String payloadExpression;
         private String attributesExpression;

@@ -10,6 +10,7 @@ import static org.mule.runtime.http.api.HttpConstants.Method.GET;
 import org.mule.extension.slack.internal.ConversationListingConfiguration;
 import org.mule.extension.slack.internal.ConversationTypes;
 import org.mule.extension.slack.internal.SlackRequestBuilderFactory;
+import org.mule.extension.slack.internal.connection.category.Auth;
 import org.mule.extension.slack.internal.connection.category.Channel;
 import org.mule.extension.slack.internal.connection.category.Chat;
 import org.mule.extension.slack.internal.connection.category.File;
@@ -42,6 +43,7 @@ public class SlackConnection {
     public File file;
     public User user;
     public IM im;
+    public Auth auth;
     private HttpClient httpClient;
     private String token;
     @Inject
@@ -57,6 +59,7 @@ public class SlackConnection {
         file = new File(this);
         user = new User(this);
         im = new IM(this);
+        auth = new Auth(this);
     }
 
     public static <T> void ifPresent(T value, Consumer<T> consumer) {
