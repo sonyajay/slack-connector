@@ -6,7 +6,7 @@
 
     <groupId>org.mule.connectors</groupId>
     <artifactId>mule-slack-connector</artifactId>
-    <version>4.0.0-SNAPSHOT-003</version>
+    <version>4.0.0</version>
     <properties>
         <oneVersion>1.0.0</oneVersion>
         <fourVersion>4.0.0</fourVersion>
@@ -79,35 +79,35 @@
         </dependency>
     </dependencies>
 
-    <!--<distributionManagement>-->
-    <!--<downloadUrl>http://www.mulesoft.org/display/MULE/Download</downloadUrl>-->
-    <!--<repository>-->
-    <!--<id>mule-releases</id>-->
-    <!--<name>Mule Release Repository</name>-->
-    <!--<url>https://repository-master.mulesoft.org/nexus/content/repositories/releases</url>-->
-    <!--</repository>-->
-    <!--<snapshotRepository>-->
-    <!--<id>mule-snapshots</id>-->
-    <!--<name>Mule Snapshot Repository</name>-->
-    <!--<url>https://repository-master.mulesoft.org/nexus/content/repositories/snapshots</url>-->
-    <!--<uniqueVersion>false</uniqueVersion>-->
-    <!--</snapshotRepository>-->
-    <!--</distributionManagement>-->
-
-
     <distributionManagement>
+        <downloadUrl>http://www.mulesoft.org/display/MULE/Download</downloadUrl>
         <repository>
-            <id>maven-facade-devx</id>
-            <name>Mozart Dev Environment</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/11fdb477-2bf6-4deb-b03c-2871528fbc58/maven
-            </url>
+            <id>mule-releases</id>
+            <name>Mule Release Repository</name>
+            <url>https://repository-master.mulesoft.org/nexus/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
-            <id>maven-facade-devx</id>
-            <name>Mozart Dev Environment</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/11fdb477-2bf6-4deb-b03c-2871528fbc58/maven
-            </url>
+            <id>mule-snapshots</id>
+            <name>Mule Snapshot Repository</name>
+            <url>https://repository-master.mulesoft.org/nexus/content/repositories/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
+
+
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>maven-facade-devx</id>-->
+            <!--<name>Mozart Dev Environment</name>-->
+            <!--<url>https://maven.anypoint.mulesoft.com/api/v1/organizations/11fdb477-2bf6-4deb-b03c-2871528fbc58/maven-->
+            <!--</url>-->
+        <!--</repository>-->
+        <!--<snapshotRepository>-->
+            <!--<id>maven-facade-devx</id>-->
+            <!--<name>Mozart Dev Environment</name>-->
+            <!--<url>https://maven.anypoint.mulesoft.com/api/v1/organizations/11fdb477-2bf6-4deb-b03c-2871528fbc58/maven-->
+            <!--</url>-->
+        <!--</snapshotRepository>-->
+    <!--</distributionManagement>-->
 
 </project>
