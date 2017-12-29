@@ -1,5 +1,6 @@
 package org.mule.extension.slack.internal.operations;
 
+import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
 import static org.mule.extension.slack.internal.error.SlackError.FILE_UPLOAD;
 import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICATION_JSON;
 
@@ -37,7 +38,6 @@ public class FileOperations extends SlackOperations {
      * @param fileType        A file type identifier. See: https://api.slack.com/types/file#file_types
      * @param callback
      */
-    @Throws(FileUploadErrorProvider.class)
     @OutputResolver(output = FileUploadOutputResolver.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("File - Upload")
@@ -66,6 +66,6 @@ public class FileOperations extends SlackOperations {
 //        }
 
         slackConnection.file.upload(channels, content, fileName, fileType, initialComment, title)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.file]", FILE_UPLOAD, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.file]", EXECUTION, callback));
     }
 }

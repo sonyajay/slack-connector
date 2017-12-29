@@ -1,5 +1,6 @@
 package org.mule.extension.slack.internal.operations;
 
+import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
 import static org.mule.extension.slack.internal.error.SlackError.USER_LISTING;
 import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICATION_JSON;
 
@@ -36,7 +37,6 @@ public class UsersOperations extends SlackOperations {
      *                        teams.
      * @param callback
      */
-    @Throws(UserListingErrorProvider.class)
     @OutputResolver(output = UsersListOutputResolver.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("User - List")
@@ -49,7 +49,7 @@ public class UsersOperations extends SlackOperations {
 
         slackConnection.user
                 .list(cursor, includeLocale, limit, presence)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.members]", "#[payload.response_metadata]", USER_LISTING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.members]", "#[payload.response_metadata]", EXECUTION, callback));
     }
 
     /**
@@ -60,7 +60,6 @@ public class UsersOperations extends SlackOperations {
      * @param includeLocale   Set this to true to receive the locale for this user. Defaults to false
      * @param callback
      */
-    @Throws(DescribingErrorProvider.class)
     @OutputResolver(output = UsersInfoOutputResolver.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("User - Info")
@@ -70,6 +69,6 @@ public class UsersOperations extends SlackOperations {
                          CompletionCallback<InputStream, Void> callback) {
         slackConnection.user
                 .info(user, includeLocale)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.user]", USER_LISTING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.user]", EXECUTION, callback));
     }
 }

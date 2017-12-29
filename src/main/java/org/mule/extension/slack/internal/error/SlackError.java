@@ -22,6 +22,7 @@ public enum SlackError implements ErrorTypeDefinition<SlackError> {
     FILE_UPLOAD(EXECUTION),
     NOT_AUTHED(CONNECTIVITY),
     INVALID_AUTH(CONNECTIVITY),
+    NO_PERMISSION(CONNECTIVITY),
     ACCOUNT_INACTIVE(CONNECTIVITY);
 
     private ErrorTypeDefinition parent;

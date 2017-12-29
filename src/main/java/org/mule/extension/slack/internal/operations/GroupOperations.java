@@ -1,19 +1,14 @@
 package org.mule.extension.slack.internal.operations;
 
-import static org.mule.extension.slack.internal.error.SlackError.CHANNEL_LISTING;
-import static org.mule.extension.slack.internal.error.SlackError.DESCRIBING;
 import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
 import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICATION_JSON;
 
 import org.mule.extension.slack.internal.connection.SlackConnection;
-import org.mule.extension.slack.internal.error.ChannelListErrorProvider;
-import org.mule.extension.slack.internal.error.DescribingErrorProvider;
 import org.mule.extension.slack.internal.metadata.GroupInfoOutputResolver;
 import org.mule.extension.slack.internal.metadata.ListGroupsOutputResolver;
 import org.mule.extension.slack.internal.metadata.RenameGroupOutputResolver;
 import org.mule.extension.slack.internal.metadata.StringOutputResolver;
 import org.mule.extension.slack.internal.valueprovider.GroupsValueProvider;
-import org.mule.runtime.extension.api.annotation.error.Throws;
 import org.mule.runtime.extension.api.annotation.metadata.OutputResolver;
 import org.mule.runtime.extension.api.annotation.param.Connection;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
@@ -38,7 +33,6 @@ public class GroupOperations extends SlackOperations {
      * @param excludeMembers  Exclude the members from each group
      * @param callback
      */
-    @Throws(ChannelListErrorProvider.class)
     @OutputResolver(output = ListGroupsOutputResolver.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("Groups - List")
@@ -48,7 +42,7 @@ public class GroupOperations extends SlackOperations {
                            CompletionCallback<InputStream, Void> callback) {
         slackConnection.group
                 .list(excludeArchived, excludeMembers)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.groups]", CHANNEL_LISTING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.groups]", EXECUTION, callback));
     }
 
     /**
@@ -59,7 +53,6 @@ public class GroupOperations extends SlackOperations {
      * @param includeLocal    Set this to true to receive the locale for this group. Defaults to false
      * @param callback
      */
-    @Throws(DescribingErrorProvider.class)
     @OutputResolver(output = GroupInfoOutputResolver.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("Groups - Info")
@@ -69,7 +62,7 @@ public class GroupOperations extends SlackOperations {
                           CompletionCallback<InputStream, Void> callback) {
         slackConnection.group
                 .info(channel, includeLocal)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.group]", DESCRIBING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.group]", EXECUTION, callback));
     }
 
     /**
@@ -81,7 +74,6 @@ public class GroupOperations extends SlackOperations {
      * @param validate        Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria.
      * @param callback
      */
-    @Throws(DescribingErrorProvider.class)
     @OutputResolver(output = RenameGroupOutputResolver.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("Groups - Rename")
@@ -104,7 +96,6 @@ public class GroupOperations extends SlackOperations {
      * @param purpose         The new purpose
      * @param callback
      */
-    @Throws(DescribingErrorProvider.class)
     @OutputResolver(output = StringOutputResolver.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("Groups - Set Purpose")
@@ -125,7 +116,6 @@ public class GroupOperations extends SlackOperations {
      * @param topic
      * @param callback        The new topic
      */
-    @Throws(DescribingErrorProvider.class)
     @OutputResolver(output = StringOutputResolver.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("Groups - Set Topic")

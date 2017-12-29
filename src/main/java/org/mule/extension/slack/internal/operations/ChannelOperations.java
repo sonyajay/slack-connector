@@ -1,6 +1,7 @@
 package org.mule.extension.slack.internal.operations;
 
 import static org.mule.extension.slack.internal.error.SlackError.CHANNEL_LISTING;
+import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
 
 import org.mule.extension.slack.internal.connection.SlackConnection;
 import org.mule.extension.slack.internal.error.ChannelListErrorProvider;
@@ -38,7 +39,6 @@ public class ChannelOperations extends SlackOperations {
      *                        even if the end of the users list hasn't been reached.
      * @param callback        Non-blocking callback
      */
-    @Throws(ChannelListErrorProvider.class)
     //TODO THIS CAN USE `excludeMembers` parameter to improve metadata.
     @OutputResolver(output = ListChannelsOutputResolver.class)
     @MediaType(MediaType.APPLICATION_JSON)
@@ -73,7 +73,7 @@ public class ChannelOperations extends SlackOperations {
                             CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .info(channel, includeLocale)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", CHANNEL_LISTING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", EXECUTION, callback));
     }
 
     /**
@@ -93,7 +93,7 @@ public class ChannelOperations extends SlackOperations {
                                 CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .setTopic(channel, topic)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.topic]", CHANNEL_LISTING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.topic]", EXECUTION, callback));
     }
 
     /**
@@ -113,7 +113,7 @@ public class ChannelOperations extends SlackOperations {
                                   CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .setPurpose(channel, purpose)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.purpose]", CHANNEL_LISTING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.purpose]", EXECUTION, callback));
     }
 
     /**
@@ -139,7 +139,7 @@ public class ChannelOperations extends SlackOperations {
                               CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .rename(channel, name, validate)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", CHANNEL_LISTING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", EXECUTION, callback));
     }
 
     /**
@@ -159,6 +159,6 @@ public class ChannelOperations extends SlackOperations {
                                 CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .invite(channel, user)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", CHANNEL_LISTING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", EXECUTION, callback));
     }
 }

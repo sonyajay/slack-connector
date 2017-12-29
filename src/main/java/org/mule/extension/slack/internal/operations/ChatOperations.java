@@ -1,5 +1,6 @@
 package org.mule.extension.slack.internal.operations;
 
+import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
 import static org.mule.extension.slack.internal.error.SlackError.PUBLISHING;
 import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICATION_JSON;
 
@@ -52,7 +53,7 @@ public class ChatOperations extends SlackOperations {
                             CompletionCallback<InputStream, InputStream> callback) {
         slackConnection.chat
                 .postMessage(message, channel, attachments, messageConfiguration.getUsername(), messageConfiguration)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.message]", "#[payload - 'message' - 'ok']", PUBLISHING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
     }
 
     /**
@@ -88,6 +89,6 @@ public class ChatOperations extends SlackOperations {
                        CompletionCallback<InputStream, InputStream> callback) {
         slackConnection.chat
                 .update(message, channel, attachments, timestamp, asUser, linkNames, parse)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.message]", "#[payload - 'message' - 'ok']", PUBLISHING, callback));
+                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
     }
 }
