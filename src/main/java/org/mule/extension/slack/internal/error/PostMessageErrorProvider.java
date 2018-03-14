@@ -1,5 +1,6 @@
 package org.mule.extension.slack.internal.error;
 
+import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
 import static org.mule.extension.slack.internal.error.SlackError.PUBLISHING;
 
 import org.mule.runtime.extension.api.error.ErrorTypeDefinition;
@@ -11,5 +12,6 @@ public class PostMessageErrorProvider extends BaseErrorTypeProvider {
     @Override
     public void addErrors(Set<ErrorTypeDefinition> errors) {
         errors.add(PUBLISHING);
+        errors.add(EXECUTION);
     }
 }

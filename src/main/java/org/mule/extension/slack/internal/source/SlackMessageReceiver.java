@@ -36,9 +36,9 @@ import org.json.JSONObject;
 
 @MetadataScope(outputResolver = ListenerOutputResolver.class)
 @Alias("message-listener")
-@DisplayName("RTM - Message Listener")
+@DisplayName("Message Receiver")
 @MediaType(APPLICATION_JSON)
-public class SlackMessageListener extends Source<String, Void> {
+public class SlackMessageReceiver extends Source<String, Void> {
 
     @Inject
     private SchedulerService schedulerService;

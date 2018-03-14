@@ -12,6 +12,7 @@ import org.mule.extension.slack.internal.valueprovider.ChannelsValueProvider;
 import org.mule.extension.slack.internal.valueprovider.UsersValueProvider;
 import org.mule.runtime.extension.api.annotation.error.Throws;
 import org.mule.runtime.extension.api.annotation.metadata.OutputResolver;
+import org.mule.runtime.extension.api.annotation.metadata.fixed.OutputJsonType;
 import org.mule.runtime.extension.api.annotation.param.Connection;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
@@ -64,7 +65,7 @@ public class ChannelOperations extends SlackOperations {
      * @param includeLocale   Set this to true to receive the locale for this channel. Defaults to false
      * @param callback
      */
-    @OutputResolver(output = ChannelInfoOutputResolver.class)
+    @OutputJsonType(schema = "metadata/channel-info-schema.json")
     @MediaType(MediaType.APPLICATION_JSON)
     @DisplayName("Channels - Info")
     public void channelInfo(@Connection SlackConnection slackConnection,

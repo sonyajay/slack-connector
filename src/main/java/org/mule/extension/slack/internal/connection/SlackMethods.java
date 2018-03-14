@@ -20,6 +20,7 @@ public class SlackMethods {
     public static final String CHANNELS_UNARCHIVE = "channels.unarchive";
     public static final String CHANNELS_ARCHIVE = "channels.archive";
     public static final String CONVERSATIONS_LIST = "conversations.list";
+    public static final String DIALOG_OPEN = "dialog.open";
     public static final String AUTH_TEST = "auth.test";
     public static final String CHAT_POSTMESSAGE = "chat.postMessage";
     public static final String CHAT_DELETE = "chat.delete";

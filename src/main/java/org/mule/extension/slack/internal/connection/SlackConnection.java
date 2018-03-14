@@ -13,6 +13,7 @@ import org.mule.extension.slack.internal.SlackRequestBuilderFactory;
 import org.mule.extension.slack.internal.connection.category.Auth;
 import org.mule.extension.slack.internal.connection.category.Channel;
 import org.mule.extension.slack.internal.connection.category.Chat;
+import org.mule.extension.slack.internal.connection.category.Dialog;
 import org.mule.extension.slack.internal.connection.category.File;
 import org.mule.extension.slack.internal.connection.category.Group;
 import org.mule.extension.slack.internal.connection.category.IM;
@@ -28,6 +29,7 @@ import org.mule.runtime.http.api.domain.entity.HttpEntity;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
 import org.mule.runtime.http.api.domain.message.request.HttpRequestBuilder;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
+import org.mule.runtime.http.api.tcp.TcpClientSocketProperties;
 
 import javax.inject.Inject;
 
@@ -39,6 +41,7 @@ public class SlackConnection {
     private final SlackRequestBuilderFactory requestBuilderFactory;
     public Channel channel;
     public Chat chat;
+    public Dialog dialog;
     public Group group;
     public File file;
     public User user;
@@ -60,6 +63,7 @@ public class SlackConnection {
         user = new User(this);
         im = new IM(this);
         auth = new Auth(this);
+        dialog = new Dialog(this);
     }
 
     public static <T> void ifPresent(T value, Consumer<T> consumer) {
