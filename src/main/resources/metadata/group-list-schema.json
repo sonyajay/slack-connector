@@ -1,88 +1,84 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
   "definitions": {},
-  "id": "http://example.com/example.json",
-  "items": {
-    "id": "/items",
-    "properties": {
-      "created": {
-        "id": "/items/properties/created",
-        "type": "integer"
-      },
-      "creator": {
-        "id": "/items/properties/creator",
+  "id": "Group",
+  "properties": {
+    "created": {
+      "id": "/items/properties/created",
+      "type": "integer"
+    },
+    "creator": {
+      "id": "/items/properties/creator",
+      "type": "string"
+    },
+    "id": {
+      "id": "/items/properties/id",
+      "type": "string"
+    },
+    "is_archived": {
+      "id": "/items/properties/is_archived",
+      "type": "boolean"
+    },
+    "is_group": {
+      "id": "/items/properties/is_group",
+      "type": "boolean"
+    },
+    "is_mpim": {
+      "id": "/items/properties/is_mpim",
+      "type": "boolean"
+    },
+    "members": {
+      "id": "/items/properties/members",
+      "items": {
+        "id": "/items/properties/members/items",
         "type": "string"
       },
-      "id": {
-        "id": "/items/properties/id",
-        "type": "string"
-      },
-      "is_archived": {
-        "id": "/items/properties/is_archived",
-        "type": "boolean"
-      },
-      "is_group": {
-        "id": "/items/properties/is_group",
-        "type": "boolean"
-      },
-      "is_mpim": {
-        "id": "/items/properties/is_mpim",
-        "type": "boolean"
-      },
-      "members": {
-        "id": "/items/properties/members",
-        "items": {
-          "id": "/items/properties/members/items",
+      "type": "array"
+    },
+    "name": {
+      "id": "/items/properties/name",
+      "type": "string"
+    },
+    "name_normalized": {
+      "id": "/items/properties/name_normalized",
+      "type": "string"
+    },
+    "purpose": {
+      "id": "/items/properties/purpose",
+      "properties": {
+        "creator": {
+          "id": "/items/properties/purpose/properties/creator",
           "type": "string"
         },
-        "type": "array"
-      },
-      "name": {
-        "id": "/items/properties/name",
-        "type": "string"
-      },
-      "name_normalized": {
-        "id": "/items/properties/name_normalized",
-        "type": "string"
-      },
-      "purpose": {
-        "id": "/items/properties/purpose",
-        "properties": {
-          "creator": {
-            "id": "/items/properties/purpose/properties/creator",
-            "type": "string"
-          },
-          "last_set": {
-            "id": "/items/properties/purpose/properties/last_set",
-            "type": "integer"
-          },
-          "value": {
-            "id": "/items/properties/purpose/properties/value",
-            "type": "string"
-          }
+        "last_set": {
+          "id": "/items/properties/purpose/properties/last_set",
+          "type": "integer"
         },
-        "type": "object"
+        "value": {
+          "id": "/items/properties/purpose/properties/value",
+          "type": "string"
+        }
       },
-      "topic": {
-        "id": "/items/properties/topic",
-        "properties": {
-          "creator": {
-            "id": "/items/properties/topic/properties/creator",
-            "type": "string"
-          },
-          "last_set": {
-            "id": "/items/properties/topic/properties/last_set",
-            "type": "integer"
-          },
-          "value": {
-            "id": "/items/properties/topic/properties/value",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      }
+      "type": "object"
     },
-    "type": "object"
+    "topic": {
+      "id": "/items/properties/topic",
+      "properties": {
+        "creator": {
+          "id": "/items/properties/topic/properties/creator",
+          "type": "string"
+        },
+        "last_set": {
+          "id": "/items/properties/topic/properties/last_set",
+          "type": "integer"
+        },
+        "value": {
+          "id": "/items/properties/topic/properties/value",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
   },
-  "type": "array"
+  "type": "object"
 }

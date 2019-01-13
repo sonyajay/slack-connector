@@ -1,6 +1,6 @@
 package org.mule.extension.slack.internal.source;
 
-import org.mule.extension.slack.internal.valueprovider.ChannelsValueProvider;
+import org.mule.extension.slack.internal.valueprovider.RTMChannelValueProvider;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
@@ -13,9 +13,9 @@ public class SlackMessageEventMatcher {
 
     @Parameter
     @Optional
-    @OfValues(ChannelsValueProvider.class)
+    @OfValues(RTMChannelValueProvider.class)
     @DisplayName("Only from channel")
-    String channel;
+    private String channel;
 
     @Parameter
     @Optional(defaultValue = "false")

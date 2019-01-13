@@ -10,7 +10,7 @@ public class ListChannelsOutputResolver implements OutputTypeResolver {
 
     @Override
     public MetadataType getOutputType(MetadataContext metadataContext, Object o) {
-        return getMetadataTypeFromResource("metadata/channel-list-schema.json", "Channel List");
+        return getMetadataTypeFromResource("metadata/channel-schema.json", "Channel");
     }
 
     @Override

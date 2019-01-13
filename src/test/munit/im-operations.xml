@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:slack="http://www.mulesoft.org/schema/mule/slack"
+
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+      http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+               http://www.mulesoft.org/schema/mule/slack http://www.mulesoft.org/schema/mule/slack/current/mule-slack.xsd
+               http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd">
+
+    <munit:config name="jms-listener-high-load.xml"/>
+
+    <configuration-properties file="automation-credentials.properties"/>
+
+    <slack:config name="config">
+        <slack:token-connection token="${slack.token}"/>
+    </slack:config>
+
+    <munit:test name="list-ims" >
+        <munit:execution>
+            <slack:list-ims config-ref="config"/>
+        </munit:execution>
+        <munit:validation>
+            <set-variable variableName="found" value="#[false]"/>
+            <foreach>
+                <choice>
+                    <when expression="#[payload.user == p('slack.im.user')]">
+                        <set-variable variableName="found" value="#[true]"/>
+                    </when>
+                </choice>
+            </foreach>
+            <munit-tools:assert-that expression="#[vars.found]" is="#[MunitTools::equalTo(true)]"/>
+        </munit:validation>
+   </munit:test>
+
+    <munit:test name="open-im" >
+        <munit:execution>
+            <slack:open-im config-ref="config" user="#[p('slack.im.user')]"/>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-that expression="#[payload.id]" is="#[MunitTools::equalTo(p('slack.im.channel'))]"/>
+        </munit:validation>
+    </munit:test>
+
+</mule>

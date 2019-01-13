@@ -4,6 +4,7 @@ import static java.lang.String.valueOf;
 import static org.mule.extension.slack.internal.connection.SlackMethods.API_URI;
 import static org.mule.extension.slack.internal.connection.SlackMethods.CONVERSATIONS_LIST;
 import static org.mule.extension.slack.internal.connection.SlackMethods.IMS_LIST;
+import static org.mule.extension.slack.internal.connection.SlackMethods.RTM_CONNECT;
 import static org.mule.extension.slack.internal.connection.SlackMethods.RTM_START;
 import static org.mule.runtime.http.api.HttpConstants.Method.GET;
 
@@ -114,7 +115,7 @@ public class SlackConnection {
 
         return httpClient.sendAsync(HttpRequest.builder()
                 .method(GET)
-                .uri(API_URI + RTM_START)
+                .uri(API_URI + RTM_CONNECT)
                 .queryParams(parameterMap)
                 .build(), 5000, true, null);
     }

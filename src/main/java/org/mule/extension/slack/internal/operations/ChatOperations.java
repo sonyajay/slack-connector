@@ -1,7 +1,6 @@
 package org.mule.extension.slack.internal.operations;
 
 import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
-import static org.mule.extension.slack.internal.error.SlackError.PUBLISHING;
 import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICATION_JSON;
 
 import org.mule.extension.slack.api.ParsingMode;
@@ -9,7 +8,7 @@ import org.mule.extension.slack.internal.MessageConfigurationGroup;
 import org.mule.extension.slack.internal.connection.SlackConnection;
 import org.mule.extension.slack.internal.error.PostMessageErrorProvider;
 import org.mule.extension.slack.internal.metadata.AttachmentsTypeResolver;
-import org.mule.extension.slack.internal.metadata.ChannelsKeyResolver;
+import org.mule.extension.slack.internal.valueprovider.ChannelsKeyResolver;
 import org.mule.extension.slack.internal.metadata.PostMessageAttributesResolver;
 import org.mule.extension.slack.internal.metadata.PostMessageOutputResolver;
 import org.mule.runtime.extension.api.annotation.error.Throws;
@@ -36,8 +35,7 @@ public class ChatOperations extends SlackOperations {
      * @param channel              Channel, private group, or IM channel to send message to. Can be an encoded ID, or
      *                             a name.
      * @param message              New text for the message. It's not required when presenting attachments.
-     * @param attachments          A JSON-based array of structured attachments, presented as a URL-encoded string.
-     *                             This field is required when not presenting text.
+     * @param attachments          An array of structured attachments. This field is required when not presenting text.
      * @param messageConfiguration Group of parameter
      * @param callback             Non-blocking callback
      */
@@ -53,7 +51,7 @@ public class ChatOperations extends SlackOperations {
                             CompletionCallback<InputStream, InputStream> callback) {
         slackConnection.chat
                 .postMessage(message, channel, attachments, messageConfiguration.getUsername(), messageConfiguration)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
     }
 
     /**
@@ -64,8 +62,7 @@ public class ChatOperations extends SlackOperations {
      * @param slackConnection The connection
      * @param channel         Channel containing the message to be updated.
      * @param message         New text for the message. It's not required when presenting attachments.
-     * @param attachments     A JSON-based array of structured attachments, presented as a URL-encoded string. This
-     *                        field is required when not presenting text.
+     * @param attachments     An array of structured attachments. This field is required when not presenting text.
      * @param timestamp       Timestamp of the message to be updated.
      * @param asUser          Pass true to update the message as the authed user. Bot users in this context are
      *                        considered authed users.
@@ -89,6 +86,6 @@ public class ChatOperations extends SlackOperations {
                        CompletionCallback<InputStream, InputStream> callback) {
         slackConnection.chat
                 .update(message, channel, attachments, timestamp, asUser, linkNames, parse)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
     }
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:slack="http://www.mulesoft.org/schema/mule/slack"
+
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+      http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+               http://www.mulesoft.org/schema/mule/slack http://www.mulesoft.org/schema/mule/slack/current/mule-slack.xsd
+               http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd">
+
+    <munit:config name="files-operations"/>
+
+    <configuration-properties file="automation-credentials.properties"/>
+
+    <munit:test name="uploadFile">
+        <munit:execution>
+            <set-variable variableName="fileContent" value="#[output application/json --- { key : 'val'}]"/>
+            <slack:upload-file config-ref="config" fileName="algo.json">
+                <slack:content>
+                    #[vars.fileContent]
+                </slack:content>
+                <slack:channels>
+                    #[[p('slack.files.channel')]]
+                </slack:channels>
+            </slack:upload-file>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-that expression="#[payload.name]" is="#[MunitTools::equalTo('algo.json')]"/>
+            <munit-tools:assert-that expression="#[payload.filetype]" is="#[MunitTools::equalTo('javascript')]"/>
+            <munit-tools:assert-that expression="#[payload.channels[0]]" is="#[MunitTools::equalTo(p('slack.file.channel'))]"/>
+        </munit:validation>
+    </munit:test>
+
+
+</mule>

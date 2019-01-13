@@ -24,21 +24,24 @@ import org.mule.runtime.extension.api.runtime.source.Source;
 import org.mule.runtime.extension.api.runtime.source.SourceCallback;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
 
-import javax.inject.Inject;
-import javax.websocket.DeploymentException;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @MetadataScope(outputResolver = ListenerOutputResolver.class)
 @Alias("message-listener")
-@DisplayName("Message Receiver")
+@DisplayName("On New Message")
 @MediaType(APPLICATION_JSON)
 public class SlackMessageReceiver extends Source<String, Void> {
+
+    Logger LOGGER = LoggerFactory.getLogger(SlackMessageReceiver.class);
 
     @Inject
     private SchedulerService schedulerService;
@@ -53,26 +56,36 @@ public class SlackMessageReceiver extends Source<String, Void> {
 
     @Override
     public void onStart(SourceCallback<String, Void> sourceCallback) throws MuleException {
+        LOGGER.debug("Starting Slack RTM (Real Time Communication)");
         SlackConnection slackConnection = connectionProvider.connect();
-        CompletableFuture<HttpResponse> webSockerURI1 = slackConnection
+        doStart(sourceCallback, slackConnection);
+    }
+
+    private void doStart(SourceCallback<String, Void> sourceCallback, SlackConnection slackConnection) {
+        CompletableFuture<HttpResponse> wsUri = slackConnection
                 .getWebSocketURI();
 
         List<EventNotifier> eventNotifiers = new ArrayList<>();
         eventNotifiers.add(new MessagesNotifier(messageEventMatcher));
 
-        webSockerURI1
+        wsUri
                 .whenCompleteAsync(((httpResponse, throwable) -> {
-                    String response = IOUtils.toString(httpResponse.getEntity().getContent());
-                    String url = new JSONObject(response).getString("url");
-                    SlackMessageHandler messageHandler = new SlackMessageHandler(url, new ConfigurableHandler(sourceCallback, eventNotifiers, emptyList()));
-                    this.scheduler = schedulerService.cpuLightScheduler();
-                    this.scheduler.execute(() -> {
-                        try {
-                            messageHandler.connect();
-                        } catch (IOException | DeploymentException | InterruptedException e) {
-                            sourceCallback.onConnectionException(new ConnectionException(e, slackConnection));
-                        }
-                    });
+                    if(throwable != null) {
+                        LOGGER.error("An error occurred trying to obtain RTM WSS URL.", throwable);
+                        scheduler.schedule(() -> doStart(sourceCallback, slackConnection), 10, TimeUnit.SECONDS);
+                    } else {
+                        String response = IOUtils.toString(httpResponse.getEntity().getContent());
+                        String url = new JSONObject(response).getString("url");
+                        this.scheduler = schedulerService.ioScheduler();
+                        SlackMessageHandler messageHandler = new SlackMessageHandler(url, new ConfigurableHandler(sourceCallback, eventNotifiers, emptyList()), scheduler, () -> doStart(sourceCallback, slackConnection));
+                        this.scheduler.execute(() -> {
+                            try {
+                                messageHandler.connect();
+                            } catch (Exception e) {
+                                sourceCallback.onConnectionException(new ConnectionException(e, slackConnection));
+                            }
+                        });
+                    }
                 }));
     }
 

@@ -4,6 +4,11 @@
  */
 package org.mule.extension.slack.internal.source.rtm;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
+import org.mule.runtime.api.scheduler.Scheduler;
+
+import javax.websocket.CloseReason;
 import javax.websocket.DeploymentException;
 import javax.websocket.Endpoint;
 import javax.websocket.EndpointConfig;
@@ -12,26 +17,37 @@ import javax.websocket.Session;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import org.glassfish.tyrus.client.ClientManager;
 import org.glassfish.tyrus.client.ClientProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SlackMessageHandler implements MessageHandler.Whole<String> {
 
+    Logger LOGGER = LoggerFactory.getLogger(SlackMessageHandler.class);
+
     public EventHandler messageHandler;
+    private Scheduler scheduler;
+    private Runnable onClose;
     private String webSocketUrl;
     private Session websocketSession;
     private long lastPingSent = 0;
     private volatile long lastPingAck = 0;
     private boolean reconnectOnDisconnection = true;
     private long messageId = 0;
+    private ScheduledFuture pingScheduler;
 
-    public SlackMessageHandler(String webSocketUrl, EventHandler messageHandler) {
+    public SlackMessageHandler(String webSocketUrl, EventHandler messageHandler, Scheduler scheduler, Runnable onClose) {
         this.webSocketUrl = webSocketUrl;
         this.messageHandler = messageHandler;
+        this.scheduler = scheduler;
+        this.onClose = onClose;
     }
 
-    public void connect() throws IOException, DeploymentException, InterruptedException {
+    public void connect() throws IOException, DeploymentException {
         ClientManager client = ClientManager.createClient();
         client.getProperties().put(ClientProperties.LOG_HTTP_UPGRADE, false);
         final MessageHandler handler = this;
@@ -42,36 +58,47 @@ public class SlackMessageHandler implements MessageHandler.Whole<String> {
                 session.addMessageHandler(handler);
             }
 
+            @Override
+            public void onClose(Session session, CloseReason closeReason) {
+                pingScheduler.cancel(true);
+                scheduler.submit(onClose);
+            }
+
+            @Override
+            public void onError(Session session, Throwable e) {
+                LOGGER.error("Unexpected error. ", e);
+            }
         }, URI.create(webSocketUrl));
-        while (true) {
+
+        pingScheduler = scheduler.scheduleAtFixedRate(() -> {
             try {
                 if (lastPingSent != lastPingAck) {
                     // disconnection happened
                     websocketSession.close();
                     lastPingSent = 0;
                     lastPingAck = 0;
-                    connect();
-                    continue;
                 } else {
                     lastPingSent = getNextMessageId();
                     websocketSession.getBasicRemote().sendText("{\"type\":\"ping\",\"id\":" + lastPingSent + "}");
                 }
-                Thread.sleep(20000);
             } catch (Exception e) {
-                websocketSession.close();
-                throw new RuntimeException("Error in RTM Connection", e);
+                try {
+                    websocketSession.close();
+                } catch (IOException e1) {
+                    LOGGER.debug("The Slack WebSocket connection seems to be disconnected. Reconnecting.");
+                }
             }
-        }
+        }, 0, 20, SECONDS);
     }
 
     public void onMessage(String message) {
-        if (message.contains("{\"type\":\"pong\",\"reply_to\"")) {
+        if (message.startsWith("{\"type\":\"pong\",\"reply_to\"")) {
             int rightBracketIdx = message.indexOf('}');
             String toParse = message.substring(26, rightBracketIdx);
             lastPingAck = Integer.parseInt(toParse);
             return;
         }
-        if (!message.contains("{\"type\":\"hello\"}")) {
+        if (!message.startsWith("{\"type\":\"hello\"}")) {
             messageHandler.onMessage(message);
         }
     }

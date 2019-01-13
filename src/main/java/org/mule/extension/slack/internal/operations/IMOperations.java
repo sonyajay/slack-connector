@@ -6,6 +6,7 @@ import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICAT
 import org.mule.extension.slack.internal.connection.SlackConnection;
 import org.mule.extension.slack.internal.metadata.IMListOutputResolver;
 import org.mule.extension.slack.internal.metadata.OpenIMOutputResolver;
+import org.mule.extension.slack.internal.utils.CursorPagingProvider;
 import org.mule.runtime.extension.api.annotation.Alias;
 import org.mule.runtime.extension.api.annotation.metadata.MetadataKeyId;
 import org.mule.runtime.extension.api.annotation.metadata.OutputResolver;
@@ -13,9 +14,12 @@ import org.mule.runtime.extension.api.annotation.param.Connection;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
+import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.runtime.process.CompletionCallback;
+import org.mule.runtime.extension.api.runtime.streaming.PagingProvider;
 
 import java.io.InputStream;
+import java.util.Map;
 
 public class IMOperations extends SlackOperations {
 
@@ -26,19 +30,13 @@ public class IMOperations extends SlackOperations {
      * @param cursor
      * @param limit           The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of
      *                        the users list hasn't been reached.
-     * @param callback
      */
     @OutputResolver(output = IMListOutputResolver.class)
-    @MediaType(APPLICATION_JSON)
     @DisplayName("IM - List")
-    public void listIms(@Connection SlackConnection slackConnection,
-                        @Optional String cursor,
-                        @Optional(defaultValue = "0") int limit,
-                        CompletionCallback<InputStream, Void> callback) {
+    public PagingProvider<SlackConnection, Map<String, Object>> listIms(@Optional @Placement(tab = "Deprecated") @DisplayName("Cursor (Deprecated)") String cursor,
+                                                                        @Optional(defaultValue = "0") int limit) {
 
-        slackConnection.im
-                .list(cursor, limit)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.ims]", "#[payload.response_metadata]", EXECUTION, callback));
+        return new CursorPagingProvider((connection, theCursor) -> connection.im.list(theCursor, limit),"#[output application/java --- payload.ims]", this.expressionManager);
     }
 
     /**
@@ -62,6 +60,6 @@ public class IMOperations extends SlackOperations {
 
         slackConnection.im
                 .open(user, includeLocale, returnIm)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", "#[payload - 'channel' - 'ok']", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.channel]", "#[payload - 'channel' - 'ok']", EXECUTION, callback));
     }
 }

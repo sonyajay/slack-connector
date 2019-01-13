@@ -10,7 +10,7 @@ public class GroupInfoOutputResolver implements OutputTypeResolver {
 
     @Override
     public MetadataType getOutputType(MetadataContext metadataContext, Object o) {
-        return getMetadataTypeFromResource("metadata/group-info-schema.json", "Group Info");
+        return getMetadataTypeFromResource("metadata/group-info-schema.json", "Group");
     }
 
     @Override

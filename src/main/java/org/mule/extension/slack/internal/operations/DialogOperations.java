@@ -4,7 +4,7 @@ import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
 import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICATION_JSON;
 
 import org.mule.extension.slack.internal.connection.SlackConnection;
-import org.mule.extension.slack.internal.error.PostMessageErrorProvider;
+import org.mule.extension.slack.internal.error.DialogErrorProvider;
 import org.mule.extension.slack.internal.metadata.DialogInputTypeResolver;
 import org.mule.runtime.extension.api.annotation.error.Throws;
 import org.mule.runtime.extension.api.annotation.metadata.TypeResolver;
@@ -18,7 +18,7 @@ import java.io.InputStream;
 
 public class DialogOperations extends SlackOperations {
 
-    @Throws(PostMessageErrorProvider.class)
+    @Throws(DialogErrorProvider.class)
     @MediaType(APPLICATION_JSON)
     @DisplayName("Dialog - Open")
     public void openDialog(@Connection SlackConnection slackConnection,
@@ -26,7 +26,7 @@ public class DialogOperations extends SlackOperations {
                             @Content @TypeResolver(value = DialogInputTypeResolver.class) InputStream dialog,
                             CompletionCallback<InputStream, InputStream> callback) {
         slackConnection.dialog.open(dialog, triggerId)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload]", EXECUTION, callback));
     }
 
 }

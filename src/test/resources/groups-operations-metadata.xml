@@ -12,7 +12,11 @@
         <slack:token-connection token="${slack.token}"/>
     </slack:config>
 
-    <flow name="channelInfo">
-        <slack:channel-info channel="#[payload]" config-ref="slack-config"/>
+    <flow name="listGroups">
+        <slack:list-groups config-ref="slack-config"/>
+    </flow>
+
+    <flow name="groupInfo">
+        <slack:group-info channel="dsadsa" config-ref="slack-config"/>
     </flow>
 </mule>

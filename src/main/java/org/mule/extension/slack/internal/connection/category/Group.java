@@ -22,10 +22,12 @@ public class Group {
         this.slackConnection = slackConnection;
     }
 
-    public CompletableFuture<HttpResponse> list(boolean excludeArchived, boolean excludeMembers) {
+    public CompletableFuture<HttpResponse> list(boolean excludeArchived, boolean excludeMembers, int limit, String cursor) {
         MultiMap<String, String> parameterMap = new MultiMap<>();
         parameterMap.put("exclude_archived", valueOf(excludeArchived));
         parameterMap.put("exclude_members", valueOf(excludeMembers));
+        parameterMap.put("limit", valueOf(limit));
+        parameterMap.put("cursor", cursor);
         return slackConnection.sendAsyncRequest(API_URI + GROUPS_LIST, parameterMap);
     }
 

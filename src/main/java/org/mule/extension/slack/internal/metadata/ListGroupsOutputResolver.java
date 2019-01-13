@@ -11,8 +11,8 @@ import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 public class ListGroupsOutputResolver implements OutputTypeResolver {
 
     @Override
-    public MetadataType getOutputType(MetadataContext metadataContext, Object o) throws MetadataResolvingException, ConnectionException {
-        return getMetadataTypeFromResource("metadata/group-list-schema.json", "Channel List");
+    public MetadataType getOutputType(MetadataContext metadataContext, Object o) {
+        return getMetadataTypeFromResource("metadata/group-list-schema.json", "Group");
     }
 
     @Override

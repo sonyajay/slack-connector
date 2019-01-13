@@ -8,6 +8,7 @@ import org.mule.extension.slack.internal.metadata.GroupInfoOutputResolver;
 import org.mule.extension.slack.internal.metadata.ListGroupsOutputResolver;
 import org.mule.extension.slack.internal.metadata.RenameGroupOutputResolver;
 import org.mule.extension.slack.internal.metadata.StringOutputResolver;
+import org.mule.extension.slack.internal.utils.CursorPagingProvider;
 import org.mule.extension.slack.internal.valueprovider.GroupsValueProvider;
 import org.mule.runtime.extension.api.annotation.metadata.OutputResolver;
 import org.mule.runtime.extension.api.annotation.param.Connection;
@@ -17,8 +18,10 @@ import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.values.OfValues;
 import org.mule.runtime.extension.api.runtime.process.CompletionCallback;
+import org.mule.runtime.extension.api.runtime.streaming.PagingProvider;
 
 import java.io.InputStream;
+import java.util.Map;
 
 public class GroupOperations extends SlackOperations {
 
@@ -28,21 +31,16 @@ public class GroupOperations extends SlackOperations {
      * This method returns a list of private channels in the team that the caller is in and archived groups that the
      * caller was in. The list of (non-deactivated) members in each private channel is also returned.
      *
-     * @param slackConnection The Connection
      * @param excludeArchived Don't return archived private channels.
      * @param excludeMembers  Exclude the members from each group
-     * @param callback
      */
     @OutputResolver(output = ListGroupsOutputResolver.class)
-    @MediaType(APPLICATION_JSON)
     @DisplayName("Groups - List")
-    public void listGroups(@Connection SlackConnection slackConnection,
-                           @Optional(defaultValue = "false") boolean excludeArchived,
-                           @Optional(defaultValue = "false") boolean excludeMembers,
-                           CompletionCallback<InputStream, Void> callback) {
-        slackConnection.group
-                .list(excludeArchived, excludeMembers)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.groups]", EXECUTION, callback));
+    public PagingProvider<SlackConnection, Map<String, Object>> listGroups(@Optional(defaultValue = "false") boolean excludeArchived,
+                                                                           @Optional(defaultValue = "false") boolean excludeMembers,
+                                                                           @Optional(defaultValue = "0") int pageSize) {
+
+        return new CursorPagingProvider((connection, theCursor) -> connection.group.list(excludeArchived, excludeMembers, pageSize, theCursor), "#[output application/java --- payload.groups]", expressionManager);
     }
 
     /**
@@ -62,7 +60,7 @@ public class GroupOperations extends SlackOperations {
                           CompletionCallback<InputStream, Void> callback) {
         slackConnection.group
                 .info(channel, includeLocal)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.group]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.group]", EXECUTION, callback));
     }
 
     /**
@@ -84,7 +82,7 @@ public class GroupOperations extends SlackOperations {
                             CompletionCallback<InputStream, Void> callback) {
         slackConnection.group
                 .rename(channel, name, validate)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.channel]", EXECUTION, callback));
     }
 
     /**
@@ -105,7 +103,7 @@ public class GroupOperations extends SlackOperations {
                                 CompletionCallback<InputStream, Void> callback) {
         slackConnection.group
                 .setPurpose(channel, purpose)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.purpose]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.purpose]", EXECUTION, callback));
     }
 
     /**
@@ -125,6 +123,6 @@ public class GroupOperations extends SlackOperations {
                               CompletionCallback<InputStream, Void> callback) {
         slackConnection.group
                 .setTopic(channel, topic)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.topic]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.topic]", EXECUTION, callback));
     }
 }

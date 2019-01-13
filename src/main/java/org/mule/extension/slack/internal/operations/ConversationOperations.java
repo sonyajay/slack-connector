@@ -29,6 +29,6 @@ public class ConversationOperations extends SlackOperations {
 
         slackConnection
                 .conversationList(conversationTypes, listingConfiguration)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channels]", "#[payload.response_metadata]", CHANNEL_LISTING, callback));
+                .whenCompleteAsync(createConsumer("#[payload.channels]", "#[payload.response_metadata]", CHANNEL_LISTING, callback));
     }
 }

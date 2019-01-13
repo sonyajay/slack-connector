@@ -1,16 +1,12 @@
 package org.mule.extension.slack.internal.operations;
 
-import static org.mule.extension.slack.internal.error.SlackError.CHANNEL_LISTING;
-import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
-
 import org.mule.extension.slack.internal.connection.SlackConnection;
-import org.mule.extension.slack.internal.error.ChannelListErrorProvider;
 import org.mule.extension.slack.internal.metadata.ChannelInfoOutputResolver;
 import org.mule.extension.slack.internal.metadata.ListChannelsOutputResolver;
 import org.mule.extension.slack.internal.metadata.StringOutputResolver;
+import org.mule.extension.slack.internal.utils.CursorPagingProvider;
 import org.mule.extension.slack.internal.valueprovider.ChannelsValueProvider;
 import org.mule.extension.slack.internal.valueprovider.UsersValueProvider;
-import org.mule.runtime.extension.api.annotation.error.Throws;
 import org.mule.runtime.extension.api.annotation.metadata.OutputResolver;
 import org.mule.runtime.extension.api.annotation.metadata.fixed.OutputJsonType;
 import org.mule.runtime.extension.api.annotation.param.Connection;
@@ -18,10 +14,16 @@ import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
+import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.values.OfValues;
 import org.mule.runtime.extension.api.runtime.process.CompletionCallback;
+import org.mule.runtime.extension.api.runtime.streaming.PagingProvider;
 
 import java.io.InputStream;
+import java.util.Map;
+
+import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
+import static org.mule.runtime.extension.api.annotation.param.display.Placement.ADVANCED_TAB;
 
 public class ChannelOperations extends SlackOperations {
 
@@ -30,7 +32,6 @@ public class ChannelOperations extends SlackOperations {
      * are not currently in, and archived channels but does not include private channels. The number of
      * (non-deactivated) members in each channel is also returned.
      *
-     * @param slackConnection The connection
      * @param cursor          Paginate through collections of data by setting the cursor parameter to a next_cursor attribute
      *                        returned by a previous request's response_metadata. Default value fetches the first "page" of the
      *                        collection. See pagination for more detail.
@@ -38,21 +39,16 @@ public class ChannelOperations extends SlackOperations {
      * @param excludeMembers  Exclude the members collection from each channel
      * @param limit           The maximum number of items to return. Fewer than the requested number of items may be returned,
      *                        even if the end of the users list hasn't been reached.
-     * @param callback        Non-blocking callback
      */
     //TODO THIS CAN USE `excludeMembers` parameter to improve metadata.
     @OutputResolver(output = ListChannelsOutputResolver.class)
-    @MediaType(MediaType.APPLICATION_JSON)
     @DisplayName("Channels - List")
-    public void listChannels(@Connection SlackConnection slackConnection,
-                             @Optional String cursor,
-                             @Optional(defaultValue = "false") boolean excludeArchived,
-                             @Optional(defaultValue = "false") boolean excludeMembers,
-                             @Optional(defaultValue = "0") int limit,
-                             CompletionCallback<InputStream, Void> callback) {
-        slackConnection.channel
-                .list(cursor, excludeArchived, excludeMembers, limit)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channels]", CHANNEL_LISTING, callback));
+    public PagingProvider<SlackConnection, Map<String, Object>> listChannels(@Optional @Placement(tab = "Deprecated") @DisplayName("Cursor (Deprecated)") String cursor,
+                                                                             @Optional(defaultValue = "false") boolean excludeArchived,
+                                                                             @Optional(defaultValue = "false") boolean excludeMembers,
+                                                                             @Optional(defaultValue = "0") @Placement(tab = ADVANCED_TAB) @DisplayName("Page Size") int limit) {
+
+        return new CursorPagingProvider((connection, theCursor) -> connection.channel.list(theCursor, excludeArchived, excludeMembers, limit),"#[output application/java --- payload.channels]", this.expressionManager);
     }
 
     /**
@@ -74,7 +70,7 @@ public class ChannelOperations extends SlackOperations {
                             CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .info(channel, includeLocale)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.channel]", EXECUTION, callback));
     }
 
     /**
@@ -94,7 +90,7 @@ public class ChannelOperations extends SlackOperations {
                                 CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .setTopic(channel, topic)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.topic]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.topic]", EXECUTION, callback));
     }
 
     /**
@@ -114,7 +110,7 @@ public class ChannelOperations extends SlackOperations {
                                   CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .setPurpose(channel, purpose)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.purpose]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.purpose]", EXECUTION, callback));
     }
 
     /**
@@ -140,7 +136,7 @@ public class ChannelOperations extends SlackOperations {
                               CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .rename(channel, name, validate)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.channel]", EXECUTION, callback));
     }
 
     /**
@@ -160,6 +156,6 @@ public class ChannelOperations extends SlackOperations {
                                 CompletionCallback<InputStream, Void> callback) {
         slackConnection.channel
                 .invite(channel, user)
-                .whenCompleteAsync(new HttpResponseConsumer<>("#[payload.channel]", EXECUTION, callback));
+                .whenCompleteAsync(createConsumer("#[payload.channel]", EXECUTION, callback));
     }
 }

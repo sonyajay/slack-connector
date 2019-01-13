@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "definitions": {},
+  "id": "/channel",
+  "properties": {
+    "created": {
+      "id": "/channel/properties/created",
+      "type": "integer"
+    },
+    "creator": {
+      "id": "/channel/properties/creator",
+      "type": "string"
+    },
+    "id": {
+      "id": "/channel/properties/id",
+      "type": "string"
+    },
+    "is_archived": {
+      "id": "/channel/properties/is_archived",
+      "type": "boolean"
+    },
+    "is_channel": {
+      "id": "/channel/properties/is_channel",
+      "type": "boolean"
+    },
+    "is_general": {
+      "id": "/channel/properties/is_general",
+      "type": "boolean"
+    },
+    "is_member": {
+      "id": "/channel/properties/is_member",
+      "type": "boolean"
+    },
+    "is_mpim": {
+      "id": "/channel/properties/is_mpim",
+      "type": "boolean"
+    },
+    "is_org_shared": {
+      "id": "/channel/properties/is_org_shared",
+      "type": "boolean"
+    },
+    "is_private": {
+      "id": "/channel/properties/is_private",
+      "type": "boolean"
+    },
+    "is_shared": {
+      "id": "/channel/properties/is_shared",
+      "type": "boolean"
+    },
+    "members": {
+      "id": "/channel/properties/members",
+      "items": {
+        "description": "This accepts anything, as long as it's valid JSON.",
+        "title": "Empty Object"
+      },
+      "type": "array"
+    },
+    "name": {
+      "id": "/channel/properties/name",
+      "type": "string"
+    },
+    "name_normalized": {
+      "id": "/channel/properties/name_normalized",
+      "type": "string"
+    },
+    "num_members": {
+      "id": "/channel/properties/num_members",
+      "type": "integer"
+    },
+    "previous_names": {
+      "id": "/channel/properties/previous_names",
+      "items": {
+        "description": "This accepts anything, as long as it's valid JSON.",
+        "title": "Empty Object"
+      },
+      "type": "array"
+    },
+    "purpose": {
+      "id": "/channel/properties/purpose",
+      "properties": {
+        "creator": {
+          "id": "/channel/properties/purpose/properties/creator",
+          "type": "string"
+        },
+        "last_set": {
+          "id": "/channel/properties/purpose/properties/last_set",
+          "type": "integer"
+        },
+        "value": {
+          "id": "/channel/properties/purpose/properties/value",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "topic": {
+      "id": "/channel/properties/topic",
+      "properties": {
+        "creator": {
+          "id": "/channel/properties/topic/properties/creator",
+          "type": "string"
+        },
+        "last_set": {
+          "id": "/channel/properties/topic/properties/last_set",
+          "type": "integer"
+        },
+        "value": {
+          "id": "/channel/properties/topic/properties/value",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "unlinked": {
+      "id": "/channel/properties/unlinked",
+      "type": "integer"
+    }
+  },
+  "type": "object"
+}

@@ -3,6 +3,7 @@ package org.mule.extension.slack.internal.valueprovider;
 import static java.util.Collections.emptySet;
 import static java.util.stream.Collectors.toSet;
 import static org.mule.extension.slack.internal.utils.SlackUtils.getBindingContext;
+import static org.mule.extension.slack.internal.utils.SlackUtils.getJavaBindingContext;
 
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.util.Reference;
@@ -39,7 +40,7 @@ public class ValueProviderCompletionCallback implements CompletionCallback {
     @Override
     public void success(Result result) {
         Object output = result.getOutput();
-        TypedValue<?> evaluate = expressionManager.evaluate("#[output application/java --- payload map { name : $." + name + ", id: $." + id + "}]", getBindingContext(output));
+        TypedValue<?> evaluate = expressionManager.evaluate("#[output application/java --- payload map { name : $." + name + ", id: $." + id + "}]", getJavaBindingContext(output));
         Set<Value> collect = ((List<Map<String, String>>) evaluate.getValue()).stream().map(val -> ValueBuilder.newValue(val.get("id")).withDisplayName(val.get("name")).build()).collect(toSet());
         values.set(collect);
         countDownLatch.countDown();

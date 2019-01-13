@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:slack="http://www.mulesoft.org/schema/mule/slack"
+
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+      http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+               http://www.mulesoft.org/schema/mule/slack http://www.mulesoft.org/schema/mule/slack/current/mule-slack.xsd
+               http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd">
+
+    <munit:config name="channels-operations"/>
+
+    <configuration-properties file="automation-credentials.properties"/>
+
+    <munit:test name="listChannels">
+        <munit:execution>
+           <slack:list-channels config-ref="config"/>
+        </munit:execution>
+        <munit:validation>
+            <set-variable variableName="found" value="#[false]"/>
+            <foreach>
+                <choice>
+                    <when expression="#[payload.id == p('slack.channels.channel')]">
+                        <set-variable variableName="found" value="#[true]"/>
+                    </when>
+                </choice>
+            </foreach>
+            <munit-tools:assert-that expression="#[vars.found]" is="#[MunitTools::equalTo(true)]"/>
+        </munit:validation>
+    </munit:test>
+
+    <munit:test name="channelInfo">
+        <munit:execution>
+            <slack:channel-info config-ref="config" channel="#[p('slack.channels.channel')]"/>
+        </munit:execution>
+        <munit:validation>
+            <munit-tools:assert-that expression="#[payload.id]" is="#[MunitTools::equalTo(p('slack.channels.channel'))]"/>
+            <munit-tools:assert-that expression="#[payload.name]" is="#[MunitTools::equalTo('random')]"/>
+            <munit-tools:assert-that expression="#[payload.is_channel]" is="#[MunitTools::equalTo(true)]"/>
+        </munit:validation>
+    </munit:test>
+
+</mule>
