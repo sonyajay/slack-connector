@@ -40,13 +40,15 @@ public class ConfigurableHandler implements EventHandler {
     public void onMessage(String message) {
         Map<String, Object> messageMap = gson.fromJson(message, type);
 
-        if (shouldBeAccepted(messageMap, eventFilterList)) {
-            if (shouldBeSent(messageMap, observerList)) {
+        if (shouldBeAccepted(messageMap, eventFilterList) && shouldBeSent(messageMap, observerList)) {
                 try {
                     sourceCallback.handle(Result.builder().output(message).mediaType(APPLICATION_JSON).build());
                 } catch (Exception e) {
                     logger.error("Error", e);
                 }
+        } else {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Message was filtered: " + message);
             }
         }
     }

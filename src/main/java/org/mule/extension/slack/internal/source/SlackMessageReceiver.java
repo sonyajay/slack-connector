@@ -74,17 +74,21 @@ public class SlackMessageReceiver extends Source<String, Void> {
                         LOGGER.error("An error occurred trying to obtain RTM WSS URL.", throwable);
                         scheduler.schedule(() -> doStart(sourceCallback, slackConnection), 10, TimeUnit.SECONDS);
                     } else {
-                        String response = IOUtils.toString(httpResponse.getEntity().getContent());
-                        String url = new JSONObject(response).getString("url");
-                        this.scheduler = schedulerService.ioScheduler();
-                        SlackMessageHandler messageHandler = new SlackMessageHandler(url, new ConfigurableHandler(sourceCallback, eventNotifiers, emptyList()), scheduler, () -> doStart(sourceCallback, slackConnection));
-                        this.scheduler.execute(() -> {
-                            try {
-                                messageHandler.connect();
-                            } catch (Exception e) {
-                                sourceCallback.onConnectionException(new ConnectionException(e, slackConnection));
-                            }
-                        });
+                        try {
+                            String response = IOUtils.toString(httpResponse.getEntity().getContent());
+                            String url = new JSONObject(response).getString("url");
+                            this.scheduler = schedulerService.ioScheduler();
+                            SlackMessageHandler messageHandler = new SlackMessageHandler(url, new ConfigurableHandler(sourceCallback, eventNotifiers, emptyList()), scheduler, () -> doStart(sourceCallback, slackConnection));
+                            this.scheduler.execute(() -> {
+                                try {
+                                    messageHandler.connect();
+                                } catch (Exception e) {
+                                    sourceCallback.onConnectionException(new ConnectionException(e, slackConnection));
+                                }
+                            });
+                        } catch (Throwable t) {
+                            sourceCallback.onConnectionException(new ConnectionException("Unknown error occurred trying to start Message Receiver", t));
+                        }
                     }
                 }));
     }
