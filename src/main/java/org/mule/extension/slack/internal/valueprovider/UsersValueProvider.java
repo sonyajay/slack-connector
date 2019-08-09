@@ -26,6 +26,6 @@ public class UsersValueProvider extends BaseValueProvider {
     PagingProvider<SlackConnection, Map<String, Object>> getPagingProvider() {
         UsersOperations usersOperations = new UsersOperations();
         usersOperations.setExpressionManager(expressionManager);
-        return usersOperations.listUsers(false, 0, false, null);
+        return usersOperations.listUsers(false, false);
     }
 }

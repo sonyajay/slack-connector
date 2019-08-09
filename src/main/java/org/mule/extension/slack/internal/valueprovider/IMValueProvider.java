@@ -21,6 +21,6 @@ public class IMValueProvider extends BaseValueProvider {
     PagingProvider<SlackConnection, Map<String, Object>> getPagingProvider() {
         IMOperations imOperations = new IMOperations();
         imOperations.setExpressionManager(expressionManager);
-        return imOperations.listIms( 0);
+        return imOperations.listIms();
     }
 }

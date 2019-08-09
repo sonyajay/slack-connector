@@ -37,6 +37,6 @@ public class GroupsValueProvider extends BaseValueProvider {
     PagingProvider<SlackConnection, Map<String, Object>> getPagingProvider() {
         GroupOperations groupOperations = new GroupOperations();
         groupOperations.setExpressionManager(expressionManager);
-        return groupOperations.listGroups(true, true, 0);
+        return groupOperations.listGroups(true, true);
     }
 }
