@@ -52,7 +52,7 @@ public class FileOperations extends SlackOperations {
     @DisplayName("File - Upload")
     public void uploadFile(@Connection SlackConnection slackConnection,
                            @Content(primary = true) TypedValue<InputStream> content,
-                           @Content @Example("[\n  \"C03NE28RY\" \n]") List<String> channels,
+                           @Example("[\n  \"C03NE28RY\" \n]") List<String> channels,
                            @Example("Sunset photo") String fileName,
                            @Optional @Example("An awesome photo!") String title,
                            @Optional @Example("Hi!, this is the photo I've talked about") @Text String initialComment,
