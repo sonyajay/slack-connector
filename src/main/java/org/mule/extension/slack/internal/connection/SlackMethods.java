@@ -48,6 +48,7 @@ public class SlackMethods {
     public static final String GROUPS_INFO = "groups.info";
     public static final String FILES_UPLOAD = "files.upload";
     public static final String FILES_DELETE = "files.delete";
+    public static final String FILES_LIST = "files.list";
     public static final String SEARCH_MESSAGES = "search.messages";
     public static final String RTM_START = "rtm.start";
     public static final String RTM_CONNECT = "rtm.connect";

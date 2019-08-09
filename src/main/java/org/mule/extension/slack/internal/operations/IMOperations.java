@@ -25,18 +25,11 @@ public class IMOperations extends SlackOperations {
 
     /**
      * This operation returns a list of all im channels that the user has.
-     *
-     * @param slackConnection The connection
-     * @param cursor
-     * @param limit           The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of
-     *                        the users list hasn't been reached.
      */
     @OutputResolver(output = IMListOutputResolver.class)
     @DisplayName("IM - List")
-    public PagingProvider<SlackConnection, Map<String, Object>> listIms(@Optional @Placement(tab = "Deprecated") @DisplayName("Cursor (Deprecated)") String cursor,
-                                                                        @Optional(defaultValue = "0") int limit) {
-
-        return new CursorPagingProvider((connection, theCursor) -> connection.im.list(theCursor, limit),"#[output application/java --- payload.ims]", this.expressionManager);
+    public PagingProvider<SlackConnection, Map<String, Object>> listIms() {
+        return new CursorPagingProvider((connection, theCursor) -> connection.im.list(theCursor, 100),"#[output application/java --- payload.ims]", this.expressionManager);
     }
 
     /**

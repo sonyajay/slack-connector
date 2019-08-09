@@ -32,23 +32,16 @@ public class ChannelOperations extends SlackOperations {
      * are not currently in, and archived channels but does not include private channels. The number of
      * (non-deactivated) members in each channel is also returned.
      *
-     * @param cursor          Paginate through collections of data by setting the cursor parameter to a next_cursor attribute
-     *                        returned by a previous request's response_metadata. Default value fetches the first "page" of the
-     *                        collection. See pagination for more detail.
      * @param excludeArchived Exclude archived channels from the list
      * @param excludeMembers  Exclude the members collection from each channel
-     * @param limit           The maximum number of items to return. Fewer than the requested number of items may be returned,
-     *                        even if the end of the users list hasn't been reached.
      */
     //TODO THIS CAN USE `excludeMembers` parameter to improve metadata.
     @OutputResolver(output = ListChannelsOutputResolver.class)
     @DisplayName("Channels - List")
-    public PagingProvider<SlackConnection, Map<String, Object>> listChannels(@Optional @Placement(tab = "Deprecated") @DisplayName("Cursor (Deprecated)") String cursor,
-                                                                             @Optional(defaultValue = "false") boolean excludeArchived,
-                                                                             @Optional(defaultValue = "false") boolean excludeMembers,
-                                                                             @Optional(defaultValue = "0") @Placement(tab = ADVANCED_TAB) @DisplayName("Page Size") int limit) {
+    public PagingProvider<SlackConnection, Map<String, Object>> listChannels(@Optional(defaultValue = "false") boolean excludeArchived,
+                                                                             @Optional(defaultValue = "false") boolean excludeMembers) {
 
-        return new CursorPagingProvider((connection, theCursor) -> connection.channel.list(theCursor, excludeArchived, excludeMembers, limit),"#[output application/java --- payload.channels]", this.expressionManager);
+        return new CursorPagingProvider((connection, theCursor) -> connection.channel.list(theCursor, excludeArchived, excludeMembers, 100),"#[output application/java --- payload.channels]", this.expressionManager);
     }
 
     /**

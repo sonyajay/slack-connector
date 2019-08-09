@@ -11,6 +11,7 @@ import org.mule.extension.slack.internal.metadata.AttachmentsTypeResolver;
 import org.mule.extension.slack.internal.valueprovider.ChannelsKeyResolver;
 import org.mule.extension.slack.internal.metadata.PostMessageAttributesResolver;
 import org.mule.extension.slack.internal.metadata.PostMessageOutputResolver;
+import org.mule.runtime.extension.api.annotation.dsl.xml.ParameterDsl;
 import org.mule.runtime.extension.api.annotation.error.Throws;
 import org.mule.runtime.extension.api.annotation.metadata.OutputResolver;
 import org.mule.runtime.extension.api.annotation.metadata.TypeResolver;
@@ -21,6 +22,7 @@ import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.ParameterGroup;
 import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
+import org.mule.runtime.extension.api.annotation.param.display.Text;
 import org.mule.runtime.extension.api.annotation.values.OfValues;
 import org.mule.runtime.extension.api.runtime.process.CompletionCallback;
 
@@ -45,7 +47,7 @@ public class ChatOperations extends SlackOperations {
     @DisplayName("Chat - Post Message")
     public void postMessage(@Connection SlackConnection slackConnection,
                             @OfValues(ChannelsKeyResolver.class) String channel,
-                            @Optional @Content(primary = true) String message,
+                            @Optional @ParameterDsl(allowInlineDefinition = false) @Text String message,
                             @Content @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream attachments,
                             @ParameterGroup(name = "Message Configuration") MessageConfigurationGroup messageConfiguration,
                             CompletionCallback<InputStream, InputStream> callback) {
@@ -77,7 +79,7 @@ public class ChatOperations extends SlackOperations {
     @DisplayName("Chat - Update Message")
     public void update(@Connection SlackConnection slackConnection,
                        @OfValues(ChannelsKeyResolver.class) String channel,
-                       @Optional @Content(primary = true) String message,
+                       @Optional @ParameterDsl(allowInlineDefinition = false) @Text String message,
                        @Content @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream attachments,
                        @Example("1405894322.002768") String timestamp,
                        @Optional(defaultValue = "false") boolean asUser,

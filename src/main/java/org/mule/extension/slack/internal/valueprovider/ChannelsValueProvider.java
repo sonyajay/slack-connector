@@ -32,6 +32,6 @@ public class ChannelsValueProvider extends BaseValueProvider {
     PagingProvider<SlackConnection, Map<String, Object>> getPagingProvider() {
         ChannelOperations channelOperations = new ChannelOperations();
         channelOperations.setExpressionManager(expressionManager);
-        return channelOperations.listChannels(null, true, true, 0);
+        return channelOperations.listChannels(true, true, 0);
     }
 }

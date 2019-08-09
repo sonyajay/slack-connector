@@ -29,8 +29,6 @@ public class UsersOperations extends SlackOperations {
      * This operation returns a list of all users in the team. This includes deleted/deactivated users.
      *
      * @param includeLocale   Set this to true to receive the locale for users. Defaults to false
-     * @param limit           The maximum number of items to return. Fewer than the requested number of items may be returned,
-     *                        even if the end of the users list hasn't been reached.
      * @param presence        Optional
      *                        Whether to include presence data in the output. Setting this to false improves performance, especially with large
      *                        teams.
@@ -38,11 +36,9 @@ public class UsersOperations extends SlackOperations {
     @OutputResolver(output = UsersListOutputResolver.class)
     @DisplayName("User - List")
     public PagingProvider<SlackConnection, Map<String, Object>> listUsers(@Optional(defaultValue = "false") boolean includeLocale,
-                                                                          @Optional(defaultValue = "0") int limit,
-                                                                          @Optional(defaultValue = "false") boolean presence,
-                                                                          @Optional @DisplayName("Cursor (Deprecated)") @Placement(tab = "Deprecated") String cursor) {
+                                                                          @Optional(defaultValue = "false") boolean presence) {
 
-      return new CursorPagingProvider((connection, theCursor) -> connection.user.list(theCursor, includeLocale, limit, presence), "#[output application/java --- payload.members]", expressionManager);
+      return new CursorPagingProvider((connection, theCursor) -> connection.user.list(theCursor, includeLocale, 100, presence), "#[output application/java --- payload.members]", expressionManager);
     }
 
     /**

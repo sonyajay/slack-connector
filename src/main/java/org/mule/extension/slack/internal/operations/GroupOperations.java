@@ -37,10 +37,9 @@ public class GroupOperations extends SlackOperations {
     @OutputResolver(output = ListGroupsOutputResolver.class)
     @DisplayName("Groups - List")
     public PagingProvider<SlackConnection, Map<String, Object>> listGroups(@Optional(defaultValue = "false") boolean excludeArchived,
-                                                                           @Optional(defaultValue = "false") boolean excludeMembers,
-                                                                           @Optional(defaultValue = "0") int pageSize) {
+                                                                           @Optional(defaultValue = "false") boolean excludeMembers) {
 
-        return new CursorPagingProvider((connection, theCursor) -> connection.group.list(excludeArchived, excludeMembers, pageSize, theCursor), "#[output application/java --- payload.groups]", expressionManager);
+        return new CursorPagingProvider((connection, theCursor) -> connection.group.list(excludeArchived, excludeMembers, 100, theCursor), "#[output application/java --- payload.groups]", expressionManager);
     }
 
     /**
