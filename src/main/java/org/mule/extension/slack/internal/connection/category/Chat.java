@@ -34,8 +34,6 @@ public class Chat {
         parameterMap.put("text", text);
         ifPresent(attachments, att -> parameterMap.put("attachments", IOUtils.toString(att)));
         ifPresent(username, user -> parameterMap.put("username", user));
-
-        parameterMap.put("as_user", valueOf(messageConfig.isAsUser()));
         parameterMap.put("link_names", valueOf(messageConfig.isLinkNames()));
         ifPresent(messageConfig.getParse(), parseMode -> parameterMap.put("parse", valueOf(parseMode)));
         parameterMap.put("reply_broadcast", valueOf(messageConfig.isReplyBroadcast()));
@@ -56,7 +54,6 @@ public class Chat {
         parameterMap.put("ts", timestamp);
         parameterMap.put("link_names", valueOf(linkNames));
         ifPresent(parse, parseMode -> parameterMap.put("parse", valueOf(parseMode)));
-        parameterMap.put("as_user", valueOf(asUser));
 
         return slackConnection.sendAsyncRequest(API_URI + CHAT_UPDATE, parameterMap);
     }
