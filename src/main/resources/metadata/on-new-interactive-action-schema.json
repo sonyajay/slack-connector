@@ -1,0 +1,1083 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "On Interactive Action",
+  "description": "On Interactive Action",
+  "default": {},
+  "examples": [
+    {
+      "type": "dialog_submission",
+      "token": "Apv8qnEERxbaqjeEVZgLqe38",
+      "action_ts": "1606876122.303773",
+      "team": {
+        "id": "T03NE28RJ",
+        "domain": "slackconnector"
+      },
+      "user": {
+        "id": "U03NE28RL",
+        "username": "estebanwasinger",
+        "name": "estebanwasinger",
+        "team_id": "T03NE28RJ"
+      },
+      "api_app_id": "A784Y0397",
+      "channel": {
+        "id": "D784YUNM7",
+        "name": "directmessage"
+      },
+      "submission": {},
+      "callback_id": "someId",
+      "response_url": "https://hooks.slack.com/app/T03NE28RJ/1539198995253/CassXLE65oxwM45wLmiEbPY7",
+      "state": "",
+      "actions": [
+        {
+          "action_id": "button-action",
+          "block_id": "mTs9/",
+          "text": {
+            "type": "plain_text",
+            "text": "Click Me",
+            "emoji": true
+          },
+          "value": "click_me_123",
+          "type": "button",
+          "action_ts": "1606915817.520073"
+        }
+      ],
+      "message": {
+        "type": "message",
+        "subtype": "bot_message",
+        "text": "Text",
+        "ts": "1606915814.000100",
+        "username": "COVID Tracker",
+        "bot_id": "B79NT9Q31",
+        "blocks": [
+          {
+            "type": "section",
+            "block_id": "Jzyn",
+            "text": {
+              "type": "plain_text",
+              "text": "This is a plain text section block.",
+              "emoji": true
+            }
+          },
+          {
+            "type": "section",
+            "block_id": "mTs9/",
+            "text": {
+              "type": "mrkdwn",
+              "text": "This is a section block with a button.",
+              "verbatim": false
+            },
+            "accessory": {
+              "type": "button",
+              "action_id": "button-action",
+              "text": {
+                "type": "plain_text",
+                "text": "Click Me",
+                "emoji": true
+              },
+              "value": "click_me_123"
+            }
+          },
+          {
+            "type": "section",
+            "block_id": "xIN",
+            "text": {
+              "type": "mrkdwn",
+              "text": "This is a section block with a button.",
+              "verbatim": false
+            },
+            "accessory": {
+              "type": "button",
+              "action_id": "button-action",
+              "text": {
+                "type": "plain_text",
+                "text": "Click Me",
+                "emoji": true
+              },
+              "value": "click_me_123"
+            }
+          }
+        ]
+      },
+      "container": {
+        "type": "message",
+        "message_ts": "1606915814.000100",
+        "channel_id": "D784YUNM7",
+        "is_ephemeral": false
+      }
+    }
+  ],
+  "required": [
+    "type",
+    "token",
+    "action_ts",
+    "team",
+    "user",
+    "api_app_id",
+    "channel",
+    "submission",
+    "callback_id",
+    "response_url",
+    "state",
+    "actions",
+    "message",
+    "container"
+  ],
+  "properties": {
+    "type": {
+      "$id": "#/properties/type",
+      "type": "string",
+      "title": "The type schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "dialog_submission"
+      ]
+    },
+    "token": {
+      "$id": "#/properties/token",
+      "type": "string",
+      "title": "The token schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "Apv8qnEERxbaqjeEVZgLqe38"
+      ]
+    },
+    "action_ts": {
+      "$id": "#/properties/action_ts",
+      "type": "string",
+      "title": "The action_ts schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "1606876122.303773"
+      ]
+    },
+    "team": {
+      "$id": "#/properties/team",
+      "type": "object",
+      "title": "The team schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "id": "T03NE28RJ",
+          "domain": "slackconnector"
+        }
+      ],
+      "required": [
+        "id",
+        "domain"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/team/properties/id",
+          "type": "string",
+          "title": "The id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "T03NE28RJ"
+          ]
+        },
+        "domain": {
+          "$id": "#/properties/team/properties/domain",
+          "type": "string",
+          "title": "The domain schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "slackconnector"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "user": {
+      "$id": "#/properties/user",
+      "type": "object",
+      "title": "The user schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "id": "U03NE28RL",
+          "username": "estebanwasinger",
+          "name": "estebanwasinger",
+          "team_id": "T03NE28RJ"
+        }
+      ],
+      "required": [
+        "id",
+        "username",
+        "name",
+        "team_id"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/user/properties/id",
+          "type": "string",
+          "title": "The id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "U03NE28RL"
+          ]
+        },
+        "username": {
+          "$id": "#/properties/user/properties/username",
+          "type": "string",
+          "title": "The username schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "estebanwasinger"
+          ]
+        },
+        "name": {
+          "$id": "#/properties/user/properties/name",
+          "type": "string",
+          "title": "The name schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "estebanwasinger"
+          ]
+        },
+        "team_id": {
+          "$id": "#/properties/user/properties/team_id",
+          "type": "string",
+          "title": "The team_id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "T03NE28RJ"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "api_app_id": {
+      "$id": "#/properties/api_app_id",
+      "type": "string",
+      "title": "The api_app_id schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "A784Y0397"
+      ]
+    },
+    "channel": {
+      "$id": "#/properties/channel",
+      "type": "object",
+      "title": "The channel schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "id": "D784YUNM7",
+          "name": "directmessage"
+        }
+      ],
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/channel/properties/id",
+          "type": "string",
+          "title": "The id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "D784YUNM7"
+          ]
+        },
+        "name": {
+          "$id": "#/properties/channel/properties/name",
+          "type": "string",
+          "title": "The name schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "directmessage"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "submission": {
+      "$id": "#/properties/submission",
+      "type": "object",
+      "title": "The submission schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {}
+      ],
+      "required": [],
+      "additionalProperties": true
+    },
+    "callback_id": {
+      "$id": "#/properties/callback_id",
+      "type": "string",
+      "title": "The callback_id schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "someId"
+      ]
+    },
+    "response_url": {
+      "$id": "#/properties/response_url",
+      "type": "string",
+      "title": "The response_url schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://hooks.slack.com/app/T03NE28RJ/1539198995253/CassXLE65oxwM45wLmiEbPY7"
+      ]
+    },
+    "state": {
+      "$id": "#/properties/state",
+      "type": "string",
+      "title": "The state schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        ""
+      ]
+    },
+    "actions": {
+      "$id": "#/properties/actions",
+      "type": "array",
+      "title": "The actions schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "action_id": "button-action",
+            "block_id": "mTs9/",
+            "text": {
+              "type": "plain_text",
+              "text": "Click Me",
+              "emoji": true
+            },
+            "value": "click_me_123",
+            "type": "button",
+            "action_ts": "1606915817.520073"
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/actions/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/actions/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "action_id": "button-action",
+                "block_id": "mTs9/",
+                "text": {
+                  "type": "plain_text",
+                  "text": "Click Me",
+                  "emoji": true
+                },
+                "value": "click_me_123",
+                "type": "button",
+                "action_ts": "1606915817.520073"
+              }
+            ],
+            "required": [
+              "action_id",
+              "block_id",
+              "text",
+              "value",
+              "type",
+              "action_ts"
+            ],
+            "properties": {
+              "action_id": {
+                "$id": "#/properties/actions/items/anyOf/0/properties/action_id",
+                "type": "string",
+                "title": "The action_id schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "button-action"
+                ]
+              },
+              "block_id": {
+                "$id": "#/properties/actions/items/anyOf/0/properties/block_id",
+                "type": "string",
+                "title": "The block_id schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "mTs9/"
+                ]
+              },
+              "text": {
+                "$id": "#/properties/actions/items/anyOf/0/properties/text",
+                "type": "object",
+                "title": "The text schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                  {
+                    "type": "plain_text",
+                    "text": "Click Me",
+                    "emoji": true
+                  }
+                ],
+                "required": [
+                  "type",
+                  "text",
+                  "emoji"
+                ],
+                "properties": {
+                  "type": {
+                    "$id": "#/properties/actions/items/anyOf/0/properties/text/properties/type",
+                    "type": "string",
+                    "title": "The type schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "plain_text"
+                    ]
+                  },
+                  "text": {
+                    "$id": "#/properties/actions/items/anyOf/0/properties/text/properties/text",
+                    "type": "string",
+                    "title": "The text schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "Click Me"
+                    ]
+                  },
+                  "emoji": {
+                    "$id": "#/properties/actions/items/anyOf/0/properties/text/properties/emoji",
+                    "type": "boolean",
+                    "title": "The emoji schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                      true
+                    ]
+                  }
+                },
+                "additionalProperties": true
+              },
+              "value": {
+                "$id": "#/properties/actions/items/anyOf/0/properties/value",
+                "type": "string",
+                "title": "The value schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "click_me_123"
+                ]
+              },
+              "type": {
+                "$id": "#/properties/actions/items/anyOf/0/properties/type",
+                "type": "string",
+                "title": "The type schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "button"
+                ]
+              },
+              "action_ts": {
+                "$id": "#/properties/actions/items/anyOf/0/properties/action_ts",
+                "type": "string",
+                "title": "The action_ts schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "1606915817.520073"
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "message": {
+      "$id": "#/properties/message",
+      "type": "object",
+      "title": "The message schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "type": "message",
+          "subtype": "bot_message",
+          "text": "Text",
+          "ts": "1606915814.000100",
+          "username": "COVID Tracker",
+          "bot_id": "B79NT9Q31",
+          "blocks": [
+            {
+              "type": "section",
+              "block_id": "Jzyn",
+              "text": {
+                "type": "plain_text",
+                "text": "This is a plain text section block.",
+                "emoji": true
+              }
+            },
+            {
+              "type": "section",
+              "block_id": "mTs9/",
+              "text": {
+                "type": "mrkdwn",
+                "text": "This is a section block with a button.",
+                "verbatim": false
+              },
+              "accessory": {
+                "type": "button",
+                "action_id": "button-action",
+                "text": {
+                  "type": "plain_text",
+                  "text": "Click Me",
+                  "emoji": true
+                },
+                "value": "click_me_123"
+              }
+            },
+            {
+              "type": "section",
+              "block_id": "xIN",
+              "text": {
+                "type": "mrkdwn",
+                "text": "This is a section block with a button.",
+                "verbatim": false
+              },
+              "accessory": {
+                "type": "button",
+                "action_id": "button-action",
+                "text": {
+                  "type": "plain_text",
+                  "text": "Click Me",
+                  "emoji": true
+                },
+                "value": "click_me_123"
+              }
+            }
+          ]
+        }
+      ],
+      "required": [
+        "type",
+        "subtype",
+        "text",
+        "ts",
+        "username",
+        "bot_id",
+        "blocks"
+      ],
+      "properties": {
+        "type": {
+          "$id": "#/properties/message/properties/type",
+          "type": "string",
+          "title": "The type schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "message"
+          ]
+        },
+        "subtype": {
+          "$id": "#/properties/message/properties/subtype",
+          "type": "string",
+          "title": "The subtype schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "bot_message"
+          ]
+        },
+        "text": {
+          "$id": "#/properties/message/properties/text",
+          "type": "string",
+          "title": "The text schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "Text"
+          ]
+        },
+        "ts": {
+          "$id": "#/properties/message/properties/ts",
+          "type": "string",
+          "title": "The ts schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "1606915814.000100"
+          ]
+        },
+        "username": {
+          "$id": "#/properties/message/properties/username",
+          "type": "string",
+          "title": "The username schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "COVID Tracker"
+          ]
+        },
+        "bot_id": {
+          "$id": "#/properties/message/properties/bot_id",
+          "type": "string",
+          "title": "The bot_id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "B79NT9Q31"
+          ]
+        },
+        "blocks": {
+          "$id": "#/properties/message/properties/blocks",
+          "type": "array",
+          "title": "The blocks schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [
+            [
+              {
+                "type": "section",
+                "block_id": "Jzyn",
+                "text": {
+                  "type": "plain_text",
+                  "text": "This is a plain text section block.",
+                  "emoji": true
+                }
+              },
+              {
+                "type": "section",
+                "block_id": "mTs9/",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "This is a section block with a button.",
+                  "verbatim": false
+                },
+                "accessory": {
+                  "type": "button",
+                  "action_id": "button-action",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Click Me",
+                    "emoji": true
+                  },
+                  "value": "click_me_123"
+                }
+              }
+            ]
+          ],
+          "additionalItems": true,
+          "items": {
+            "$id": "#/properties/message/properties/blocks/items",
+            "anyOf": [
+              {
+                "$id": "#/properties/message/properties/blocks/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                  {
+                    "type": "section",
+                    "block_id": "Jzyn",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "This is a plain text section block.",
+                      "emoji": true
+                    }
+                  }
+                ],
+                "required": [
+                  "type",
+                  "block_id",
+                  "text"
+                ],
+                "properties": {
+                  "type": {
+                    "$id": "#/properties/message/properties/blocks/items/anyOf/0/properties/type",
+                    "type": "string",
+                    "title": "The type schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "section"
+                    ]
+                  },
+                  "block_id": {
+                    "$id": "#/properties/message/properties/blocks/items/anyOf/0/properties/block_id",
+                    "type": "string",
+                    "title": "The block_id schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "Jzyn"
+                    ]
+                  },
+                  "text": {
+                    "$id": "#/properties/message/properties/blocks/items/anyOf/0/properties/text",
+                    "type": "object",
+                    "title": "The text schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                      {
+                        "type": "plain_text",
+                        "text": "This is a plain text section block.",
+                        "emoji": true
+                      }
+                    ],
+                    "required": [
+                      "type",
+                      "text",
+                      "emoji"
+                    ],
+                    "properties": {
+                      "type": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/0/properties/text/properties/type",
+                        "type": "string",
+                        "title": "The type schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "plain_text"
+                        ]
+                      },
+                      "text": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/0/properties/text/properties/text",
+                        "type": "string",
+                        "title": "The text schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "This is a plain text section block."
+                        ]
+                      },
+                      "emoji": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/0/properties/text/properties/emoji",
+                        "type": "boolean",
+                        "title": "The emoji schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": false,
+                        "examples": [
+                          true
+                        ]
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              {
+                "$id": "#/properties/message/properties/blocks/items/anyOf/1",
+                "type": "object",
+                "title": "The second anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                  {
+                    "type": "section",
+                    "block_id": "mTs9/",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "This is a section block with a button.",
+                      "verbatim": false
+                    },
+                    "accessory": {
+                      "type": "button",
+                      "action_id": "button-action",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Click Me",
+                        "emoji": true
+                      },
+                      "value": "click_me_123"
+                    }
+                  }
+                ],
+                "required": [
+                  "type",
+                  "block_id",
+                  "text",
+                  "accessory"
+                ],
+                "properties": {
+                  "type": {
+                    "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/type",
+                    "type": "string",
+                    "title": "The type schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "section"
+                    ]
+                  },
+                  "block_id": {
+                    "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/block_id",
+                    "type": "string",
+                    "title": "The block_id schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "mTs9/"
+                    ]
+                  },
+                  "text": {
+                    "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/text",
+                    "type": "object",
+                    "title": "The text schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "This is a section block with a button.",
+                        "verbatim": false
+                      }
+                    ],
+                    "required": [
+                      "type",
+                      "text",
+                      "verbatim"
+                    ],
+                    "properties": {
+                      "type": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/text/properties/type",
+                        "type": "string",
+                        "title": "The type schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "mrkdwn"
+                        ]
+                      },
+                      "text": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/text/properties/text",
+                        "type": "string",
+                        "title": "The text schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "This is a section block with a button."
+                        ]
+                      },
+                      "verbatim": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/text/properties/verbatim",
+                        "type": "boolean",
+                        "title": "The verbatim schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": false,
+                        "examples": [
+                          false
+                        ]
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "accessory": {
+                    "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/accessory",
+                    "type": "object",
+                    "title": "The accessory schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                      {
+                        "type": "button",
+                        "action_id": "button-action",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "Click Me",
+                          "emoji": true
+                        },
+                        "value": "click_me_123"
+                      }
+                    ],
+                    "required": [
+                      "type",
+                      "action_id",
+                      "text",
+                      "value"
+                    ],
+                    "properties": {
+                      "type": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/accessory/properties/type",
+                        "type": "string",
+                        "title": "The type schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "button"
+                        ]
+                      },
+                      "action_id": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/accessory/properties/action_id",
+                        "type": "string",
+                        "title": "The action_id schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "button-action"
+                        ]
+                      },
+                      "text": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/accessory/properties/text",
+                        "type": "object",
+                        "title": "The text schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                          {
+                            "type": "plain_text",
+                            "text": "Click Me",
+                            "emoji": true
+                          }
+                        ],
+                        "required": [
+                          "type",
+                          "text",
+                          "emoji"
+                        ],
+                        "properties": {
+                          "type": {
+                            "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/accessory/properties/text/properties/type",
+                            "type": "string",
+                            "title": "The type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                              "plain_text"
+                            ]
+                          },
+                          "text": {
+                            "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/accessory/properties/text/properties/text",
+                            "type": "string",
+                            "title": "The text schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                              "Click Me"
+                            ]
+                          },
+                          "emoji": {
+                            "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/accessory/properties/text/properties/emoji",
+                            "type": "boolean",
+                            "title": "The emoji schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                              true
+                            ]
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "value": {
+                        "$id": "#/properties/message/properties/blocks/items/anyOf/1/properties/accessory/properties/value",
+                        "type": "string",
+                        "title": "The value schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                          "click_me_123"
+                        ]
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "container": {
+      "$id": "#/properties/container",
+      "type": "object",
+      "title": "The container schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "type": "message",
+          "message_ts": "1606915814.000100",
+          "channel_id": "D784YUNM7",
+          "is_ephemeral": false
+        }
+      ],
+      "required": [
+        "type",
+        "message_ts",
+        "channel_id",
+        "is_ephemeral"
+      ],
+      "properties": {
+        "type": {
+          "$id": "#/properties/container/properties/type",
+          "type": "string",
+          "title": "The type schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "message"
+          ]
+        },
+        "message_ts": {
+          "$id": "#/properties/container/properties/message_ts",
+          "type": "string",
+          "title": "The message_ts schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "1606915814.000100"
+          ]
+        },
+        "channel_id": {
+          "$id": "#/properties/container/properties/channel_id",
+          "type": "string",
+          "title": "The channel_id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "D784YUNM7"
+          ]
+        },
+        "is_ephemeral": {
+          "$id": "#/properties/container/properties/is_ephemeral",
+          "type": "boolean",
+          "title": "The is_ephemeral schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            false
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

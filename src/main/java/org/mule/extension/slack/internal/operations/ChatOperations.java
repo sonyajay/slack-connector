@@ -4,6 +4,7 @@ import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
 import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICATION_JSON;
 
 import org.mule.extension.slack.api.ParsingMode;
+import org.mule.extension.slack.internal.EphemeralMessageConfigurationGroup;
 import org.mule.extension.slack.internal.MessageConfigurationGroup;
 import org.mule.extension.slack.internal.connection.SlackConnection;
 import org.mule.extension.slack.internal.error.PostMessageErrorProvider;
@@ -11,6 +12,8 @@ import org.mule.extension.slack.internal.metadata.AttachmentsTypeResolver;
 import org.mule.extension.slack.internal.valueprovider.ChannelsKeyResolver;
 import org.mule.extension.slack.internal.metadata.PostMessageAttributesResolver;
 import org.mule.extension.slack.internal.metadata.PostMessageOutputResolver;
+import org.mule.runtime.api.meta.ExpressionSupport;
+import org.mule.runtime.extension.api.annotation.Expression;
 import org.mule.runtime.extension.api.annotation.dsl.xml.ParameterDsl;
 import org.mule.runtime.extension.api.annotation.error.Throws;
 import org.mule.runtime.extension.api.annotation.metadata.OutputResolver;
@@ -48,13 +51,49 @@ public class ChatOperations extends SlackOperations {
     public void postMessage(@Connection SlackConnection slackConnection,
                             @OfValues(ChannelsKeyResolver.class) String channel,
                             @Optional @ParameterDsl(allowInlineDefinition = false) @Text String message,
-                            @Content @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream attachments,
+                            @Content(primary = true) @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream attachments,
+                            @Content @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream blocks,
                             @ParameterGroup(name = "Message Configuration") MessageConfigurationGroup messageConfiguration,
                             CompletionCallback<InputStream, InputStream> callback) {
         slackConnection.chat
-                .postMessage(message, channel, attachments, messageConfiguration.getUsername(), messageConfiguration)
+                .postMessage(message, channel, attachments, blocks, messageConfiguration.getUsername(), messageConfiguration)
                 .whenCompleteAsync(createConsumer("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
     }
+
+    @Throws(PostMessageErrorProvider.class)
+    @OutputResolver(output = PostMessageOutputResolver.class, attributes = PostMessageAttributesResolver.class)
+    @MediaType(APPLICATION_JSON)
+    @DisplayName("Chat - Schedule Message")
+    public void scheduleMessage(@Connection SlackConnection slackConnection,
+                            @OfValues(ChannelsKeyResolver.class) String channel,
+                                @Expression(ExpressionSupport.REQUIRED) @Example("#[Slack::DateUtils::minutesFromNow(1)]") long postAt,
+                                @Optional @ParameterDsl(allowInlineDefinition = false) @Text String message,
+                            @Content(primary = true) @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream attachments,
+                            @Content @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream blocks,
+                            @ParameterGroup(name = "Message Configuration") MessageConfigurationGroup messageConfiguration,
+                            CompletionCallback<InputStream, InputStream> callback) {
+        slackConnection.chat
+                .scheduleMessage(message, channel, postAt, attachments, blocks, messageConfiguration.getUsername(), messageConfiguration)
+                .whenCompleteAsync(createConsumer("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
+    }
+
+    @Throws(PostMessageErrorProvider.class)
+    @OutputResolver(output = PostMessageOutputResolver.class, attributes = PostMessageAttributesResolver.class)
+    @MediaType(APPLICATION_JSON)
+    @DisplayName("Chat - Post Ephemeral Message")
+    public void postEphemeralMessage(@Connection SlackConnection slackConnection,
+                            @OfValues(ChannelsKeyResolver.class) String channel,
+                            String user,
+                            @Optional @ParameterDsl(allowInlineDefinition = false) @Text String message,
+                            @Content(primary = true) @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream attachments,
+                            @Content @Optional @TypeResolver(AttachmentsTypeResolver.class) InputStream blocks,
+                            @ParameterGroup(name = "Message Configuration") EphemeralMessageConfigurationGroup messageConfiguration,
+                            CompletionCallback<InputStream, InputStream> callback) {
+        slackConnection.chat
+                .postEphemeralMessage(message, channel, user, attachments, blocks, messageConfiguration.getUsername(), messageConfiguration)
+                .whenCompleteAsync(createConsumer("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
+    }
+
 
     /**
      * This operation updates a message in a channel.
@@ -90,4 +129,5 @@ public class ChatOperations extends SlackOperations {
                 .update(message, channel, attachments, timestamp, asUser, linkNames, parse)
                 .whenCompleteAsync(createConsumer("#[payload.message]", "#[payload - 'message' - 'ok']", EXECUTION, callback));
     }
+
 }

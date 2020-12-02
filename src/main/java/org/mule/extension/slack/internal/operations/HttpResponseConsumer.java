@@ -52,8 +52,10 @@ public class HttpResponseConsumer<P, A> implements BiConsumer<HttpResponse, Thro
     @Override
     public void accept(HttpResponse httpResponse, Throwable throwable) {
         try {
-            if(httpResponse.getStatusCode() == 413) {
+            if (httpResponse.getStatusCode() == 413) {
                 callback.error(new SlackException("Entity too long, your message or attachments are too long.", EXECUTION));
+            } else if (httpResponse.getStatusCode() == 429) {
+                callback.error(new SlackException("Too many request, try after: " + httpResponse.getHeaderValueIgnoreCase("Retry-After"), EXECUTION));
             } else {
                 processHttpResponse(callback, payloadExpression, attributesExpression, getBindingContext(httpResponse.getEntity().getContent()), slackError);
             }
@@ -88,14 +90,14 @@ public class HttpResponseConsumer<P, A> implements BiConsumer<HttpResponse, Thro
                 resultBuilder.attributes(getEmptyMap(mediaType));
             }
 
-            resultBuilder.mediaType(mediaType);
+            resultBuilder.attributesMediaType(mediaType);
         }
 
         callback.success(resultBuilder.build());
     }
 
     private Object getEmptyMap(MediaType mediaType) {
-        if(mediaType.toString().toLowerCase().contains("json")) {
+        if (mediaType.toString().toLowerCase().contains("json")) {
             return "{}";
         } else {
             return emptyMap();

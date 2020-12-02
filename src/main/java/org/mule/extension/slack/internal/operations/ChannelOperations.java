@@ -25,6 +25,7 @@ import java.util.Map;
 import static org.mule.extension.slack.internal.error.SlackError.EXECUTION;
 import static org.mule.runtime.extension.api.annotation.param.display.Placement.ADVANCED_TAB;
 
+@Deprecated
 public class ChannelOperations extends SlackOperations {
 
     /**
@@ -37,7 +38,7 @@ public class ChannelOperations extends SlackOperations {
      */
     //TODO THIS CAN USE `excludeMembers` parameter to improve metadata.
     @OutputResolver(output = ListChannelsOutputResolver.class)
-    @DisplayName("Channels - List")
+    @DisplayName("Channels - List (Deprecated)")
     public PagingProvider<SlackConnection, Map<String, Object>> listChannels(@Optional(defaultValue = "false") boolean excludeArchived,
                                                                              @Optional(defaultValue = "false") boolean excludeMembers) {
 
@@ -56,7 +57,7 @@ public class ChannelOperations extends SlackOperations {
      */
     @OutputJsonType(schema = "metadata/channel-info-schema.json")
     @MediaType(MediaType.APPLICATION_JSON)
-    @DisplayName("Channels - Info")
+    @DisplayName("Channels - Info (Deprecated)")
     public void channelInfo(@Connection SlackConnection slackConnection,
                             @OfValues(ChannelsValueProvider.class) @Example("C1234567890") @Optional String channel,
                             @Optional(defaultValue = "false") boolean includeLocale,
@@ -75,7 +76,7 @@ public class ChannelOperations extends SlackOperations {
      * @param callback
      */
     @MediaType(MediaType.APPLICATION_JSON)
-    @DisplayName("Channels - Set Topic")
+    @DisplayName("Channels - Set Topic (Deprecated)")
     @OutputResolver(output = StringOutputResolver.class)
     public void setChannelTopic(@Connection SlackConnection slackConnection,
                                 @OfValues(ChannelsValueProvider.class) @Example("C1234567890") @Optional String channel,
@@ -95,7 +96,7 @@ public class ChannelOperations extends SlackOperations {
      * @param callback
      */
     @MediaType(MediaType.APPLICATION_JSON)
-    @DisplayName("Channels - Set Purpose")
+    @DisplayName("Channels - Set Purpose (Deprecated)")
     @OutputResolver(output = StringOutputResolver.class)
     public void setChannelPurpose(@Connection SlackConnection slackConnection,
                                   @OfValues(ChannelsValueProvider.class) @Example("C1234567890") @Optional String channel,
@@ -121,7 +122,7 @@ public class ChannelOperations extends SlackOperations {
      */
     @OutputResolver(output = ChannelInfoOutputResolver.class)
     @MediaType(MediaType.APPLICATION_JSON)
-    @DisplayName("Channels - Rename")
+    @DisplayName("Channels - Rename (Deprecated)")
     public void renameChannel(@Connection SlackConnection slackConnection,
                               @OfValues(ChannelsValueProvider.class) @Example("C1234567890") @Optional String channel,
                               @Example("mule-engineers-channel") String name,
@@ -142,7 +143,7 @@ public class ChannelOperations extends SlackOperations {
      */
     @OutputResolver(output = ChannelInfoOutputResolver.class)
     @MediaType(MediaType.APPLICATION_JSON)
-    @DisplayName("Channels - Invite")
+    @DisplayName("Channels - Invite (Deprecated)")
     public void inviteToChannel(@Connection SlackConnection slackConnection,
                                 @OfValues(ChannelsValueProvider.class) @Example("C1234567890") @Optional String channel,
                                 @OfValues(UsersValueProvider.class) String user,

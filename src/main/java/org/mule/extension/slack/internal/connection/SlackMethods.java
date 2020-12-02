@@ -19,10 +19,40 @@ public class SlackMethods {
     public static final String CHANNELS_MARK = "channels.mark";
     public static final String CHANNELS_UNARCHIVE = "channels.unarchive";
     public static final String CHANNELS_ARCHIVE = "channels.archive";
+
+    public static final String CONVERSATIONS_ARCHIVE = "conversations.archive";
+    public static final String CONVERSATIONS_CLOSE = "conversations.close";
+    public static final String CONVERSATIONS_CREATE = "conversations.create";
+    public static final String CONVERSATIONS_HISTORY = "conversations.history";
+    public static final String CONVERSATIONS_INFO = "conversations.info";
+    public static final String CONVERSATIONS_INVITE = "conversations.invite";
+    public static final String CONVERSATIONS_JOIN = "conversations.join";
+    public static final String CONVERSATIONS_KICK = "conversations.kick";
+    public static final String CONVERSATIONS_LEAVE = "conversations.leave";
     public static final String CONVERSATIONS_LIST = "conversations.list";
+    public static final String CONVERSATIONS_MARK = "conversations.mark";
+    public static final String CONVERSATIONS_MEMBERS = "conversations.members";
+    public static final String CONVERSATIONS_OPEN = "conversations.open";
+    public static final String CONVERSATIONS_RENAME = "conversations.rename";
+    public static final String CONVERSATIONS_REPLIES = "conversations.replies";
+    public static final String CONVERSATIONS_SETPURPOSE = "conversations.setPurpose";
+    public static final String CONVERSATIONS_SETTOPIC = "conversations.setTopic";
+    public static final String CONVERSATIONS_UNARCHIVE = "conversations.unarchive";
+
     public static final String DIALOG_OPEN = "dialog.open";
+
+    public static final String VIEWS_OPEN = "views.open";
+    public static final String VIEWS_PUBLISH = "views.publish";
+    public static final String VIEWS_PUSH = "views.push";
+    public static final String VIEWS_UPDATE = "views.update";
+
     public static final String AUTH_TEST = "auth.test";
+    public static final String REACTIONS_ADD = "reactions.add";
+    public static final String REACTIONS_GET = "reactions.get";
+    public static final String REACTIONS_REMOVE = "reactions.remove";
     public static final String CHAT_POSTMESSAGE = "chat.postMessage";
+    public static final String CHAT_SCHEDULEMESSAGE = "chat.scheduleMessage";
+    public static final String CHAT_POSTEPHEMERAL = "chat.postEphemeral";
     public static final String CHAT_DELETE = "chat.delete";
     public static final String CHAT_UPDATE = "chat.update";
     public static final String IM_OPEN = "im.open";

@@ -1,0 +1,563 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "Message",
+  "description": "A Message.",
+  "default": {},
+  "examples": [
+    {
+      "type": "message",
+      "subtype": "bot_message",
+      "text": "New Idea has been published on *Connectors*",
+      "ts": "1601325541.000300",
+      "username": "MuleSoft Ideas Portal",
+      "bot_id": "B833GSD5E",
+      "blocks": [
+        {
+          "type": "section",
+          "block_id": "GlvF",
+          "fields": [
+            {
+              "type": "mrkdwn",
+              "text": "*Created* : 2020-09-28",
+              "verbatim": false
+            },
+            {
+              "type": "mrkdwn",
+              "text": "*Creator*: Randall Tom",
+              "verbatim": false
+            },
+            {
+              "type": "mrkdwn",
+              "text": "*Link*: <https://help.mulesoft.com/s/ideas#0872T000000Xa6rQAC|0872T000000Xa6rQAC>",
+              "verbatim": false
+            }
+          ],
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Body*: Please allow invalid dates in Mule 3 HL7 EDI connector to be parsed without throwing exception.",
+            "verbatim": false
+          }
+        }
+      ],
+      "user": "U061F7AUR",
+      "attachments": [
+        {
+          "service_name": "Leg end nary a laugh, Ink.",
+          "text": "This is likely a pun about the weather.",
+          "fallback": "We're withholding a pun from you",
+          "thumb_url": "https://badpuns.example.com/puns/123.png",
+          "thumb_width": 1920,
+          "thumb_height": 700,
+          "id": 1
+        }
+      ],
+      "channel": "C2147483705",
+      "edited": {
+        "user": "U2147483697",
+        "ts": "1355517536.000001"
+      }
+    }
+  ],
+  "required": [
+    "type",
+    "subtype",
+    "text",
+    "ts",
+    "username",
+    "bot_id",
+    "blocks",
+    "user",
+    "attachments",
+    "channel",
+    "edited"
+  ],
+  "properties": {
+    "type": {
+      "$id": "#/properties/type",
+      "type": "string",
+      "title": "The type schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "message"
+      ]
+    },
+    "subtype": {
+      "$id": "#/properties/subtype",
+      "type": "string",
+      "title": "The subtype schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "bot_message"
+      ]
+    },
+    "text": {
+      "$id": "#/properties/text",
+      "type": "string",
+      "title": "The text schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "New Idea has been published on *Connectors*"
+      ]
+    },
+    "ts": {
+      "$id": "#/properties/ts",
+      "type": "string",
+      "title": "The ts schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "1601325541.000300"
+      ]
+    },
+    "username": {
+      "$id": "#/properties/username",
+      "type": "string",
+      "title": "The username schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "MuleSoft Ideas Portal"
+      ]
+    },
+    "bot_id": {
+      "$id": "#/properties/bot_id",
+      "type": "string",
+      "title": "The bot_id schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "B833GSD5E"
+      ]
+    },
+    "blocks": {
+      "$id": "#/properties/blocks",
+      "type": "array",
+      "title": "The blocks schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "type": "section",
+            "block_id": "GlvF",
+            "fields": [
+              {
+                "type": "mrkdwn",
+                "text": "*Created* : 2020-09-28",
+                "verbatim": false
+              },
+              {
+                "type": "mrkdwn",
+                "text": "*Creator*: Randall Tom",
+                "verbatim": false
+              },
+              {
+                "type": "mrkdwn",
+                "text": "*Link*: <https://help.mulesoft.com/s/ideas#0872T000000Xa6rQAC|0872T000000Xa6rQAC>",
+                "verbatim": false
+              }
+            ],
+            "text": {
+              "type": "mrkdwn",
+              "text": "*Body*: Please allow invalid dates in Mule 3 HL7 EDI connector to be parsed without throwing exception.",
+              "verbatim": false
+            }
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/blocks/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/blocks/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "type": "section",
+                "block_id": "GlvF",
+                "fields": [
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Created* : 2020-09-28",
+                    "verbatim": false
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Creator*: Randall Tom",
+                    "verbatim": false
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Link*: <https://help.mulesoft.com/s/ideas#0872T000000Xa6rQAC|0872T000000Xa6rQAC>",
+                    "verbatim": false
+                  }
+                ],
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*Body*: Please allow invalid dates in Mule 3 HL7 EDI connector to be parsed without throwing exception.",
+                  "verbatim": false
+                }
+              }
+            ],
+            "required": [
+              "type",
+              "block_id",
+              "fields",
+              "text"
+            ],
+            "properties": {
+              "type": {
+                "$id": "#/properties/blocks/items/anyOf/0/properties/type",
+                "type": "string",
+                "title": "The type schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "section"
+                ]
+              },
+              "block_id": {
+                "$id": "#/properties/blocks/items/anyOf/0/properties/block_id",
+                "type": "string",
+                "title": "The block_id schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "GlvF"
+                ]
+              },
+              "fields": {
+                "$id": "#/properties/blocks/items/anyOf/0/properties/fields",
+                "type": "array",
+                "title": "The fields schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": [],
+                "examples": [
+                  [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Created* : 2020-09-28",
+                      "verbatim": false
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Creator*: Randall Tom",
+                      "verbatim": false
+                    }
+                  ]
+                ],
+                "additionalItems": true,
+                "items": {
+                  "$id": "#/properties/blocks/items/anyOf/0/properties/fields/items",
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/blocks/items/anyOf/0/properties/fields/items/anyOf/0",
+                      "type": "object",
+                      "title": "The first anyOf schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": {},
+                      "examples": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Created* : 2020-09-28",
+                          "verbatim": false
+                        }
+                      ],
+                      "required": [
+                        "type",
+                        "text",
+                        "verbatim"
+                      ],
+                      "properties": {
+                        "type": {
+                          "$id": "#/properties/blocks/items/anyOf/0/properties/fields/items/anyOf/0/properties/type",
+                          "type": "string",
+                          "title": "The type schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": "",
+                          "examples": [
+                            "mrkdwn"
+                          ]
+                        },
+                        "text": {
+                          "$id": "#/properties/blocks/items/anyOf/0/properties/fields/items/anyOf/0/properties/text",
+                          "type": "string",
+                          "title": "The text schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": "",
+                          "examples": [
+                            "*Created* : 2020-09-28"
+                          ]
+                        },
+                        "verbatim": {
+                          "$id": "#/properties/blocks/items/anyOf/0/properties/fields/items/anyOf/0/properties/verbatim",
+                          "type": "boolean",
+                          "title": "The verbatim schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": false,
+                          "examples": [
+                            false
+                          ]
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  ]
+                }
+              },
+              "text": {
+                "$id": "#/properties/blocks/items/anyOf/0/properties/text",
+                "type": "object",
+                "title": "The text schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Body*: Please allow invalid dates in Mule 3 HL7 EDI connector to be parsed without throwing exception.",
+                    "verbatim": false
+                  }
+                ],
+                "required": [
+                  "type",
+                  "text",
+                  "verbatim"
+                ],
+                "properties": {
+                  "type": {
+                    "$id": "#/properties/blocks/items/anyOf/0/properties/text/properties/type",
+                    "type": "string",
+                    "title": "The type schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "mrkdwn"
+                    ]
+                  },
+                  "text": {
+                    "$id": "#/properties/blocks/items/anyOf/0/properties/text/properties/text",
+                    "type": "string",
+                    "title": "The text schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "*Body*: Please allow invalid dates in Mule 3 HL7 EDI connector to be parsed without throwing exception."
+                    ]
+                  },
+                  "verbatim": {
+                    "$id": "#/properties/blocks/items/anyOf/0/properties/text/properties/verbatim",
+                    "type": "boolean",
+                    "title": "The verbatim schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                      false
+                    ]
+                  }
+                },
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "user": {
+      "$id": "#/properties/user",
+      "type": "string",
+      "title": "The user schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "U061F7AUR"
+      ]
+    },
+    "attachments": {
+      "$id": "#/properties/attachments",
+      "type": "array",
+      "title": "The attachments schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "service_name": "Leg end nary a laugh, Ink.",
+            "text": "This is likely a pun about the weather.",
+            "fallback": "We're withholding a pun from you",
+            "thumb_url": "https://badpuns.example.com/puns/123.png",
+            "thumb_width": 1920,
+            "thumb_height": 700,
+            "id": 1
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/attachments/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/attachments/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "service_name": "Leg end nary a laugh, Ink.",
+                "text": "This is likely a pun about the weather.",
+                "fallback": "We're withholding a pun from you",
+                "thumb_url": "https://badpuns.example.com/puns/123.png",
+                "thumb_width": 1920,
+                "thumb_height": 700,
+                "id": 1
+              }
+            ],
+            "required": [
+              "service_name",
+              "text",
+              "fallback",
+              "thumb_url",
+              "thumb_width",
+              "thumb_height",
+              "id"
+            ],
+            "properties": {
+              "service_name": {
+                "$id": "#/properties/attachments/items/anyOf/0/properties/service_name",
+                "type": "string",
+                "title": "The service_name schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "Leg end nary a laugh, Ink."
+                ]
+              },
+              "text": {
+                "$id": "#/properties/attachments/items/anyOf/0/properties/text",
+                "type": "string",
+                "title": "The text schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "This is likely a pun about the weather."
+                ]
+              },
+              "fallback": {
+                "$id": "#/properties/attachments/items/anyOf/0/properties/fallback",
+                "type": "string",
+                "title": "The fallback schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "We're withholding a pun from you"
+                ]
+              },
+              "thumb_url": {
+                "$id": "#/properties/attachments/items/anyOf/0/properties/thumb_url",
+                "type": "string",
+                "title": "The thumb_url schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "https://badpuns.example.com/puns/123.png"
+                ]
+              },
+              "thumb_width": {
+                "$id": "#/properties/attachments/items/anyOf/0/properties/thumb_width",
+                "type": "integer",
+                "title": "The thumb_width schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0,
+                "examples": [
+                  1920
+                ]
+              },
+              "thumb_height": {
+                "$id": "#/properties/attachments/items/anyOf/0/properties/thumb_height",
+                "type": "integer",
+                "title": "The thumb_height schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0,
+                "examples": [
+                  700
+                ]
+              },
+              "id": {
+                "$id": "#/properties/attachments/items/anyOf/0/properties/id",
+                "type": "integer",
+                "title": "The id schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0,
+                "examples": [
+                  1
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "channel": {
+      "$id": "#/properties/channel",
+      "type": "string",
+      "title": "The channel schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "C2147483705"
+      ]
+    },
+    "edited": {
+      "$id": "#/properties/edited",
+      "type": "object",
+      "title": "The edited schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "user": "U2147483697",
+          "ts": "1355517536.000001"
+        }
+      ],
+      "required": [
+        "user",
+        "ts"
+      ],
+      "properties": {
+        "user": {
+          "$id": "#/properties/edited/properties/user",
+          "type": "string",
+          "title": "The user schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "U2147483697"
+          ]
+        },
+        "ts": {
+          "$id": "#/properties/edited/properties/ts",
+          "type": "string",
+          "title": "The ts schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "1355517536.000001"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

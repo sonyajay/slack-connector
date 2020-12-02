@@ -23,6 +23,7 @@ import org.mule.runtime.extension.api.runtime.streaming.PagingProvider;
 import java.io.InputStream;
 import java.util.Map;
 
+@Deprecated
 public class GroupOperations extends SlackOperations {
 
     /**
@@ -35,7 +36,7 @@ public class GroupOperations extends SlackOperations {
      * @param excludeMembers  Exclude the members from each group
      */
     @OutputResolver(output = ListGroupsOutputResolver.class)
-    @DisplayName("Groups - List")
+    @DisplayName("Groups - List (Deprecated)")
     public PagingProvider<SlackConnection, Map<String, Object>> listGroups(@Optional(defaultValue = "false") boolean excludeArchived,
                                                                            @Optional(defaultValue = "false") boolean excludeMembers) {
 
@@ -52,7 +53,7 @@ public class GroupOperations extends SlackOperations {
      */
     @OutputResolver(output = GroupInfoOutputResolver.class)
     @MediaType(APPLICATION_JSON)
-    @DisplayName("Groups - Info")
+    @DisplayName("Groups - Info (Deprecated)")
     public void groupInfo(@Connection SlackConnection slackConnection,
                           @OfValues(GroupsValueProvider.class) String channel,
                           @Optional(defaultValue = "false") boolean includeLocal,
@@ -73,7 +74,7 @@ public class GroupOperations extends SlackOperations {
      */
     @OutputResolver(output = RenameGroupOutputResolver.class)
     @MediaType(APPLICATION_JSON)
-    @DisplayName("Groups - Rename")
+    @DisplayName("Groups - Rename (Deprecated)")
     public void renameGroup(@Connection SlackConnection slackConnection,
                             @OfValues(GroupsValueProvider.class) String channel,
                             @Example("mule-engineers-group") String name,
@@ -95,7 +96,7 @@ public class GroupOperations extends SlackOperations {
      */
     @OutputResolver(output = StringOutputResolver.class)
     @MediaType(APPLICATION_JSON)
-    @DisplayName("Groups - Set Purpose")
+    @DisplayName("Groups - Set Purpose (Deprecated)")
     public void setGroupPurpose(@Connection SlackConnection slackConnection,
                                 @OfValues(GroupsValueProvider.class) String channel,
                                 @Example("Group to talk about Mule products") String purpose,
@@ -115,7 +116,7 @@ public class GroupOperations extends SlackOperations {
      */
     @OutputResolver(output = StringOutputResolver.class)
     @MediaType(APPLICATION_JSON)
-    @DisplayName("Groups - Set Topic")
+    @DisplayName("Groups - Set Topic (Deprecated)")
     public void setGroupTopic(@Connection SlackConnection slackConnection,
                               @OfValues(GroupsValueProvider.class) String channel,
                               @Example("Group to talk about Mule products") String topic,

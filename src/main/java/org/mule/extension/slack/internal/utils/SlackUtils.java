@@ -17,12 +17,13 @@ public class SlackUtils {
     public static BindingContext getBindingContext(Object response) {
         return BindingContext.builder().addBinding("payload", new TypedValue<>(response, APPLICATION_JSON)).build();
     }
+
     public static BindingContext getJavaBindingContext(Object response) {
         return BindingContext.builder().addBinding("payload", new TypedValue<>(response, DataType.OBJECT)).build();
     }
 
     public static MetadataType getMetadataTypeFromResource(String resource, String typeAlias) {
         InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
-        return new JsonTypeLoader(IOUtils.toString(resourceAsStream)).load(null, typeAlias).get();
+        return new JsonTypeLoader(IOUtils.toString(resourceAsStream)).load(typeAlias, typeAlias).get();
     }
 }

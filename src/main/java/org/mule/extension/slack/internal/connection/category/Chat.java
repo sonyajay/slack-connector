@@ -3,10 +3,13 @@ package org.mule.extension.slack.internal.connection.category;
 import static java.lang.String.valueOf;
 import static org.mule.extension.slack.internal.connection.SlackConnection.ifPresent;
 import static org.mule.extension.slack.internal.connection.SlackMethods.API_URI;
+import static org.mule.extension.slack.internal.connection.SlackMethods.CHAT_POSTEPHEMERAL;
 import static org.mule.extension.slack.internal.connection.SlackMethods.CHAT_POSTMESSAGE;
+import static org.mule.extension.slack.internal.connection.SlackMethods.CHAT_SCHEDULEMESSAGE;
 import static org.mule.extension.slack.internal.connection.SlackMethods.CHAT_UPDATE;
 
 import org.mule.extension.slack.api.ParsingMode;
+import org.mule.extension.slack.internal.EphemeralMessageConfigurationGroup;
 import org.mule.extension.slack.internal.MessageConfigurationGroup;
 import org.mule.extension.slack.internal.connection.SlackConnection;
 import org.mule.runtime.api.util.MultiMap;
@@ -27,12 +30,14 @@ public class Chat {
     public CompletableFuture<HttpResponse> postMessage(String text,
                                                        String channel,
                                                        InputStream attachments,
+                                                       InputStream blocks,
                                                        String username,
                                                        MessageConfigurationGroup messageConfig) {
         MultiMap<String, String> parameterMap = new MultiMap<>();
         parameterMap.put("channel", channel);
         parameterMap.put("text", text);
         ifPresent(attachments, att -> parameterMap.put("attachments", IOUtils.toString(att)));
+        ifPresent(blocks, blcks -> parameterMap.put("blocks", IOUtils.toString(blcks)));
         ifPresent(username, user -> parameterMap.put("username", user));
         parameterMap.put("link_names", valueOf(messageConfig.isLinkNames()));
         ifPresent(messageConfig.getParse(), parseMode -> parameterMap.put("parse", valueOf(parseMode)));
@@ -44,6 +49,56 @@ public class Chat {
         ifPresent(messageConfig.getThreadTimeStamp(), val -> parameterMap.put("thread_ts", val));
 
         return slackConnection.sendAsyncRequest(API_URI + CHAT_POSTMESSAGE, parameterMap);
+
+    }
+
+    public CompletableFuture<HttpResponse> scheduleMessage(String text,
+                                                       String channel,
+                                                       long postAt,
+                                                       InputStream attachments,
+                                                       InputStream blocks,
+                                                       String username,
+                                                       MessageConfigurationGroup messageConfig) {
+        MultiMap<String, String> parameterMap = new MultiMap<>();
+        parameterMap.put("channel", channel);
+        parameterMap.put("text", text);
+        parameterMap.put("post_at", String.valueOf(postAt));
+        ifPresent(attachments, att -> parameterMap.put("attachments", IOUtils.toString(att)));
+        ifPresent(blocks, blcks -> parameterMap.put("blocks", IOUtils.toString(blcks)));
+        ifPresent(username, user -> parameterMap.put("username", user));
+        parameterMap.put("link_names", valueOf(messageConfig.isLinkNames()));
+        ifPresent(messageConfig.getParse(), parseMode -> parameterMap.put("parse", valueOf(parseMode)));
+        parameterMap.put("reply_broadcast", valueOf(messageConfig.isReplyBroadcast()));
+        parameterMap.put("unfurl_links", valueOf(messageConfig.isUnfurlLinks()));
+        parameterMap.put("unfurl_media", valueOf(messageConfig.isUnfurlMedia()));
+        ifPresent(messageConfig.getIconEmoji(), val -> parameterMap.put("icon_emoji", val));
+        ifPresent(messageConfig.getIconUrl(), val -> parameterMap.put("icon_url", val));
+        ifPresent(messageConfig.getThreadTimeStamp(), val -> parameterMap.put("thread_ts", val));
+
+        return slackConnection.sendAsyncRequest(API_URI + CHAT_SCHEDULEMESSAGE, parameterMap);
+
+    }
+
+    public CompletableFuture<HttpResponse> postEphemeralMessage(String text,
+                                                                String channel,
+                                                                String user,
+                                                                InputStream attachments,
+                                                                InputStream blocks,
+                                                                String username,
+                                                                EphemeralMessageConfigurationGroup messageConfig) {
+        MultiMap<String, String> parameterMap = new MultiMap<>();
+        parameterMap.put("channel", channel);
+        parameterMap.put("text", text);
+        parameterMap.put("user", user);
+        ifPresent(attachments, att -> parameterMap.put("attachments", IOUtils.toString(att)));
+        ifPresent(blocks, blcks -> parameterMap.put("blocks", IOUtils.toString(blcks)));
+        ifPresent(username, userN -> parameterMap.put("username", userN));
+        parameterMap.put("link_names", valueOf(messageConfig.isLinkNames()));
+//        ifPresent(messageConfig.getParse(), parseMode -> parameterMap.put("parse", valueOf(parseMode)));
+        ifPresent(messageConfig.getIconEmoji(), val -> parameterMap.put("icon_emoji", val));
+        ifPresent(messageConfig.getIconUrl(), val -> parameterMap.put("icon_url", val));
+
+        return slackConnection.sendAsyncRequest(API_URI + CHAT_POSTEPHEMERAL, parameterMap);
     }
 
     public CompletableFuture<HttpResponse> update(String text, String channel, InputStream attachments, String timestamp, boolean asUser, boolean linkNames, ParsingMode parse) {

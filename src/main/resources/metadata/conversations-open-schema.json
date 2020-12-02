@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "id": "D069C7QFK",
+      "created": 1460147748,
+      "is_im": true,
+      "is_org_shared": false,
+      "user": "U069C7QF3",
+      "last_read": "0000000000.000000",
+      "latest": null,
+      "unread_count": 0,
+      "unread_count_display": 0,
+      "is_open": true,
+      "priority": 0
+    }
+  ],
+  "required": [
+    "id"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The id schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "D069C7QFK"
+      ]
+    },
+    "created": {
+      "$id": "#/properties/created",
+      "type": "integer",
+      "title": "The created schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        1460147748
+      ]
+    },
+    "is_im": {
+      "$id": "#/properties/is_im",
+      "type": "boolean",
+      "title": "The is_im schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        true
+      ]
+    },
+    "is_org_shared": {
+      "$id": "#/properties/is_org_shared",
+      "type": "boolean",
+      "title": "The is_org_shared schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "user": {
+      "$id": "#/properties/user",
+      "type": "string",
+      "title": "The user schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "U069C7QF3"
+      ]
+    },
+    "last_read": {
+      "$id": "#/properties/last_read",
+      "type": "string",
+      "title": "The last_read schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "0000000000.000000"
+      ]
+    },
+    "latest": {
+      "$id": "#/properties/latest",
+      "type": "null",
+      "title": "The latest schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "unread_count": {
+      "$id": "#/properties/unread_count",
+      "type": "integer",
+      "title": "The unread_count schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        0
+      ]
+    },
+    "unread_count_display": {
+      "$id": "#/properties/unread_count_display",
+      "type": "integer",
+      "title": "The unread_count_display schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        0
+      ]
+    },
+    "is_open": {
+      "$id": "#/properties/is_open",
+      "type": "boolean",
+      "title": "The is_open schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        true
+      ]
+    },
+    "priority": {
+      "$id": "#/properties/priority",
+      "type": "integer",
+      "title": "The priority schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        0
+      ]
+    }
+  },
+  "additionalProperties": true
+}

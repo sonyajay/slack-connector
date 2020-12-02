@@ -70,22 +70,34 @@ public class SlackMessageReceiver extends Source<String, Void> {
 
         wsUri
                 .whenCompleteAsync(((httpResponse, throwable) -> {
-                    if(throwable != null) {
-                        LOGGER.error("An error occurred trying to obtain RTM WSS URL.", throwable);
-                        scheduler.schedule(() -> doStart(sourceCallback, slackConnection), 10, TimeUnit.SECONDS);
-                    } else {
-                        String response = IOUtils.toString(httpResponse.getEntity().getContent());
-                        String url = new JSONObject(response).getString("url");
-                        this.scheduler = schedulerService.ioScheduler();
-                        SlackMessageHandler messageHandler = new SlackMessageHandler(url, new ConfigurableHandler(sourceCallback, eventNotifiers, emptyList()), scheduler, () -> doStart(sourceCallback, slackConnection));
-                        this.scheduler.execute(() -> {
-                            try {
-                                messageHandler.connect();
-                            } catch (Exception e) {
-                                sourceCallback.onConnectionException(new ConnectionException(e, slackConnection));
-                            }
-                        });
+                    try {
+                        if(throwable != null) {
+                            LOGGER.error("An error occurred trying to obtain RTM WSS URL.", throwable);
+                            scheduler.schedule(() -> doStart(sourceCallback, slackConnection), 10, TimeUnit.SECONDS);
+                        } else {
+                            LOGGER.info("Creating RTM connection");
+                            String response = IOUtils.toString(httpResponse.getEntity().getContent());
+                            LOGGER.info("Creating RTM connection using " + response);
+                            String url = new JSONObject(response).getString("url");
+                            LOGGER.info("Creating RTM connection using " + response);
+                            this.scheduler = schedulerService.ioScheduler();
+                            SlackMessageHandler messageHandler = new SlackMessageHandler(url, new ConfigurableHandler(sourceCallback, eventNotifiers, emptyList()), scheduler, () -> doStart(sourceCallback, slackConnection));
+                            LOGGER.info("Creating RTM connection using " + messageHandler);
+
+                            this.scheduler.execute(() -> {
+                                try {
+                                    LOGGER.info("CONNECTING");
+                                    messageHandler.connect();
+                                } catch (Exception e) {
+                                    LOGGER.error("Error", e);
+                                    sourceCallback.onConnectionException(new ConnectionException(e, slackConnection));
+                                }
+                            });
+                        }
+                    } catch (Throwable t) {
+                        sourceCallback.onConnectionException(new ConnectionException(t, slackConnection));
                     }
+
                 }));
     }
 

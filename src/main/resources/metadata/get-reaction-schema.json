@@ -1,0 +1,546 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "Slack Reactions",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "channel": "G03GX5CHC",
+      "message": {
+        "type": "message",
+        "subtype": "bot_message",
+        "text": "test message",
+        "ts": "1600182572.003900",
+        "username": "Slack API Tester",
+        "bot_id": "BLVE2M7QF",
+        "reactions": [
+          {
+            "name": "partyparrot",
+            "users": [
+              "WJL3J2PPW"
+            ],
+            "count": 1
+          }
+        ],
+        "permalink": "https://mulesoft.slack.com/archives/G03GX5CHC/p1600182572003900"
+      },
+      "file": {
+        "channels": [
+          "C2U7V2YA2"
+        ],
+        "comments_count": 1,
+        "created": 1507850315,
+        "groups": [],
+        "id": "F7H0D7ZA4",
+        "ims": [],
+        "name": "computer.gif",
+        "reactions": [
+          {
+            "count": 1,
+            "name": "stuck_out_tongue_winking_eye",
+            "users": [
+              "U2U85N1RV"
+            ]
+          }
+        ],
+        "timestamp": 1507850315,
+        "title": "computer.gif",
+        "user": "U2U85N1RV"
+      }
+    }
+  ],
+  "required": [
+    "channel",
+  ],
+  "properties": {
+    "channel": {
+      "$id": "#/properties/channel",
+      "type": "string",
+      "title": "The channel schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "G03GX5CHC"
+      ]
+    },
+    "message": {
+      "$id": "#/properties/message",
+      "type": "object",
+      "title": "The message schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "type": "message",
+          "subtype": "bot_message",
+          "text": "test message",
+          "ts": "1600182572.003900",
+          "username": "Slack API Tester",
+          "bot_id": "BLVE2M7QF",
+          "reactions": [
+            {
+              "name": "partyparrot",
+              "users": [
+                "WJL3J2PPW"
+              ],
+              "count": 1
+            }
+          ],
+          "permalink": "https://mulesoft.slack.com/archives/G03GX5CHC/p1600182572003900"
+        }
+      ],
+      "required": [
+        "type",
+        "subtype",
+        "text",
+        "ts",
+        "username",
+        "bot_id",
+        "reactions",
+        "permalink"
+      ],
+      "properties": {
+        "type": {
+          "$id": "#/properties/message/properties/type",
+          "type": "string",
+          "title": "The type schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "message"
+          ]
+        },
+        "subtype": {
+          "$id": "#/properties/message/properties/subtype",
+          "type": "string",
+          "title": "The subtype schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "bot_message"
+          ]
+        },
+        "text": {
+          "$id": "#/properties/message/properties/text",
+          "type": "string",
+          "title": "The text schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "test message"
+          ]
+        },
+        "ts": {
+          "$id": "#/properties/message/properties/ts",
+          "type": "string",
+          "title": "The ts schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "1600182572.003900"
+          ]
+        },
+        "username": {
+          "$id": "#/properties/message/properties/username",
+          "type": "string",
+          "title": "The username schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "Slack API Tester"
+          ]
+        },
+        "bot_id": {
+          "$id": "#/properties/message/properties/bot_id",
+          "type": "string",
+          "title": "The bot_id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "BLVE2M7QF"
+          ]
+        },
+        "reactions": {
+          "$id": "#/properties/message/properties/reactions",
+          "type": "array",
+          "title": "The reactions schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [
+            [
+              {
+                "name": "partyparrot",
+                "users": [
+                  "WJL3J2PPW"
+                ],
+                "count": 1
+              }
+            ]
+          ],
+          "additionalItems": true,
+          "items": {
+            "$id": "#/properties/message/properties/reactions/items",
+            "anyOf": [
+              {
+                "$id": "#/properties/message/properties/reactions/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                  {
+                    "name": "partyparrot",
+                    "users": [
+                      "WJL3J2PPW"
+                    ],
+                    "count": 1
+                  }
+                ],
+                "required": [
+                  "name",
+                  "users",
+                  "count"
+                ],
+                "properties": {
+                  "name": {
+                    "$id": "#/properties/message/properties/reactions/items/anyOf/0/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "partyparrot"
+                    ]
+                  },
+                  "users": {
+                    "$id": "#/properties/message/properties/reactions/items/anyOf/0/properties/users",
+                    "type": "array",
+                    "title": "The users schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": [],
+                    "examples": [
+                      [
+                        "WJL3J2PPW"
+                      ]
+                    ],
+                    "additionalItems": true,
+                    "items": {
+                      "$id": "#/properties/message/properties/reactions/items/anyOf/0/properties/users/items",
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/message/properties/reactions/items/anyOf/0/properties/users/items/anyOf/0",
+                          "type": "string",
+                          "title": "The first anyOf schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": "",
+                          "examples": [
+                            "WJL3J2PPW"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "count": {
+                    "$id": "#/properties/message/properties/reactions/items/anyOf/0/properties/count",
+                    "type": "integer",
+                    "title": "The count schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                      1
+                    ]
+                  }
+                },
+                "additionalProperties": true
+              }
+            ]
+          }
+        },
+        "permalink": {
+          "$id": "#/properties/message/properties/permalink",
+          "type": "string",
+          "title": "The permalink schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "https://mulesoft.slack.com/archives/G03GX5CHC/p1600182572003900"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "file": {
+      "$id": "#/properties/file",
+      "type": "object",
+      "title": "The file schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "channels": [
+            "C2U7V2YA2"
+          ],
+          "comments_count": 1,
+          "created": 1507850315,
+          "groups": [],
+          "id": "F7H0D7ZA4",
+          "ims": [],
+          "name": "computer.gif",
+          "reactions": [
+            {
+              "count": 1,
+              "name": "stuck_out_tongue_winking_eye",
+              "users": [
+                "U2U85N1RV"
+              ]
+            }
+          ],
+          "timestamp": 1507850315,
+          "title": "computer.gif",
+          "user": "U2U85N1RV"
+        }
+      ],
+      "required": [
+        "channels",
+        "comments_count",
+        "created",
+        "groups",
+        "id",
+        "ims",
+        "name",
+        "reactions",
+        "timestamp",
+        "title",
+        "user"
+      ],
+      "properties": {
+        "channels": {
+          "$id": "#/properties/file/properties/channels",
+          "type": "array",
+          "title": "The channels schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [
+            [
+              "C2U7V2YA2"
+            ]
+          ],
+          "additionalItems": true,
+          "items": {
+            "$id": "#/properties/file/properties/channels/items",
+            "anyOf": [
+              {
+                "$id": "#/properties/file/properties/channels/items/anyOf/0",
+                "type": "string",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "C2U7V2YA2"
+                ]
+              }
+            ]
+          }
+        },
+        "comments_count": {
+          "$id": "#/properties/file/properties/comments_count",
+          "type": "integer",
+          "title": "The comments_count schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            1
+          ]
+        },
+        "created": {
+          "$id": "#/properties/file/properties/created",
+          "type": "integer",
+          "title": "The created schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            1507850315
+          ]
+        },
+        "groups": {
+          "$id": "#/properties/file/properties/groups",
+          "type": "array",
+          "title": "The groups schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [
+            []
+          ],
+          "additionalItems": true,
+          "items": {
+            "$id": "#/properties/file/properties/groups/items"
+          }
+        },
+        "id": {
+          "$id": "#/properties/file/properties/id",
+          "type": "string",
+          "title": "The id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "F7H0D7ZA4"
+          ]
+        },
+        "ims": {
+          "$id": "#/properties/file/properties/ims",
+          "type": "array",
+          "title": "The ims schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [
+            []
+          ],
+          "additionalItems": true,
+          "items": {
+            "$id": "#/properties/file/properties/ims/items"
+          }
+        },
+        "name": {
+          "$id": "#/properties/file/properties/name",
+          "type": "string",
+          "title": "The name schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "computer.gif"
+          ]
+        },
+        "reactions": {
+          "$id": "#/properties/file/properties/reactions",
+          "type": "array",
+          "title": "The reactions schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [
+            [
+              {
+                "count": 1,
+                "name": "stuck_out_tongue_winking_eye",
+                "users": [
+                  "U2U85N1RV"
+                ]
+              }
+            ]
+          ],
+          "additionalItems": true,
+          "items": {
+            "$id": "#/properties/file/properties/reactions/items",
+            "anyOf": [
+              {
+                "$id": "#/properties/file/properties/reactions/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                  {
+                    "count": 1,
+                    "name": "stuck_out_tongue_winking_eye",
+                    "users": [
+                      "U2U85N1RV"
+                    ]
+                  }
+                ],
+                "required": [
+                  "count",
+                  "name",
+                  "users"
+                ],
+                "properties": {
+                  "count": {
+                    "$id": "#/properties/file/properties/reactions/items/anyOf/0/properties/count",
+                    "type": "integer",
+                    "title": "The count schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                      1
+                    ]
+                  },
+                  "name": {
+                    "$id": "#/properties/file/properties/reactions/items/anyOf/0/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "stuck_out_tongue_winking_eye"
+                    ]
+                  },
+                  "users": {
+                    "$id": "#/properties/file/properties/reactions/items/anyOf/0/properties/users",
+                    "type": "array",
+                    "title": "The users schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": [],
+                    "examples": [
+                      [
+                        "U2U85N1RV"
+                      ]
+                    ],
+                    "additionalItems": true,
+                    "items": {
+                      "$id": "#/properties/file/properties/reactions/items/anyOf/0/properties/users/items",
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/file/properties/reactions/items/anyOf/0/properties/users/items/anyOf/0",
+                          "type": "string",
+                          "title": "The first anyOf schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": "",
+                          "examples": [
+                            "U2U85N1RV"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                "additionalProperties": true
+              }
+            ]
+          }
+        },
+        "timestamp": {
+          "$id": "#/properties/file/properties/timestamp",
+          "type": "integer",
+          "title": "The timestamp schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            1507850315
+          ]
+        },
+        "title": {
+          "$id": "#/properties/file/properties/title",
+          "type": "string",
+          "title": "The title schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "computer.gif"
+          ]
+        },
+        "user": {
+          "$id": "#/properties/file/properties/user",
+          "type": "string",
+          "title": "The user schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "U2U85N1RV"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

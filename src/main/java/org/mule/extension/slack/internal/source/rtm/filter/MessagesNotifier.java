@@ -22,8 +22,16 @@ public class MessagesNotifier implements EventNotifier {
 
     @Override
     public boolean shouldSend(Map<String, Object> message) {
-        if (messageEventMatcher.getChannel() != null && !message.get("channel").toString().equals(messageEventMatcher.getChannel())) {
-            return false;
+        String channel = (String) message.get("channel");
+
+        if(channel != null) {
+            if (messageEventMatcher.getChannel() != null && !channel.equals(messageEventMatcher.getChannel())) {
+                return false;
+            }
+
+            if (messageEventMatcher.isOnlyDmMessages() && !channel.toLowerCase().startsWith("d")) {
+                return false;
+            }
         }
 
         if (!message.get("type").equals("message")) {
@@ -31,10 +39,6 @@ public class MessagesNotifier implements EventNotifier {
         }
 
         if (messageEventMatcher.isOnlyNewMessages() && !isNewMessage(message)) {
-            return false;
-        }
-
-        if (messageEventMatcher.isOnlyDmMessages() && !((String) message.get("channel")).toLowerCase().startsWith("d")) {
             return false;
         }
 
@@ -54,6 +58,6 @@ public class MessagesNotifier implements EventNotifier {
     }
 
     private Optional<String> getSubtype(Map<String, Object> message) {
-        return ofNullable((String) message.get("subtype"));
+        return ofNullable(message.get("subtype")).map(v -> (String) v);
     }
 }

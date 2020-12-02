@@ -1,0 +1,449 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "Conversation",
+  "description": "The information about a Conversation",
+  "default": {},
+  "examples": [
+    {
+      "id": "C012AB3CD",
+      "name": "general",
+      "is_channel": true,
+      "is_group": false,
+      "is_im": false,
+      "created": 1449252889,
+      "creator": "W012A3BCD",
+      "is_archived": false,
+      "is_general": true,
+      "unlinked": 0,
+      "name_normalized": "general",
+      "is_read_only": false,
+      "is_shared": false,
+      "parent_conversation": null,
+      "is_ext_shared": false,
+      "is_org_shared": false,
+      "pending_shared": [],
+      "is_pending_ext_shared": false,
+      "is_member": true,
+      "is_private": false,
+      "is_mpim": false,
+      "last_read": "1502126650.228446",
+      "topic": {
+        "value": "For public discussion of generalities",
+        "creator": "W012A3BCD",
+        "last_set": 1449709364
+      },
+      "purpose": {
+        "value": "This part of the workspace is for fun. Make fun here.",
+        "creator": "W012A3BCD",
+        "last_set": 1449709364
+      },
+      "previous_names": [
+        "specifics",
+        "abstractions",
+        "etc"
+      ],
+      "locale": "en-US"
+    }
+  ],
+  "required": [
+    "id",
+    "name",
+    "is_channel",
+    "is_group",
+    "is_im",
+    "created",
+    "creator",
+    "is_archived",
+    "is_general",
+    "unlinked",
+    "name_normalized",
+    "is_read_only",
+    "is_shared",
+    "parent_conversation",
+    "is_ext_shared",
+    "is_org_shared",
+    "pending_shared",
+    "is_pending_ext_shared",
+    "is_member",
+    "is_private",
+    "is_mpim",
+    "last_read",
+    "topic",
+    "purpose",
+    "previous_names",
+    "locale"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The id schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "C012AB3CD"
+      ]
+    },
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "title": "The name schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "general"
+      ]
+    },
+    "is_channel": {
+      "$id": "#/properties/is_channel",
+      "type": "boolean",
+      "title": "The is_channel schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        true
+      ]
+    },
+    "is_group": {
+      "$id": "#/properties/is_group",
+      "type": "boolean",
+      "title": "The is_group schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "is_im": {
+      "$id": "#/properties/is_im",
+      "type": "boolean",
+      "title": "The is_im schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "created": {
+      "$id": "#/properties/created",
+      "type": "integer",
+      "title": "The created schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        1449252889
+      ]
+    },
+    "creator": {
+      "$id": "#/properties/creator",
+      "type": "string",
+      "title": "The creator schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "W012A3BCD"
+      ]
+    },
+    "is_archived": {
+      "$id": "#/properties/is_archived",
+      "type": "boolean",
+      "title": "The is_archived schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "is_general": {
+      "$id": "#/properties/is_general",
+      "type": "boolean",
+      "title": "The is_general schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        true
+      ]
+    },
+    "unlinked": {
+      "$id": "#/properties/unlinked",
+      "type": "integer",
+      "title": "The unlinked schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        0
+      ]
+    },
+    "name_normalized": {
+      "$id": "#/properties/name_normalized",
+      "type": "string",
+      "title": "The name_normalized schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "general"
+      ]
+    },
+    "is_read_only": {
+      "$id": "#/properties/is_read_only",
+      "type": "boolean",
+      "title": "The is_read_only schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "is_shared": {
+      "$id": "#/properties/is_shared",
+      "type": "boolean",
+      "title": "The is_shared schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "parent_conversation": {
+      "$id": "#/properties/parent_conversation",
+      "type": "null",
+      "title": "The parent_conversation schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "is_ext_shared": {
+      "$id": "#/properties/is_ext_shared",
+      "type": "boolean",
+      "title": "The is_ext_shared schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "is_org_shared": {
+      "$id": "#/properties/is_org_shared",
+      "type": "boolean",
+      "title": "The is_org_shared schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "pending_shared": {
+      "$id": "#/properties/pending_shared",
+      "type": "array",
+      "title": "The pending_shared schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        []
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/pending_shared/items"
+      }
+    },
+    "is_pending_ext_shared": {
+      "$id": "#/properties/is_pending_ext_shared",
+      "type": "boolean",
+      "title": "The is_pending_ext_shared schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "is_member": {
+      "$id": "#/properties/is_member",
+      "type": "boolean",
+      "title": "The is_member schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        true
+      ]
+    },
+    "is_private": {
+      "$id": "#/properties/is_private",
+      "type": "boolean",
+      "title": "The is_private schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "is_mpim": {
+      "$id": "#/properties/is_mpim",
+      "type": "boolean",
+      "title": "The is_mpim schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "last_read": {
+      "$id": "#/properties/last_read",
+      "type": "string",
+      "title": "The last_read schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "1502126650.228446"
+      ]
+    },
+    "topic": {
+      "$id": "#/properties/topic",
+      "type": "object",
+      "title": "The topic schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "value": "For public discussion of generalities",
+          "creator": "W012A3BCD",
+          "last_set": 1449709364
+        }
+      ],
+      "required": [
+        "value",
+        "creator",
+        "last_set"
+      ],
+      "properties": {
+        "value": {
+          "$id": "#/properties/topic/properties/value",
+          "type": "string",
+          "title": "The value schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "For public discussion of generalities"
+          ]
+        },
+        "creator": {
+          "$id": "#/properties/topic/properties/creator",
+          "type": "string",
+          "title": "The creator schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "W012A3BCD"
+          ]
+        },
+        "last_set": {
+          "$id": "#/properties/topic/properties/last_set",
+          "type": "integer",
+          "title": "The last_set schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            1449709364
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "purpose": {
+      "$id": "#/properties/purpose",
+      "type": "object",
+      "title": "The purpose schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "value": "This part of the workspace is for fun. Make fun here.",
+          "creator": "W012A3BCD",
+          "last_set": 1449709364
+        }
+      ],
+      "required": [
+        "value",
+        "creator",
+        "last_set"
+      ],
+      "properties": {
+        "value": {
+          "$id": "#/properties/purpose/properties/value",
+          "type": "string",
+          "title": "The value schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "This part of the workspace is for fun. Make fun here."
+          ]
+        },
+        "creator": {
+          "$id": "#/properties/purpose/properties/creator",
+          "type": "string",
+          "title": "The creator schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "W012A3BCD"
+          ]
+        },
+        "last_set": {
+          "$id": "#/properties/purpose/properties/last_set",
+          "type": "integer",
+          "title": "The last_set schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            1449709364
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "previous_names": {
+      "$id": "#/properties/previous_names",
+      "type": "array",
+      "title": "The previous_names schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          "specifics",
+          "abstractions"
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/previous_names/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/previous_names/items/anyOf/0",
+            "type": "string",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+              "specifics",
+              "abstractions"
+            ]
+          }
+        ]
+      }
+    },
+    "locale": {
+      "$id": "#/properties/locale",
+      "type": "string",
+      "title": "The locale schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "en-US"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

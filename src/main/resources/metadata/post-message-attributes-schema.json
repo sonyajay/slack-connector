@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-06/schema#",
   "definitions": {},
   "id": "http://example.com/example.json",
+  "title": "Slack Message Result Attributes",
   "properties": {
     "channel": {
       "id": "/properties/channel",

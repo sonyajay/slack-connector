@@ -22,14 +22,11 @@ public class RTMChannelValueProvider implements ValueProvider {
 
     @Override
     public Set<Value> resolve() throws ValueResolvingException {
-        Set<Value> allChannels = new HashSet<>();
-
-        Set<Value> channels = new ChannelsValueProvider(expressionManager, slackConnection).resolve();
-        Set<Value> groups = new GroupsValueProvider(expressionManager, slackConnection).resolve();
-
-        allChannels.addAll(channels);
-        allChannels.addAll(groups);
-
-        return allChannels;
+        ConversationsValueProvider conversationsValueProvider = new ConversationsValueProvider(expressionManager, slackConnection);
+        conversationsValueProvider.setIm(true);
+        conversationsValueProvider.setMpim(false);
+        conversationsValueProvider.setPublicChannels(true);
+        conversationsValueProvider.setPrivateChannels(true);
+        return conversationsValueProvider.resolve();
     }
 }

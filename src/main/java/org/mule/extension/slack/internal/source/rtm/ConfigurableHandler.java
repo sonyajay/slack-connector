@@ -38,6 +38,7 @@ public class ConfigurableHandler implements EventHandler {
     }
 
     public void onMessage(String message) {
+        logger.debug(message);
         Map<String, Object> messageMap = gson.fromJson(message, type);
 
         if (shouldBeAccepted(messageMap, eventFilterList)) {

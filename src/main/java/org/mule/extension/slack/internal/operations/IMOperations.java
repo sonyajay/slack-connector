@@ -21,13 +21,14 @@ import org.mule.runtime.extension.api.runtime.streaming.PagingProvider;
 import java.io.InputStream;
 import java.util.Map;
 
+@Deprecated
 public class IMOperations extends SlackOperations {
 
     /**
      * This operation returns a list of all im channels that the user has.
      */
     @OutputResolver(output = IMListOutputResolver.class)
-    @DisplayName("IM - List")
+    @DisplayName("IM - List (Deprecated)")
     public PagingProvider<SlackConnection, Map<String, Object>> listIms() {
         return new CursorPagingProvider((connection, theCursor) -> connection.im.list(theCursor, 100),"#[output application/java --- payload.ims]", this.expressionManager);
     }
@@ -43,7 +44,7 @@ public class IMOperations extends SlackOperations {
      */
     @MediaType(APPLICATION_JSON)
     @OutputResolver(output = OpenIMOutputResolver.class, attributes = OpenIMOutputResolver.class)
-    @DisplayName("IM - Open")
+    @DisplayName("IM - Open (Deprecated)")
     @Alias("open-im")
     public void openIM(@Connection SlackConnection slackConnection,
                        String user,

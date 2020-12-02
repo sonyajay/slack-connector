@@ -55,11 +55,14 @@ public class SlackMessageHandler implements MessageHandler.Whole<String> {
 
             @Override
             public void onOpen(Session session, EndpointConfig config) {
+                LOGGER.info("On Open");
                 session.addMessageHandler(handler);
             }
 
             @Override
             public void onClose(Session session, CloseReason closeReason) {
+                LOGGER.info("On Close");
+
                 pingScheduler.cancel(true);
                 scheduler.submit(onClose);
             }
@@ -72,6 +75,7 @@ public class SlackMessageHandler implements MessageHandler.Whole<String> {
 
         pingScheduler = scheduler.scheduleAtFixedRate(() -> {
             try {
+                LOGGER.info("PING");
                 if (lastPingSent != lastPingAck) {
                     // disconnection happened
                     websocketSession.close();
@@ -83,6 +87,8 @@ public class SlackMessageHandler implements MessageHandler.Whole<String> {
                 }
             } catch (Exception e) {
                 try {
+                    LOGGER.error("CLOSING", e);
+
                     websocketSession.close();
                 } catch (IOException e1) {
                     LOGGER.debug("The Slack WebSocket connection seems to be disconnected. Reconnecting.");
@@ -92,6 +98,7 @@ public class SlackMessageHandler implements MessageHandler.Whole<String> {
     }
 
     public void onMessage(String message) {
+        LOGGER.info("Received message: " + message);
         if (message.startsWith("{\"type\":\"pong\",\"reply_to\"")) {
             int rightBracketIdx = message.indexOf('}');
             String toParse = message.substring(26, rightBracketIdx);
