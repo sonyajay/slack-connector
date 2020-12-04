@@ -1,0 +1,2233 @@
+
+
+= Slack Connector Connector Reference
+
+
+
+== Configurations
+---
+[[Config]]
+=== Config
+
+
+Default configuration
+
+
+==== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+|Name | String | The name for this configuration. Connectors reference the configuration with this name. | | *x*{nbsp}
+| Connection a| * <<Config_OauthConnection, 2 - OAuth 2 Connection>> {nbsp}
+* <<Config_TokenConnection, 1 - Token Connection>> {nbsp}
+ | The connection types that can be provided to this configuration. | | *x*{nbsp}
+| Name a| String |  The identifier of this element used to reference it in other components |  | *x*{nbsp}
+| Expiration Policy a| <<ExpirationPolicy>> |  Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit. |  | {nbsp}
+|===
+
+==== Connection Types
+[[Config_OauthConnection]]
+===== 2 - OAuth 2 Connection
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Connection Timeout a| Number |  |  5000 | {nbsp}
+| Host a| String |  |  | {nbsp}
+| Port a| Number |  |  | {nbsp}
+| Username a| String |  |  | {nbsp}
+| Password a| String |  |  | {nbsp}
+| NTLM Domain a| String |  |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+| Consumer Key a| String |  The OAuth consumerKey as registered with the service provider |  | *x*{nbsp}
+| Consumer Secret a| String |  The OAuth consumerSecret as registered with the service provider |  | *x*{nbsp}
+| Authorization Url a| String |  The service provider's authorization endpoint URL |  https://slack.com/oauth/authorize | {nbsp}
+| Access Token Url a| String |  The service provider's accessToken endpoint URL |  https://slack.com/api/oauth.access | {nbsp}
+| Scopes a| String |  The OAuth scopes to be requested during the dance. If not provided, it will default to those in the annotation |  chat:write:user | {nbsp}
+| Resource Owner Id a| String |  The resourceOwnerId which each component should use if it doesn't reference otherwise. |  | {nbsp}
+| Before a| String |  The name of a flow to be executed right before starting the OAuth dance |  | {nbsp}
+| After a| String |  The name of a flow to be executed right after an accessToken has been received |  | {nbsp}
+| Listener Config a| String |  A reference to a <http:listener-config /> to be used in order to create the listener that will catch the access token callback endpoint. |  | *x*{nbsp}
+| Callback Path a| String |  The path of the access token callback endpoint |  | *x*{nbsp}
+| Authorize Path a| String |  The path of the local http endpoint which triggers the OAuth dance |  | *x*{nbsp}
+| External Callback Url a| String |  If the callback endpoint is behind a proxy or should be accessed through a non direct URL, use this parameter to tell the OAuth provider the URL it should use to access the callback |  | {nbsp}
+| Object Store a| String |  A reference to the object store that should be used to store each resource owner id's data. If not specified, runtime will automatically provision the default one. |  | {nbsp}
+|===
+[[Config_TokenConnection]]
+===== 1 - Token Connection
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Connection Timeout a| Number |  |  5000 | {nbsp}
+| Token a| String |  |  | *x*{nbsp}
+| Host a| String |  |  | {nbsp}
+| Port a| Number |  |  | {nbsp}
+| Username a| String |  |  | {nbsp}
+| Password a| String |  |  | {nbsp}
+| NTLM Domain a| String |  |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+|===
+
+==== Associated Operations
+* <<AddReaction>> {nbsp}
+* <<ArchiveConversation>> {nbsp}
+* <<ChannelInfo>> {nbsp}
+* <<CloseConversation>> {nbsp}
+* <<ConversationHistory>> {nbsp}
+* <<ConversationsInfo>> {nbsp}
+* <<ConversationsInvite>> {nbsp}
+* <<ConversationsKick>> {nbsp}
+* <<DeleteFile>> {nbsp}
+* <<GetConversationMembers>> {nbsp}
+* <<GetReactions>> {nbsp}
+* <<GroupInfo>> {nbsp}
+* <<InviteToChannel>> {nbsp}
+* <<ListChannels>> {nbsp}
+* <<ListConversations>> {nbsp}
+* <<ListFiles>> {nbsp}
+* <<ListGroups>> {nbsp}
+* <<ListIms>> {nbsp}
+* <<ListUsers>> {nbsp}
+* <<OpenIm>> {nbsp}
+* <<OpenConversation>> {nbsp}
+* <<OpenDialog>> {nbsp}
+* <<OpenView>> {nbsp}
+* <<PostEphemeralMessage>> {nbsp}
+* <<PostMessage>> {nbsp}
+* <<PublishView>> {nbsp}
+* <<PushView>> {nbsp}
+* <<RemoveReaction>> {nbsp}
+* <<RenameChannel>> {nbsp}
+* <<RenameConversations>> {nbsp}
+* <<RenameGroup>> {nbsp}
+* <<ScheduleMessage>> {nbsp}
+* <<SetChannelPurpose>> {nbsp}
+* <<SetChannelTopic>> {nbsp}
+* <<SetGroupPurpose>> {nbsp}
+* <<SetGroupTopic>> {nbsp}
+* <<SetPurposeConversations>> {nbsp}
+* <<SetTopicConversations>> {nbsp}
+* <<UnarchiveConversation>> {nbsp}
+* <<Unauthorize>> {nbsp}
+* <<Update>> {nbsp}
+* <<UpdateView>> {nbsp}
+* <<UploadFile>> {nbsp}
+* <<UserInfo>> {nbsp}
+
+==== Associated Sources
+* <<MessageListener>> {nbsp}
+
+
+== Operations
+
+[[AddReaction]]
+== Reactions - Add
+`<slack:add-reaction>`
+
+
+This method adds a reaction (emoji) to a message.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Reaction Name a| String |  Reaction (emoji) name. |  | *x*{nbsp}
+| Channel a| String |  Channel where the message to add reaction to was posted. |  | *x*{nbsp}
+| Timestamp a| String |  Timestamp of the message to add reaction to. |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[ArchiveConversation]]
+== Conversations - Archive
+`<slack:archive-conversation>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[ChannelInfo]]
+== Channels - Info (Deprecated)
+`<slack:channel-info>`
+
+
+Returns information about a team channel. To retrieve information on a private channel, use group-info operation.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Channel to get info on |  | {nbsp}
+| Include Locale a| Boolean |  Set this to true to receive the locale for this channel. Defaults to false |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[CloseConversation]]
+== Conversations - Close
+`<slack:close-conversation>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[ConversationHistory]]
+== Conversations - History
+`<slack:conversation-history>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Latest a| String |  |  #[now() as Number] | {nbsp}
+| Oldest a| String |  |  #[Slack::DateUtils::yesterday()] | {nbsp}
+| Inclusive a| Boolean |  |  true | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryIterable>>
+* <<RepeatableFileStoreIterable>>
+* non-repeatable-iterable |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+
+
+[[ConversationsInfo]]
+== Conversations - Info
+`<slack:conversations-info>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Include Local a| Boolean |  |  false | {nbsp}
+| Include Num Members a| Boolean |  |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[ConversationsInvite]]
+== Conversations - Invite
+`<slack:conversations-invite>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Users a| Array of String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[ConversationsKick]]
+== Conversations - Kick
+`<slack:conversations-kick>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| User a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[DeleteFile]]
+== File - Delete
+`<slack:delete-file>`
+
+
+This operation deletes a file from your team.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| File ID a| String |  ID of file to delete. |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[GetConversationMembers]]
+== Conversations - Members
+`<slack:get-conversation-members>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryIterable>>
+* <<RepeatableFileStoreIterable>>
+* non-repeatable-iterable |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+
+
+[[GetReactions]]
+== Reactions - Get
+`<slack:get-reactions>`
+
+
+Gets reactions for an item. This operation returns a list of all reactions for a single item (file, file comment, channel message, group message, or direct message).
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Full a| Boolean |  If true always return the complete reaction list. |  true | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| File Reaction a| <<FileReactionGroup>> |  |  | {nbsp}
+| Message Reaction a| <<MessageReactionGroup>> |  |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[GroupInfo]]
+== Groups - Info (Deprecated)
+`<slack:group-info>`
+
+
+This operation returns information about a private channel.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Private channel to get info on |  | *x*{nbsp}
+| Include Local a| Boolean |  Set this to true to receive the locale for this group. Defaults to false |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[InviteToChannel]]
+== Channels - Invite (Deprecated)
+`<slack:invite-to-channel>`
+
+
+This method is used to invite a user to a channel. The calling user must be a member of the channel.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Channel to invite user to. |  | {nbsp}
+| User a| String |  User to invite to channel. |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[ListChannels]]
+== Channels - List (Deprecated)
+`<slack:list-channels>`
+
+
+This method returns a list of all channels in the team. This includes channels the caller is in, channels they are not currently in, and archived channels but does not include private channels. The number of (non-deactivated) members in each channel is also returned.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Exclude Archived a| Boolean |  Exclude archived channels from the list |  false | {nbsp}
+| Exclude Members a| Boolean |  Exclude the members collection from each channel |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryIterable>>
+* <<RepeatableFileStoreIterable>>
+* non-repeatable-iterable |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Object
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+
+
+[[ListConversations]]
+== Conversations - List
+`<slack:list-conversations>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Public Channels a| Boolean |  |  true | {nbsp}
+| Private Channels (Groups) a| Boolean |  |  true | {nbsp}
+| Multi Party IM (MPIM) a| Boolean |  |  true | {nbsp}
+| IM a| Boolean |  |  true | {nbsp}
+| Exclude Archived Channels a| Boolean |  |  true | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryIterable>>
+* <<RepeatableFileStoreIterable>>
+* non-repeatable-iterable |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+
+
+[[ListFiles]]
+== File - List
+`<slack:list-files>`
+
+
+This operations returns a list of files within the team. It can be filtered and sliced in various ways.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Filter files appearing in a specific channel, indicated by its ID |  | {nbsp}
+| User a| String |  |  | {nbsp}
+| Timestamp From a| String |  Filter files created after this timestamp (inclusive). |  | {nbsp}
+| Timestamp To a| String |  Filter files created before this timestamp (inclusive). |  | {nbsp}
+| Type a| String |  Filter files by type. You can pass multiple values in the types argument, like "spaces,snippets". The default value is all, which does not filter the list. |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryIterable>>
+* <<RepeatableFileStoreIterable>>
+* non-repeatable-iterable |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Object
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+
+
+[[ListGroups]]
+== Groups - List (Deprecated)
+`<slack:list-groups>`
+
+
+Lists private channels that the calling user has access to. This method returns a list of private channels in the team that the caller is in and archived groups that the caller was in. The list of (non-deactivated) members in each private channel is also returned.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Exclude Archived a| Boolean |  Don't return archived private channels. |  false | {nbsp}
+| Exclude Members a| Boolean |  Exclude the members from each group |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryIterable>>
+* <<RepeatableFileStoreIterable>>
+* non-repeatable-iterable |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Object
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+
+
+[[ListIms]]
+== IM - List (Deprecated)
+`<slack:list-ims>`
+
+
+This operation returns a list of all im channels that the user has.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryIterable>>
+* <<RepeatableFileStoreIterable>>
+* non-repeatable-iterable |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Object
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+
+
+[[ListUsers]]
+== User - List
+`<slack:list-users>`
+
+
+This operation returns a list of all users in the team. This includes deleted/deactivated users.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Include Locale a| Boolean |  Set this to true to receive the locale for users. Defaults to false |  false | {nbsp}
+| Presence a| Boolean |  Optional Whether to include presence data in the output. Setting this to false improves performance, especially with large teams. |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryIterable>>
+* <<RepeatableFileStoreIterable>>
+* non-repeatable-iterable |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Object
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:USER_LISTING {nbsp}
+
+
+[[OpenIm]]
+== IM - Open (Deprecated)
+`<slack:open-im>`
+
+
+This operation opens a direct message channel with another member of your Slack team.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| User a| String |  User to open a direct message channel with. |  | *x*{nbsp}
+| Include Locale a| Boolean |  Set this to true to receive the locale for this im. Defaults to false |  FALSE | {nbsp}
+| Return Im a| Boolean |  Boolean, indicates you want the full IM channel definition in the response. |  FALSE | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[OpenConversation]]
+== Conversations - Open
+`<slack:open-conversation>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Return IM Definition a| Boolean |  |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| from Channel a| String |  |  | {nbsp}
+| with Users a| Array of String |  |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[OpenDialog]]
+== Dialog - Open
+`<slack:open-dialog>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Trigger Id a| String |  |  | *x*{nbsp}
+| Dialog a| Any |  |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+* SLACK:TRIGGER_EXPIRED {nbsp}
+
+
+[[OpenView]]
+== Views - Open
+`<slack:open-view>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Trigger Id a| String |  |  | *x*{nbsp}
+| View a| <<View>> |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[PostEphemeralMessage]]
+== Chat - Post Ephemeral Message
+`<slack:post-ephemeral-message>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| User a| String |  |  | *x*{nbsp}
+| Message a| String |  |  | {nbsp}
+| Attachments a| Any |  |  | {nbsp}
+| Blocks a| Any |  |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| As User a| Boolean |  Pass true to post the message as the authed user, instead of as a bot. Defaults to false. |  false | {nbsp}
+| Send As a| String |  Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. |  | {nbsp}
+| Icon Url a| String |  URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. |  | {nbsp}
+| Icon Emoji a| String |  Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. |  | {nbsp}
+| Link Names a| Boolean |  Find and link channel names and usernames. |  false | {nbsp}
+| Parse a| Enumeration, one of:
+
+** FULL
+** NONE |  Change how messages are treated. Defaults to none. See: https://api.slack.com/methods/chat.postMessage#formatting |  NONE | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:PUBLISHING {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[PostMessage]]
+== Chat - Post Message
+`<slack:post-message>`
+
+
+This operation lets you post a message to a public channel, private channel, or direct message/IM channel.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. |  | *x*{nbsp}
+| Message a| String |  New text for the message. It's not required when presenting attachments. |  | {nbsp}
+| Attachments a| Any |  An array of structured attachments. This field is required when not presenting text. |  | {nbsp}
+| Blocks a| Any |  |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| As User a| Boolean |  Pass true to post the message as the authed user, instead of as a bot. Defaults to false. |  false | {nbsp}
+| Send As a| String |  Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. |  | {nbsp}
+| Icon Url a| String |  URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. |  | {nbsp}
+| Icon Emoji a| String |  Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. |  | {nbsp}
+| Link Names a| Boolean |  Find and link channel names and usernames. |  false | {nbsp}
+| Parse a| Enumeration, one of:
+
+** FULL
+** NONE |  Change how messages are treated. Defaults to none. See: https://api.slack.com/methods/chat.postMessage#formatting |  NONE | {nbsp}
+| Reply Broadcast a| Boolean |  Used in conjunction with Thread Time Stamp and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false. |  false | {nbsp}
+| Thread Time Stamp a| String |  Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead. |  | {nbsp}
+| Unfurl Links a| Boolean |  Pass true to enable unfurling of primarily text-based content. |  false | {nbsp}
+| Unfurl Media a| Boolean |  Pass false to disable unfurling of media content. |  false | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:PUBLISHING {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[PublishView]]
+== Views - Publish
+`<slack:publish-view>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| User Id a| String |  |  | *x*{nbsp}
+| View a| <<View>> |  |  | *x*{nbsp}
+| Hash a| String |  |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[PushView]]
+== Views - Push
+`<slack:push-view>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Trigger Id a| String |  |  | *x*{nbsp}
+| View a| <<View>> |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[RemoveReaction]]
+== Reactions - Remove
+`<slack:remove-reaction>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Reaction Name a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| File Reaction a| <<FileReactionGroup>> |  |  | {nbsp}
+| Message Reaction a| <<MessageReactionGroup>> |  |  | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[RenameChannel]]
+== Channels - Rename (Deprecated)
+`<slack:rename-channel>`
+
+
+This method renames a team channel. The only people who can rename a channel are Team Admins, or the person that originally created the channel. Others will receive a "not_authorized" error.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Channel to rename |  | {nbsp}
+| Name a| String |  New name for channel. |  | *x*{nbsp}
+| Validate a| Boolean |  Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria. |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[RenameConversations]]
+== Conversations - Rename
+`<slack:rename-conversations>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Name a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[RenameGroup]]
+== Groups - Rename (Deprecated)
+`<slack:rename-group>`
+
+
+This operation renames a private channel.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Private channel to rename |  | *x*{nbsp}
+| Name a| String |  New name for private channel. |  | *x*{nbsp}
+| Validate a| Boolean |  Whether to return errors on invalid channel name instead of modifying it to meet the specified criteria. |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[ScheduleMessage]]
+== Chat - Schedule Message
+`<slack:schedule-message>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Post At a| Number |  |  | *x*{nbsp}
+| Message a| String |  |  | {nbsp}
+| Attachments a| Any |  |  | {nbsp}
+| Blocks a| Any |  |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| As User a| Boolean |  Pass true to post the message as the authed user, instead of as a bot. Defaults to false. |  false | {nbsp}
+| Send As a| String |  Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. |  | {nbsp}
+| Icon Url a| String |  URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. |  | {nbsp}
+| Icon Emoji a| String |  Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. |  | {nbsp}
+| Link Names a| Boolean |  Find and link channel names and usernames. |  false | {nbsp}
+| Parse a| Enumeration, one of:
+
+** FULL
+** NONE |  Change how messages are treated. Defaults to none. See: https://api.slack.com/methods/chat.postMessage#formatting |  NONE | {nbsp}
+| Reply Broadcast a| Boolean |  Used in conjunction with Thread Time Stamp and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false. |  false | {nbsp}
+| Thread Time Stamp a| String |  Provide another message's ts value to make this message a reply. Avoid using a reply's ts value; use its parent instead. |  | {nbsp}
+| Unfurl Links a| Boolean |  Pass true to enable unfurling of primarily text-based content. |  false | {nbsp}
+| Unfurl Media a| Boolean |  Pass false to disable unfurling of media content. |  false | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:PUBLISHING {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[SetChannelPurpose]]
+== Channels - Set Purpose (Deprecated)
+`<slack:set-channel-purpose>`
+
+
+This operation is used to change the purpose of a channel. The calling user must be a member of the channel.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Channel to set the purpose of |  | {nbsp}
+| Purpose a| String |  The new purpose |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[SetChannelTopic]]
+== Channels - Set Topic (Deprecated)
+`<slack:set-channel-topic>`
+
+
+This operation is used to change the topic of a channel. The calling user must be a member of the channel.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Channel to set the topic of |  | {nbsp}
+| Topic a| String |  The new topic |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[SetGroupPurpose]]
+== Groups - Set Purpose (Deprecated)
+`<slack:set-group-purpose>`
+
+
+This operation is used to change the purpose of a private channel. The calling user must be a member of the private channel.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Private channel to set the purpose of |  | *x*{nbsp}
+| Purpose a| String |  The new purpose |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[SetGroupTopic]]
+== Groups - Set Topic (Deprecated)
+`<slack:set-group-topic>`
+
+
+This operation is used to change the topic of a private channel. The calling user must be a member of the private channel.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Private channel to set the topic of |  | *x*{nbsp}
+| Topic a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[SetPurposeConversations]]
+== Conversations - Set Purpose
+`<slack:set-purpose-conversations>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Purpose a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[SetTopicConversations]]
+== Conversations - Set Topic
+`<slack:set-topic-conversations>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Topic a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[UnarchiveConversation]]
+== Conversations - Unarchive
+`<slack:unarchive-conversation>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[Unauthorize]]
+== Unauthorize
+`<slack:unauthorize>`
+
+
+Deletes all the access token information of a given resource owner id so that it's impossible to execute any operation for that user without doing the authorization dance again
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Resource Owner Id a| String |  The id of the resource owner which access should be invalidated |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+
+
+[[Update]]
+== Chat - Update Message
+`<slack:update>`
+
+
+This operation updates a message in a channel. Ephemeral messages created by chat.postEphemeral or otherwise cannot be updated with this method.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Channel a| String |  Channel containing the message to be updated. |  | *x*{nbsp}
+| Message a| String |  New text for the message. It's not required when presenting attachments. |  | {nbsp}
+| Attachments a| Any |  An array of structured attachments. This field is required when not presenting text. |  | {nbsp}
+| Timestamp a| String |  Timestamp of the message to be updated. |  | *x*{nbsp}
+| As User a| Boolean |  Pass true to update the message as the authed user. Bot users in this context are considered authed users. |  false | {nbsp}
+| Link Names a| Boolean |  Find and link channel names and usernames. Defaults to none. This parameter should be used in conjunction with parse. To set link_names to TRUE, specify a parse mode of FULL. |  false | {nbsp}
+| Parse a| Enumeration, one of:
+
+** FULL
+** NONE |  Change how messages are treated. See: https://api.slack.com/methods/chat.update#formatting |  NONE | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:PUBLISHING {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[UpdateView]]
+== Views - Update
+`<slack:update-view>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| View a| <<View>> |  |  | *x*{nbsp}
+| Hash a| String |  |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| View Id a| String |  |  | {nbsp}
+| External Id a| String |  |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| Binary
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[UploadFile]]
+== File - Upload
+`<slack:upload-file>`
+
+
+This operation allows you to create or upload an existing file.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Content a| Binary |  File contents |  #[payload] | {nbsp}
+| Channels a| Array of String |  List of channel names or IDs where the file will be shared. |  | *x*{nbsp}
+| File Name a| String |  Filename of file. |  | *x*{nbsp}
+| Title a| String |  Title of file. |  | {nbsp}
+| Initial Comment a| String |  Initial comment to add to file. |  | {nbsp}
+| File Type a| String |  A file type identifier. See: https://api.slack.com/types/file#file_types |  | {nbsp}
+| Thread Time Stamp a| String |  |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:EXECUTION {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+
+
+[[UserInfo]]
+== User - Info
+`<slack:user-info>`
+
+
+This method returns information about a member of a workspace.
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| User a| String |  User to get info on |  | {nbsp}
+| Include Locale a| Boolean |  Set this to true to receive the locale for this user. Defaults to false |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SLACK:CONNECTIVITY {nbsp}
+* MULE:CONNECTIVITY {nbsp}
+* SLACK:RETRY_EXHAUSTED {nbsp}
+* SLACK:USER_LISTING {nbsp}
+
+
+== Sources
+
+[[MessageListener]]
+== On New Message
+`<slack:message-listener>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Primary Node Only a| Boolean |  Whether this source should only be executed on the primary node when runnning in Cluster |  | {nbsp}
+| Redelivery Policy a| <<RedeliveryPolicy>> |  Defines a policy for processing the redelivery of the same message |  | {nbsp}
+| Only from channel a| String |  |  | {nbsp}
+| Only Direct Messages (DM) a| Boolean |  |  false | {nbsp}
+| Only New Messages a| Boolean |  |  true | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+
+
+== Types
+[[Reconnection]]
+=== Reconnection
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | 
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> | The reconnection strategy to use |  | 
+|======================
+
+[[Reconnect]]
+=== Reconnect
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+| Count a| Number | How many reconnection attempts to make |  | 
+|======================
+
+[[ReconnectForever]]
+=== Reconnect Forever
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+|======================
+
+[[ExpirationPolicy]]
+=== Expiration Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  | 
+| Time Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A time unit that qualifies the maxIdleTime attribute |  | 
+|======================
+
+[[RedeliveryPolicy]]
+=== Redelivery Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Max Redelivery Count a| Number | The maximum number of times a message can be redelivered and processed unsuccessfully before triggering process-failed-message |  | 
+| Message Digest Algorithm a| String | The secure hashing algorithm to use. If not set, the default is SHA-256. |  | 
+| Message Identifier a| <<RedeliveryPolicyMessageIdentifier>> | Defines which strategy is used to identify the messages. |  | 
+| Object Store a| ObjectStore | The object store where the redelivery counter for each message is going to be stored. |  | 
+|======================
+
+[[RedeliveryPolicyMessageIdentifier]]
+=== Redelivery Policy Message Identifier
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Use Secure Hash a| Boolean | Whether to use a secure hash algorithm to identify a redelivered message |  | 
+| Id Expression a| String | Defines one or more expressions to use to determine when a message has been redelivered. This property may only be set if useSecureHash is false. |  | 
+|======================
+
+[[RepeatableInMemoryStream]]
+=== Repeatable In Memory Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Initial Buffer Size a| Number | This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. |  | 
+| Buffer Size Increment a| Number | This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. |  | 
+| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which all these attributes are expressed |  | 
+|======================
+
+[[RepeatableFileStoreStream]]
+=== Repeatable File Store Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| In Memory Size a| Number | Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which maxInMemorySize is expressed |  | 
+|======================
+
+[[RepeatableInMemoryIterable]]
+=== Repeatable In Memory Iterable
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Initial Buffer Size a| Number | This is the amount of instances that will be initially be allowed to be kept in memory in order to consume the stream and provide random access to it. If the stream contains more data than can fit into this buffer, then it will be expanded according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. Default value is 100 instances. |  | 
+| Buffer Size Increment a| Number | This is by how much will the buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. Default value is 100 instances. |  | 
+| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  | 
+|======================
+
+[[RepeatableFileStoreIterable]]
+=== Repeatable File Store Iterable
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| In Memory Objects a| Number | This is the maximum amount of instances that will be kept in memory. If more than that is required, then it will start to buffer the content on disk. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which maxInMemorySize is expressed |  | 
+|======================
+
+[[FileReactionGroup]]
+=== File Reaction Group
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| File a| String |  |  | x
+| File Comment a| String |  |  | x
+|======================
+
+[[MessageReactionGroup]]
+=== Message Reaction Group
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Channel a| String |  |  | x
+| Timestamp a| String |  |  | x
+|======================
+
+[[View]]
+=== View
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Submit a| Any |  |  | x
+| Callback_id a| String |  |  | x
+| Blocks a| Array of * Any
+* Any |  |  | x
+| Private_metadata a| String |  |  | x
+| Type a| String |  |  | x
+| Title a| Any |  |  | x
+| Close a| Any |  |  | x
+|======================
+

@@ -54,13 +54,13 @@ abstract class WebhookBasedSource extends Source<InputStream, Void> {
     abstract Result handleRequest(HttpRequestContext requestContext);
 
     @OnSuccess
-    public void onSuccess(SourceCallbackContext callbackContext, @Placement( tab = "Response") @ParameterGroup(showInDsl = true, name = "Slack Response") ResponseBuilder response) {
-        onEnd(callbackContext, response.getResponse());
+    public void onSuccess(SourceCallbackContext callbackContext, @Placement( tab = "Response") @ParameterGroup(name = "Slack Response") ResponseBuilder slackResponse) {
+        onEnd(callbackContext, slackResponse.getResponse());
     }
 
     @OnError
-    public void onError(SourceCallbackContext callbackContext, @Placement( tab = "Response") @ParameterGroup(showInDsl = true, name = "Slack Response") ResponseBuilder response) {
-        onEnd(callbackContext, response.getResponse());
+    public void onError(SourceCallbackContext callbackContext, @Placement( tab = "Response") @ParameterGroup(name = "Slack Response") ResponseBuilder slackResponse) {
+        onEnd(callbackContext, slackResponse.getResponse());
     }
 
     private void onEnd(SourceCallbackContext callbackContext, TypedValue<InputStream> response) {

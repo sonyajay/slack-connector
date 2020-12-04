@@ -75,14 +75,12 @@ public class SlackMessageReceiver extends Source<String, Void> {
                             LOGGER.error("An error occurred trying to obtain RTM WSS URL.", throwable);
                             scheduler.schedule(() -> doStart(sourceCallback, slackConnection), 10, TimeUnit.SECONDS);
                         } else {
-                            LOGGER.info("Creating RTM connection");
+                            LOGGER.debug("Creating RTM connection");
                             String response = IOUtils.toString(httpResponse.getEntity().getContent());
-                            LOGGER.info("Creating RTM connection using " + response);
+                            LOGGER.debug("Creating RTM connection using " + response);
                             String url = new JSONObject(response).getString("url");
-                            LOGGER.info("Creating RTM connection using " + response);
                             this.scheduler = schedulerService.ioScheduler();
                             SlackMessageHandler messageHandler = new SlackMessageHandler(url, new ConfigurableHandler(sourceCallback, eventNotifiers, emptyList()), scheduler, () -> doStart(sourceCallback, slackConnection));
-                            LOGGER.info("Creating RTM connection using " + messageHandler);
 
                             this.scheduler.execute(() -> {
                                 try {
