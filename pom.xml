@@ -8,6 +8,7 @@
     <artifactId>mule-slack-connector</artifactId>
     <version>5.0.0-SNAPSHOT</version>
     <packaging>mule-extension</packaging>
+    <name>Slack Connector - Mule 4 - Community Version</name>
 
     <parent>
         <groupId>org.mule.extensions</groupId>
